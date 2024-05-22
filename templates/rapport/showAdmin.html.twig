@@ -1,0 +1,51 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block title %}Rapport{% endblock %}
+
+{% block profile %}
+    <h1>Rapport</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ rapport.id }}</td>
+            </tr>
+            <tr>
+                <th>Decision</th>
+                <td>{{ rapport.decision }}</td>
+            </tr>
+            <tr>
+            <th>justification</th>
+            <td>{{ rapport.justification }}</td>
+        </tr>
+            <tr>
+                <th>Date Sinister</th>
+                <td>{{ rapport.sinisterRapport.dateSinister|date('Y-m-d') }}</td>
+            </tr>
+            <tr>
+                <th>Location</th>
+                <td>{{ rapport.sinisterRapport.location }}</td>
+            </tr>
+            <tr>
+                <th> actions</th>
+                <td>   <a href="{{ path('app_rapport_index') }}"" class="btn btn-secondary">Back to list</a> 
+               <a href="{{ path('app_rapport_edit', {'id': rapport.id}) }}"" class="btn btn-warning">Modifier</a></td>
+
+
+               <form action="{{ path('rapport.pdf', {'id': rapport.id}) }}" method="get" style="display: inline;">
+   
+</form>
+</td>
+            </tr>
+        </tbody>
+    </table>
+<button type="submit" class="btn btn-primary">Télecharger le rapport</button>
+
+    {# Button to view more details about the sinister #}
+   
+
+ 
+
+    
+{% endblock %}

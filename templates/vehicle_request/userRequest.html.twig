@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}VehicleRequest Index{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <div class="section-title">
+        <h2>Liste des assurances vehicules</h2>
+    </div>
+    <table class="table">
+        <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>DateRequest</th>
+                    <th>TypeInsurance</th>
+                    <th>Status</th>
+                    <th>Marque</th>
+                    <th>Modele</th>
+                    <th>Fab_year</th>
+                    <th>Serial_number</th>
+                    <th>Matricul_number</th>
+                    <th>Vehicle_price</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for vehicle_request in vehicle_requests %}
+                    <tr>
+                        <td>{{ vehicle_request.id }}</td>
+                        <td>{{ vehicle_request.dateRequest ? vehicle_request.dateRequest|date('Y-m-d') : '' }}</td>
+                        <td>{{ vehicle_request.typeInsurance }}</td>
+                        <td class="{% if vehicle_request.status == 'Accepter' %}text-success{% elseif vehicle_request.status == 'Refusée' %}text-danger{% endif %}">{{ vehicle_request.status }}</td>
+                        <td>{{ vehicle_request.Marque }}</td>
+                        <td>{{ vehicle_request.Modele }}</td>
+                        <td>{{ vehicle_request.FabYear ? vehicle_request.FabYear|date('Y-m-d') : '' }}</td>
+                        <td>{{ vehicle_request.serialNumber }}</td>
+                        <td>{{ vehicle_request.matriculNumber }}</td>
+                        <td>{{ vehicle_request.vehiclePrice }}</td>
+                        <td>
+                            <a href="{{ path('app_vehicle_request_show', {'id': vehicle_request.id}) }}" class="btn btn-primary">Show</a>
+                            <a href="{{ path('app_vehicle_request_edit', {'id': vehicle_request.id}) }}" class="btn btn-warning">Edit</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="11">No records found</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        
+    <a href="{{ path('app_vehicle_request_new') }}" class="btn btn-success">Create new</a>
+   <br>
+    <br>
+</div>
+</div>
+{% endblock %}

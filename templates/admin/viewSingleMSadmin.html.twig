@@ -1,0 +1,61 @@
+{% extends 'admin/index.html.twig' %}
+
+
+{% block profile %}
+    <h1>MedicalSheet</h1>
+
+    <table class="table">
+        <tbody>
+        <tr>
+            <th>Id</th>
+            <td>{{ medical_sheet.id }}</td>
+        </tr>
+        <tr>
+            <th>Medical Diagnosis</th>
+            <td>{{ medical_sheet.medicalDiagnosis }}</td>
+        </tr>
+        <tr>
+            <th>Treatment Plan</th>
+            <td>{{ medical_sheet.treatmentPlan }}</td>
+        </tr>
+        <tr>
+            <th>Medical Reports</th>
+            <td>{{ medical_sheet.medicalReports }}</td>
+        </tr>
+        <tr>
+            <th>Duration Of Incapacity</th>
+            <td>{{ medical_sheet.durationOfIncapacity }}</td>
+        </tr>
+        <tr>
+            <th>Procedure Performed</th>
+            <td>{{ medical_sheet.procedurePerformed }}</td>
+        </tr>
+        <tr>
+            <th>Sick Leave Duration</th>
+            <td>{{ medical_sheet.sickLeaveDuration }}</td>
+        </tr>
+        <tr>
+            <th>Hospitalization Period</th>
+            <td>{{ medical_sheet.hospitalizationPeriod }}</td>
+        </tr>
+        <tr>
+            <th>Rehabilitation Period</th>
+            <td>{{ medical_sheet.rehabilitationPeriod }}</td>
+        </tr>
+        <tr>
+            <th>Medical Information</th>
+            <td>{{ medical_sheet.medicalInformation }}</td>
+        </tr>
+        <tr>
+            <th>Client Name</th>
+            <td>{{ medical_sheet.userCIN }}</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_medical_sheet_index') }}">Back to list</a>
+
+    <a href="{{ path('app_medical_sheet_edit', {'id': medical_sheet.id}) }}">edit</a>
+
+    {{ include('medical_sheet/_delete_form.html.twig') }}
+{% endblock %}

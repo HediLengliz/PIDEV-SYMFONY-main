@@ -1,0 +1,313 @@
+<body>
+  <main>
+    <div class="container">
+ <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+      <section class="">
+  {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="alert alert-{{ label }} alert-dismissible fade show" role="alert">
+                {{ message|raw }}
+                <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endfor %}
+    {% endfor %}
+        <div class="card mb-3" style= "margin-bottom:50%">
+          <div class="card-body">
+          {{ form_start(form, {'attr': {'class': 'row g-3 needs-validation',  'enctype': 'multipart/form-data', 'novalidate': 'novalidate'}}) }}
+
+            {% if form_errors(form) %}
+
+            <div class="alert alert-danger">
+                <ul>
+                    {% for error in form_errors(form) %}
+                        <li>{{ error.message }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+            <div class="col-12">
+              <div class="step" id="step1">
+                <h2>Informations à propos l'accident</h2>
+                <label for="dateSinister" class="form-label">Date Sinister</label>
+                {{ form_widget(form.dateSinister) }}
+              {% if form_errors(form.dateSinister) %}
+                <div class="alert alert-danger">
+                  {{ form_errors(form.dateSinister) }}
+                </div>
+              {% endif %}
+                <div class="col-12">
+    
+    {{ form_row(form.imageFile) }}
+
+
+</div>
+              
+
+              <div class="col-12">
+                <label for="location" class="form-label">Location</label>
+                {{ form_widget(form.location, {'attr': {'class': 'form-control', 'id': 'location'}}) }}
+                                {% if form_errors(form.location) %}
+                       <div class="alert alert-danger">
+                           {{ form_errors(form.location) }}
+                       </div>
+            {% endif %}
+              </div>
+               <button type="button" onclick="nextStep('step1', 'step2')">Next</button>
+
+                </div>
+              <!-- Move the "Next" button here -->
+             
+            </div>
+            </div>
+
+            <div class="step" id="step2" style="display: none;">
+              <div class="col-12">
+              <h2>Informations à propos véhicule A</h2>
+                <label for="Nom_Conducteur_A" class="form-label">Nom Conducteur A</label>
+                {{ form_widget(form.Nom_Conducteur_A, {'attr': {'class': 'form-control', 'id': 'Nom_Conducteur_A'}}) }}
+                                {% if form_errors(form.Nom_Conducteur_A) %}
+                    <div class="alert alert-danger">
+                        {{ form_errors(form.Nom_Conducteur_A) }}
+                    </div>
+                {% endif %}
+              </div>
+
+              <div class="col-12">
+                <label for="Prenom_Conducteur_A" class="form-label">Prenom Conducteur A</label>
+                {{ form_widget(form.Prenom_Conducteur_A, {'attr': {'class': 'form-control', 'id': 'Prenom_Conducteur_A'}}) }}
+                                {% if form_errors(form.Prenom_Conducteur_A) %}
+                    <div class="alert alert-danger">
+                        {{ form_errors(form.Prenom_Conducteur_A) }}
+                    </div>
+                {% endif %}
+              </div>
+
+              <div class="col-12">
+                <label for="Adresse_conducteurA" class="form-label">Adresse Conducteur A</label>
+                {{ form_widget(form.Adresse_conducteurA, {'attr': {'class': 'form-control', 'id': 'Adresse_conducteurA'}}) }}
+                       {% if form_errors(form.Adresse_conducteurA) %}
+                       <div class="alert alert-danger">
+                           {{ form_errors(form.Adresse_conducteurA) }}
+                       </div>
+            {% endif %}
+              </div>
+
+              <div class="col-12">
+                <label for="num_permisA" class="form-label">Num Permis A</label>
+                {{ form_widget(form.num_permisA, {'attr': {'class': 'form-control', 'id': 'num_permisA'}}) }}
+                            {% if form_errors(form.num_permisA) %}
+                       <div class="alert alert-danger">
+                           {{ form_errors(form.num_permisA) }}
+                       </div>
+            {% endif %}
+              </div>
+
+              <div class="col-12">
+                <label for="delivre_A" class="form-label">Delivre A</label>
+                {{ form_widget(form.delivre_A) }}
+                {% if form_errors(form.delivre_A) %}
+                       <div class="alert alert-danger">
+                           {{ form_errors(form.delivre_A) }}
+                       </div>
+            {% endif %}
+              </div>
+
+              <div class="col-12">
+                <label for="num_contratA" class="form-label">Num Contrat A</label>
+                {{ form_widget(form.num_contratA, {'attr': {'class': 'form-control', 'id': 'num_contratA'}}) }}
+            {% if form_errors(form.num_contratA) %}
+                       <div class="alert alert-danger">
+                           {{ form_errors(form.num_contratA) }}
+                       </div>
+            {% endif %}
+              </div>
+
+              <div class="col-12">
+                <label for="Marque_VehiculeA" class="form-label">Marque Vehicule A</label>
+                {{ form_widget(form.Marque_VehiculeA, {'attr': {'class': 'form-control', 'id': 'Marque_VehiculeA'}}) }}
+          {% if form_errors(form.Marque_VehiculeA) %}
+                       <div class="alert alert-danger">
+                           {{ form_errors(form.Marque_VehiculeA) }}
+                       </div>
+            {% endif %}
+              </div>
+
+              <div class="col-12">
+                <label for="ImmatriculationA" class="form-label">Immatriculation A</label>
+                {{ form_widget(form.ImmatriculationA, {'attr': {'class': 'form-control', 'id': 'ImmatriculationA'}}) }}
+                                          {% if form_errors(form.ImmatriculationA) %}
+                       <div class="alert alert-danger">
+                           {{ form_errors(form.ImmatriculationA) }}
+                       </div>
+            {% endif %}
+                <!-- Move the "Previous" and "Next" buttons here -->
+                <button type="button" onclick="prevStep('step2', 'step1')">Previous</button>
+                <button type="button" onclick="nextStep('step2', 'step3')">Next</button>
+
+              </div>
+            </div>
+
+            <!-- Add other fields related to vehicle A information here -->
+<div class="step" id="step3" style="display: none;">
+    <div class="col-12">
+        <h2>Informations à propos véhicule B</h2>
+        <label for="Nom_Conducteur_B" class="form-label">Nom Conducteur B</label>
+        {{ form_widget(form.Nom_Conducteur_B, {'attr': {'class': 'form-control', 'id': 'Nom_Conducteur_B'}}) }}
+                    {% if form_errors(form.Nom_Conducteur_B) %}
+                       <div class="alert alert-danger">
+                           {{ form_errors(form.Nom_Conducteur_B) }}
+                       </div>
+            {% endif %}
+    </div>
+
+    <div class="col-12">
+        <label for="Prenom_Conducteur_B" class="form-label">Prenom Conducteur B</label>
+        {{ form_widget(form.Prenom_Conducteur_B, {'attr': {'class': 'form-control', 'id': 'Prenom_Conducteur_B'}}) }}
+                     {% if form_errors(form.Prenom_Conducteur_B) %}
+                       <div class="alert alert-danger">
+                           {{ form_errors(form.Prenom_Conducteur_B) }}
+                       </div>
+            {% endif %}
+    </div>
+
+    <div class="col-12">
+        <label for="Adresse_conducteurB" class="form-label">Adresse Conducteur B</label>
+        {{ form_widget(form.Adresse_conducteurB, {'attr': {'class': 'form-control', 'id': 'Adresse_conducteurB'}}) }}
+                            {% if form_errors(form.Adresse_conducteurB) %}
+                       <div class="alert alert-danger">
+                           {{ form_errors(form.Adresse_conducteurB) }}
+                       </div>
+            {% endif %}
+    </div>
+
+    <div class="col-12">
+        <label for="num_permisB" class="form-label">Num Permis B</label>
+        {{ form_widget(form.num_permisB, {'attr': {'class': 'form-control', 'id': 'num_permisB'}}) }}
+                                  {% if form_errors(form.num_permisB) %}
+                       <div class="alert alert-danger">
+                           {{ form_errors(form.num_permisB) }}
+                       </div>
+            {% endif %}
+    </div>
+
+    <div class="col-12">
+        <label for="delivre_B" class="form-label">Delivre B</label>
+        {{ form_widget(form.delivre_B) }}
+                   {% if form_errors(form.delivre_B) %}
+                       <div class="alert alert-danger">
+                           {{ form_errors(form.delivre_B) }}
+                       </div>
+            {% endif %}
+    </div>
+
+    <div class="col-12">
+        <label for="num_contratB" class="form-label">Num Contrat B</label>
+        {{ form_widget(form.num_contratB, {'attr': {'class': 'form-control', 'id': 'num_contratB'}}) }}
+                             {% if form_errors(form.num_contratB) %}
+                       <div class="alert alert-danger">
+                           {{ form_errors(form.num_contratB) }}
+                       </div>
+            {% endif %}
+    </div>
+
+    <div class="col-12">
+        <label for="Marque_VehiculeB" class="form-label">Marque Vehicule B</label>
+        {{ form_widget(form.Marque_VehiculeB, {'attr': {'class': 'form-control', 'id': 'Marque_VehiculeB'}}) }}
+                   {% if form_errors(form.Marque_VehiculeB) %}
+                       <div class="alert alert-danger">
+                           {{ form_errors(form.Marque_VehiculeB) }}
+                       </div>
+            {% endif %}
+    </div>
+
+    <div class="col-12">
+        <label for="ImmatriculationB" class="form-label">Immatriculation B</label>
+        {{ form_widget(form.ImmatriculationB, {'attr': {'class': 'form-control', 'id': 'ImmatriculationB'}}) }}
+                   {% if form_errors(form.ImmatriculationB) %}
+                       <div class="alert alert-danger">
+                           {{ form_errors(form.ImmatriculationB) }}
+                       </div>
+            {% endif %}
+    </div>
+
+    <div class="col-12">
+        <label for="BvehiculeAssurePar" class="form-label">Bvehicule Assure Par</label>
+        {{ form_widget(form.BvehiculeAssurePar, {'attr': {'class': 'form-control', 'id': 'BvehiculeAssurePar'}}) }}
+                            {% if form_errors(form.BvehiculeAssurePar) %}
+                       <div class="alert alert-danger">
+                           {{ form_errors(form.BvehiculeAssurePar) }}
+                       </div>
+            {% endif %}
+    </div>
+
+    <div class="col-12">
+        <label for="agence" class="form-label">Agence</label>
+        {{ form_widget(form.agence, {'attr': {'class': 'form-control', 'id': 'agence'}}) }}
+            {% if form_errors(form.agence) %}
+        <div class="alert alert-danger">
+            {{ form_errors(form.agence) }}
+        </div>
+    {% endif %}
+    </div>
+
+    <!-- Add other fields related to vehicle B information here -->
+
+ <div class="col-12">
+<div class="col-12">
+    <button type="button" onclick="prevStep('step3')">Previous</button>
+
+    <button class="btn btn-primary w-100" onclick="submitForm()">{{ button_label|default('Save') }}</button>
+</div>
+
+</div>
+
+
+</div>
+
+{{ form_end(form) }}
+
+          </div>
+        </div>
+      </section>
+    </div>
+  </main><!-- End #main -->
+</body>
+<script>
+    // Initialize Bootstrap components
+    var alertList = document.querySelectorAll('.alert');
+    alertList.forEach(function (alert) {
+        new bootstrap.Alert(alert);
+    });
+</script>
+<script>
+  function showStep(stepId) {
+    // Hide all steps
+    document.getElementById('step1').style.display = 'none';
+    document.getElementById('step2').style.display = 'none';
+    document.getElementById('step3').style.display = 'none';
+    // Show the specified step
+    document.getElementById(stepId).style.display = 'block';
+  }
+
+  function nextStep(currentStepId, nextStepId) {
+    // Add validation or logic here if needed before proceeding to the next step
+    showStep(nextStepId);
+  }
+
+  function prevStep(currentStepId) {
+    // Add validation or logic here if needed before going to the previous step
+    if (currentStepId === 'step3') {
+      showStep('step2');
+    } else if (currentStepId === 'step2') {
+      showStep('step1');
+    }
+  }
+</script>
+
+
+
+
+

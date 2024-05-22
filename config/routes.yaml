@@ -1,0 +1,168 @@
+#index:
+#    path: /
+#    controller: App\Controller\DefaultController::index
+
+
+
+register:
+    path: /register
+    controller: App\Controller\RegistrationController::register
+app_login:
+    path: /login
+    controller: App\Controller\SecurityController::login
+app_logout:
+    path: /logout
+    controller: App\Controller\SecurityController::logout
+users-profile:
+    path: /users-profile
+    controller: App\Controller\ProfileController::usersProfile
+editprofile:
+    path: /editprofile
+    controller: App\Controller\ProfileController::editprofile
+# config/routes.yaml
+
+changePassword:
+    path: /changePassword
+    controller: 'App\Controller\ProfileController::changePassword'
+    methods: ['GET', 'POST']
+forgot_password:
+    path: /forgetPassword
+    controller: 'App\Controller\ProfileController::changePassword'
+    methods: ['GET', 'POST']
+
+profile:
+    path: /profile
+    controller: 'App\Controller\ProfileController::profile'
+    methods: ['GET']
+admin_profile:
+    path: /adminprofile
+    controller: 'App\Controller\ProfileController::adminprofile'
+    methods: ['GET']
+
+# app_user_delete:
+#     path: /delete
+#     controller: App\Controller\UserController::delete
+# app_user_new:
+#     path: /new
+#     controller: App\Controller\UserController::new
+# getAllusers:
+#     path: /getAllusers
+#     controller: App\Controller\UserController::getAllusers
+admincreateuser:
+    path: /admincreateuser
+    controller: App\Controller\UserController::adminCreateUser
+sendSms:
+    path: /sendSms
+    controller: App\Controller\UserController::sendSms
+    methods: ['GET', 'POST']
+# config/routes.yaml
+
+two_factor_authentication:
+    path: /two-factor-authentication
+    controller: App\Controller\TwoFactorAuthentificationController::index
+    methods: ['GET', 'POST']
+#index:
+#    path: /
+#    controller: App\Controller\DefaultController::index
+admin:
+    path: /admin
+    controller: App\Controller\AdminController::admin
+
+client:
+    path: /client
+    controller: App\Controller\ClientController::client
+
+HomePage:
+    path: /HomePage
+    controller: App\Controller\ClientController::HomePage
+
+New_VehicleRequest:
+    path: /new_VehicleRequest
+    controller: App\Controller\VehicleRequestController::new
+
+New_PropretyRequest:
+    path: /New_PropretyRequest
+    controller: App\Controller\PropretyRequestController::new
+
+
+New_LifeRequest:
+    path: /New_LifeRequest
+    controller: App\Controller\LifeRequestController::new
+
+New_ContratHabitat:
+    path: /New_ContratHabitat
+    controller: App\Controller\ContratHabitatController::new
+
+New_ContratVehicule:
+    path: /New_ContratVehicule
+    controller: App\Controller\ContratVehiculeController::new
+
+New_ContratVie:
+    path: /New_ContratVie
+    controller: App\Controller\ContratVieController::new
+
+
+app_contrat_habitat_show_in_contrat:
+    path: '/showDemandes_habitat'
+    controller: 'App\Controller\ContratHabitatController::showDemandes_habitat'
+    methods: ['GET']
+
+app_contrat_vie_show_in_contrat:
+    path: '/showDemandes_vie'
+    controller: 'App\Controller\ContratVieController::showDemandes_vie'
+    methods: ['GET']
+
+app_contrat_vehicule_show_in_contrat:
+    path: '/showDemandes_vehicule'
+    controller: 'App\Controller\ContratVehiculeController::showDemandes_vehicule'
+    methods: ['GET']
+app_stripe:
+    path: /stripe
+    controller: App\Controller\StripeController::index
+    methods: ['GET']
+
+
+payment/checkout:
+    path: /payment/checkout
+    controller: App\Controller\StripeController::checkout
+    methods: ['GET']
+
+pp_notification_show:
+    path: '/notification/{id}'
+    controller: 'App\Controller\NotificationController::show'
+    methods: ['GET']
+
+app_stripe_charge:
+    path: '/stripe/create-charge'
+    controller: 'App\Controller\StripeController::createCharge'
+    methods: ['GET','POST']
+
+refuser_demande:
+    path: /refuser-demande/{id}
+    controller: App\Controller\ContratVehiculeController::refuserDemande
+    methods: ['GET','POST']
+
+refuser_demande_life:
+    path: /refuser-demande-vie/{id}
+    controller: App\Controller\ContratVieController::refuserDemande
+    methods: ['GET','POST']
+
+refuser_demande_habitat:
+    path: /refuser-demande-habitat/{id}
+    controller: App\Controller\ContratHabitatController::refuserDemande
+    methods: ['GET','POST']
+
+pdf:
+    path: /pdf/{id}
+    controller: App\Controller\ContratHabitatController::generatePdfPersonne
+    methods: ['GET','POST']
+
+pdf_vehicule:
+    path: /pdf_vehicule/{id}
+    controller: App\Controller\ContratVehiculeController::generatePdfPersonne
+    methods: ['GET','POST']
+
+pdf_vie:
+    path: /pdf_vie/{id}
+    controller: App\Controller\ContratVieController::generatePdfPersonne
+    methods: ['GET','POST']

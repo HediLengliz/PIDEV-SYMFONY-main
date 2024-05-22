@@ -1,0 +1,56 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block title %}New Question{% endblock %}
+
+{% block profile %}
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <h1>new Question</h1>
+
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-md-10 form-group">
+                            {{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
+                            {{ form_widget(form.question, {'attr': {'class': 'form-control', 'placeholder': 'question'}}) }}
+                                {{ form_errors(form.question) }}
+                            <br>
+                            {{ form_widget(form.priority, {'attr': {'class': 'form-control', 'placeholder': 'priority'}}) }}
+                            {{ form_errors(form.priority) }}
+                        <br>
+                            {{ form_widget(form.type, {'attr': {'class': 'form-control', 'placeholder': 'type'}}) }}
+                                {{ form_errors(form.type) }}
+                            <br>
+                            <button class="btn btn-primary">{{ button_label|default('Save') }}</button>
+                            <a href="{{ path('app_question_index') }}" class="btn btn-danger">Back to List</a>
+
+                            {{ form_end(form) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const questionInput = document.querySelector('#{{ form.question.vars.id }}');
+            const typeInput = document.querySelector('#{{ form.type.vars.id }}');
+
+            questionInput.addEventListener('input', function() {
+                const questionError = document.querySelector('#question-error');
+                if (questionError) {
+                    questionError.style.display = 'none';
+                }
+            });
+
+            typeInput.addEventListener('input', function() {
+                const typeError = document.querySelector('#type-error');
+                if (typeError) {
+                    typeError.style.display = 'none';
+                }
+            });
+        });
+    </script>
+{% endblock %}

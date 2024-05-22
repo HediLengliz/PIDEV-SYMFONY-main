@@ -1,0 +1,137 @@
+{%  extends 'base3.html.twig' %}
+{%  block title%} protechtini {% endblock %}
+{%  block body %}
+    <main id="main">
+
+        <!-- ======= Portfolio Section ======= -->
+         {% for article in articles %}
+        {% endfor %}
+        <section id="portfolio" class="portfolio">
+            <div class="container" data-aos="fade-up">
+
+                <div class="section-title">
+                    <h2>Articles</h2>
+                    <p>Explorer notre actualité en navigant les derniers articles.</p>
+                </div>
+                <center>
+                <div class="row">
+                    <div class="col-lg-6 d-flex justify-content-center">
+                        <center>
+                        <div class="input-group center">
+                            <input type="text" id="searchInput" class="form-control" placeholder="Search articles...">
+                            <button id="searchButton" class="btn btn-primary">Search</button>
+                        </div></center>
+                    </div></center>
+
+                <div class="row">
+                    <div class="col-lg-12 d-flex justify-content-center">
+                        <ul id="portfolio-flters">
+                            <li data-filter="*" class="filter-active">Tous</li>
+                            <li data-filter=".filter-auto">Auto</li>
+                            <li data-filter=".filter-hab">Habitat</li>
+                            <li data-filter=".filter-san">Sante</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="row portfolio-container">
+                    {% for article in articles %}
+                        {% if article.categorie == 'Auto' %}
+                            <div class="col-lg-4 col-md-6 portfolio-item filter-auto">
+                                <div class="portfolio-wrap">
+                                    <img src="{{ asset('uploads/images/' ~ article.image) }}" class="img-fluid" alt="">
+                                    <div class="portfolio-info">
+                                        <h4>{{ article.title }}</h4>
+
+                                    </div>
+                                    <div class="portfolio-links">
+                                        <a href="{{ asset('uploads/images/' ~ article.image) }}" data-gallery="portfolioGallery" class="portfolio-lightbox" title="{{ article.description }}"><i class="bx bx-plus"></i></a>
+                                        <a href="{{ path('app_client_articlebyid', {'id': article.id}) }}" title="Voir Plus"><i class="bx bx-link"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                        {% if article.categorie == 'Habitat' %}
+                            <div class="col-lg-4 col-md-6 portfolio-item filter-hab">
+                                <div class="portfolio-wrap">
+                                    <img src="{{ asset('uploads/images/' ~ article.image) }}" class="img-fluid" alt="">
+                                    <div class="portfolio-info">
+                                        <h4>{{ article.title }}</h4>
+
+                                    </div>
+                                    <div class="portfolio-links">
+                                        <a href="{{ asset('uploads/images/' ~ article.image) }}" data-gallery="portfolioGallery" class="portfolio-lightbox" title="{{ article.description }}"><i class="bx bx-plus"></i></a>
+                                        <a href="{{ path('app_client_articlebyid', {'id': article.id}) }}" title="Voir Plus"><i class="bx bx-link"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                        {% if article.categorie == 'Sante' %}
+                            <div class="col-lg-4 col-md-6 portfolio-item filter-san">
+                                <div class="portfolio-wrap">
+                                    <img src="{{ asset( 'uploads/images/' ~ article.image)}}" class="img-fluid" alt="">
+                                    <div class="portfolio-info">
+                                        <h4>{{ article.title }}</h4>
+                                    </div>
+                                    <div class="portfolio-links">
+                                        <a href="{{ asset('uploads/images/' ~ article.image )}}" data-gallery="portfolioGallery" class="portfolio-lightbox" title="{{ article.description }}"><i class="bx bx-plus"></i></a>
+                                        <a href="{{ path('app_client_articlebyid', {'id': article.id}) }}" title="Voir Plus"><i class="bx bx-link"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+
+                </div>
+
+            </div>
+        </section><!-- End Portfolio Section -->
+        <script>
+            $(document).ready(function() {
+                // Initialize DataTable
+                $('#articlesTable').DataTable({
+                    searching: true,
+                    paging: true,
+                    ordering: true,
+                    info: true
+                });
+
+                // Handle search button click event
+                $('#searchButton').click(function() {
+                    var searchText = $('#searchInput').val().trim().toLowerCase();
+                    var articlesFound = true;
+
+                    // Loop through each article and hide/show based on search text
+                    $('.portfolio-item').each(function() {
+                        var articleTitle = $(this).find('h4').text().trim().toLowerCase();
+                        if (articleTitle.includes(searchText)) {
+                            $(this).show();
+                            articlesFound = false;
+                        } else {
+                            $(this).hide();
+                        }
+                    });
+                    if (!articlesFound) {
+                        // Use AJAX to trigger Flashy message
+                        $.ajax({
+                            url: '{{ path('app_client') }}',
+                            type: 'POST',
+                            data: { message: 'Article not found', type: 'error' },
+                            success: function(response) {
+                                // Handle success response if needed
+                            },
+                            error: function(xhr, status, error) {
+                                console.error('Error triggering Flashy message:', error);
+                            }
+                        });
+                    }
+                });
+            });
+        </script>
+    </main>
+
+
+
+
+
+{%endblock%}

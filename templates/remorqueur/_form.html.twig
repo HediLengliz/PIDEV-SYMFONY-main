@@ -1,0 +1,90 @@
+<body>
+    <main>
+        <div class="container">
+
+            <!-- Add this script tag to include jQuery -->
+            <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+            <section class="section register min-vh-100 d-flex flex-column align-items-center ">
+                <div class="card mb-3">
+                    <div class="card-body">
+
+                        {{ form_start(form, {'attr': {'class': 'row g-3 needs-validation', 'novalidate': 'novalidate', 'enctype': 'multipart/form-data'}}) }}
+                        {% if form_errors(form) %}
+                            <div class="alert alert-danger">
+                                <ul>
+                                    {% for error in form_errors(form) %}
+                                        <li>{{ error.message }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        {% endif %}
+
+                        <div class="col-12">
+                            <h2>Remorqueur Information</h2>
+
+                            <div class="col-12">
+                                <label for="FirstName" class="form-label">First Name</label>
+                                {{ form_widget(form.FirstName, {'attr': {'class': 'form-control', 'id': 'FirstName'}}) }}
+                                {% if form_errors(form.FirstName) %}
+                                    <div class="alert alert-danger">
+                                        {{ form_errors(form.FirstName) }}
+                                    </div>
+                                {% endif %}
+                            </div>
+
+                            <div class="col-12">
+                                <label for="LastName" class="form-label">Last Name</label>
+                                {{ form_widget(form.LastName, {'attr': {'class': 'form-control', 'id': 'LastName'}}) }}
+                                {% if form_errors(form.LastName) %}
+                                    <div class="alert alert-danger">
+                                        {{ form_errors(form.LastName) }}
+                                    </div>
+                                {% endif %}
+                            </div>
+
+                            <div class="col-12">
+                                <label for="PhoneNumber" class="form-label">Phone Number</label>
+                                {{ form_widget(form.PhoneNumber, {'attr': {'class': 'form-control', 'id': 'PhoneNumber'}}) }}
+                                {% if form_errors(form.PhoneNumber) %}
+                                    <div class="alert alert-danger">
+                                        {{ form_errors(form.PhoneNumber) }}
+                                    </div>
+                                {% endif %}
+                            </div>
+
+                            <div class="col-12">
+                                <label for="lattitude" class="form-label">Lattitude</label>
+                                {{ form_widget(form.lattitude, {'attr': {'class': 'form-control', 'id': 'lattitude'}}) }}
+                                {% if form_errors(form.lattitude) %}
+                                    <div class="alert alert-danger">
+                                        {{ form_errors(form.lattitude) }}
+                                    </div>
+                                {% endif %}
+                            </div>
+
+                            <div class="col-12">
+                                <label for="longuitude" class="form-label">Longuitude</label>
+                                {{ form_widget(form.longuitude, {'attr': {'class': 'form-control', 'id': 'longuitude'}}) }}
+                                {% if form_errors(form.longuitude) %}
+                                    <div class="alert alert-danger">
+                                        {{ form_errors(form.longuitude) }}
+                                    </div>
+                                {% endif %}
+                            </div>
+
+                            <div class="col-12">
+                                <button class="btn btn-primary w-100">{{ button_label|default('Save') }}</button>
+                            </div>
+
+                        </div>
+
+                        {{ form_end(form) }}
+
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main><!-- End #main -->
+</body>

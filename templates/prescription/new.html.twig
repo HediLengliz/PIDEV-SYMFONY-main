@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Prescription{% endblock %}
+
+{% block body %}
+    <h1>Create new Prescription</h1>
+
+    {{ include('prescription/_form.html.twig') }}
+    <a href="{{ path('app_prescription_index') }}" class="btn btn-secondary me-2">Back to list</a>
+{% endblock %}

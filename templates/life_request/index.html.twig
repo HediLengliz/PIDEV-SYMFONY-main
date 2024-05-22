@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}LifeRequest Index{% endblock %}
+
+{% block body %}
+
+<div class="container mt-5">
+    <div class="section-title">
+        <h2>Liste des assurances maladies</h2>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>DateRequest</th>
+                <th>TypeInsurance</th>
+                <th>Status</th>
+                <th>Age</th>
+                <th>Chron_disease</th>
+                <th>Surgery</th>
+                <th>Civil_status</th>
+                <th>Occupation</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for life_request in life_requests %}
+                <tr>
+                    <td>{{ life_request.id }}</td>
+                    <td>{{ life_request.dateRequest ? life_request.dateRequest|date('Y-m-d') : '' }}</td>
+                    <td>{{ life_request.typeInsurance }}</td>
+                    <td class="{% if life_request.status == 'Accepter' %}text-success{% elseif life_request.status == 'Refusée' %}text-danger{% endif %}">{{ life_request.status }}</td>
+                    <td>{{ life_request.Age }}</td>
+                    <td>{{ life_request.chronDisease }}</td>
+                    <td>{{ life_request.surgery }}</td>
+                    <td>{{ life_request.civilStatus }}</td>
+                    <td>{{ life_request.occupation }}</td>
+                    <td>
+                        <a href="{{ path('app_life_request_show', {'id': life_request.id}) }}" class="btn btn-primary"><i class="bi bi-list-check"></i></a>
+                        <a href="{{ path('app_life_request_edit', {'id': life_request.id}) }}" class="btn btn-warning"><i class="bi bi-pencil-square"></i></a>
+                    <a href="{{ path('app_contrat_vie_user') }}" class="btn btn-warning"><i class="bi bi-pencil-square"></i></a>
+
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="10">No records found</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_life_request_new') }}" class="btn btn-success">Create new</a>
+    
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-end">
+            {{ knp_pagination_render(life_requests) }}
+        </ul>
+    </nav>
+</div>
+
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block title %}New ServiceLife{% endblock %}
+
+{% block profile %}
+    <h1>Create new ServiceLife</h1>
+
+    {{ include('service_life/_form.html.twig') }}
+
+    <a href="{{ path('app_service_life_index') }}">back to list</a>
+{% endblock %}

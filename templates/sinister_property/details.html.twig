@@ -1,0 +1,30 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block title %}SinisterProperty{% endblock %}
+
+{% block profile %}
+    <h1>SinisterProperty</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ sinister.id }}</td>
+            </tr>
+            <tr>
+                <th>Type_degat</th>
+                <td>{{ sinister.typeDegat }}</td>
+            </tr>
+            <tr>
+                <th>Description_degat</th>
+                <td>{{ sinister.descriptionDegat }}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{{ sinister.statusSinister }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_sinister_property_edit', {'id': sinister.id}) }}">traiter</a>
+{% endblock %}

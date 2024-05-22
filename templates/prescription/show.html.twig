@@ -1,0 +1,73 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Prescription{% endblock %}
+
+{% block body %}
+    {% if prescription is defined %}
+    <h1>Prescription</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ prescription.id }}</td>
+            </tr>
+            <tr>
+                <th>Date Prescription</th>
+                <td>{{ prescription.datePrescription ? prescription.datePrescription|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Medications</th>
+                <td>{{ prescription.medications }}</td>
+            </tr>
+            <tr>
+                <th>Status Prescription</th>
+                <td>{{ prescription.statusPrescription }}</td>
+            </tr>
+            <tr>
+                <th>Additional Notes</th>
+                <td>{{ prescription.additionalNotes }}</td>
+            </tr>
+            <tr>
+                <th>Validity Duration</th>
+                <td>{{ prescription.validityDuration }}</td>
+            </tr>
+            <tr>
+                <th>Client Name</th>
+                <td>{{prescription.userCIN }}</td>
+            </tr>
+        </tbody>
+    </table>
+    {% endif %}
+
+    <div class="text-center mt-4">
+        <form class="d-inline" action="{{ path('drug_search') }}" method="get">
+            <label for="drugName" class="form-label">Search Medicine with OpenFDA:</label>
+            <input type="text" id="drugName" name="drugName" placeholder="Enter medicine name" class="form-control d-inline-block" style="width: auto;">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+    </div>
+    {% if drugDetails is defined %}
+    <div class="mt-4">
+        <h2>Drug Information:</h2>
+        {# Example of displaying drug name and description. Adjust according to your API response structure #}
+        <p><strong>Name:</strong> {{ drugDetails['openfda']['brand_name'][0] | default('Not Available') }}</p>
+        <p><strong>Description:</strong> {{ drugDetails['description'][0] | default('Description not available') }}</p>
+        {# Add more fields as needed #}
+    </div>
+{% endif %}
+
+{% if prescription is defined %}
+    <div class="mt-4 text-center">
+        <a href="{{ path('app_prescription_index') }}" class="btn btn-secondary">Back to list</a>
+        <a href="{{ path('app_prescription_edit', {'id': prescription.id}) }}" class="btn btn-warning">Edit</a>
+        <a href="{{ path('prescription_export_pdf', {'id': prescription.id}) }}" class="btn btn-primary">Exporter en PDF</a>
+    </div>
+        <div class="mt-3 text-center">
+            {{ include('prescription/_delete_form.html.twig') }}
+        </div>
+    {% endif %}
+{% endblock %}
+
+
+

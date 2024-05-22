@@ -1,0 +1,16 @@
+{% extends 'baseback.html.twig' %}
+
+{% block title %}Modifier Article{% endblock %}
+
+{% block content1 %}
+    <center>
+    <h1>Modifier article</h1>
+
+    {{ include('article/_form.html.twig', {'button_label': 'Modifier'}) }}
+
+    <a class="btn btn-primary" href="{{ path('app_article_index') }}">Retour</a>
+<table class="table table-striped">
+    {{ include('article/_delete_form.html.twig') }}
+</table>
+        </center>
+{% endblock %}

@@ -1,0 +1,102 @@
+<body>
+<main>
+    <div class="container">
+
+        <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+            <div class="card mb-3">
+
+                <div class="card-body">
+
+
+                    {{ form_start(form, {'attr': {'class': 'row g-3 needs-validation', 'novalidate': 'novalidate'}}) }}
+                    {% if form_errors(form) %}
+
+                        <div class="alert alert-danger">
+                            <ul>
+                                {% for error in form_errors(form) %}
+                                    <li>{{ error.message }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
+                    <div class="col-12">
+                        <label for="datePrescription" class="form-label">Date Prescription </label>
+                        {{ form_widget(form.datePrescription, {'attr': {'class': 'form-control', 'id': 'datePrescription'}}) }}
+                        {% if form_errors(form.datePrescription) %}
+                            <div class="alert alert-danger">
+                                {{ form_errors(form.datePrescription) }}
+                            </div>
+                        {% endif %}
+                    </div>
+
+
+                    <div class="col-12">
+                        <label for="medications" class="form-label">Medications</label>
+                        {{ form_widget(form.medications, {'attr': {'class': 'form-control', 'id': 'medications'}}) }}
+                        {% if form_errors(form.medications) %}
+                            <div class="alert alert-danger">
+                                {{ form_errors(form.medications) }}
+                            </div>
+                        {% endif %}
+                    </div>
+
+
+                    <div class="col-12">
+                        <label for="statusPrescription" class="form-label">Status Prescription</label>
+                        {{ form_widget(form.statusPrescription, {'attr': {'class': 'form-control', 'id': 'statusPrescription'}}) }}
+                        {% if form_errors(form.statusPrescription) %}
+                            <div class="alert alert-danger">
+                                {{ form_errors(form.statusPrescription) }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="col-12">
+                        <label for="additionalNotes" class="form-label"> Additional Notes </label>
+                        {{ form_widget(form.additionalNotes, {'attr': {'class': 'form-control', 'id': 'additionalNotes'}}) }}
+                        {% if form_errors(form.additionalNotes) %}
+                            <div class="alert alert-danger">
+                                {{ form_errors(form.additionalNotes) }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="col-12">
+                        <label for="validityDuration" class="form-label">Validity Duration</label>
+                        {{ form_widget(form.validityDuration, {'attr': {'class': 'form-control', 'id': 'validityDuration'}}) }}
+                        {% if form_errors(form.validityDuration) %}
+                            <div class="alert alert-danger">
+                                {{ form_errors(form.validityDuration) }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="col-12">
+                        <label for="userCIN" class="form-label">Client CIN</label>
+                        {{ form_widget(form.userCIN, {'attr': {'class': 'form-control', 'id': 'userCIN'}}) }}
+                        {% if form_errors(form.userCIN) %}
+                            <div class="alert alert-danger">
+                                {{ form_errors(form.userCIN) }}
+                            </div>
+                        {% endif %}
+                    </div>
+
+
+                    <div class="col-12">
+
+                        <button class="btn btn-primary w-100">{{ button_label|default('Save') }}</button>
+                    </div>
+                    <div class="col-12">
+                        <a href="{{ path('app_sinister_life_index') }}" class="btn btn-primary w-100">back to list</a>
+
+                    </div>
+
+
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </section>
+
+    </div>
+</main><!-- End #main -->
+
+
+
+</body>

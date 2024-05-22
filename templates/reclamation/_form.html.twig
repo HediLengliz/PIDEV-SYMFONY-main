@@ -1,0 +1,111 @@
+{# reclamation/new.html.twig #}
+{% extends 'client/index.html.twig' %}
+
+{% block content %}
+    <div class="d-flex align-items-center justify-content-center">
+        <div class="col-md-12">
+            <div class="h1">
+                {% if action == 'update' %}
+                    Update Reclamation
+                {% else %}
+                    Créer une reclamation
+                {% endif %}
+            </div>
+
+            {{ form_start(form, {'attr': {'novalidate': 'novalidate','id':'reclamation_form'}}) }}
+
+            <table class="table" style="margin-top: 3%;">
+                <tbody>
+                    <tr>
+                        <th>{{ form_label(form.title) }}</th>
+                        <td>
+                            {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
+                            {% if form_errors(form.title) %}
+                                <div class="text-danger error-title">
+                                    {{ form.title.vars.errors|first.message }}   
+                                </div>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>{{ form_label(form.description) }}</th>
+                        <td>
+                            {{ form_widget(form.description, {'attr': {'class': 'form-control', 'rows': 9}}) }}
+                            {% if form_errors(form.description) %}
+                                <div class="text-danger error-description">
+                                    {{ form.description.vars.errors|first.message }}   
+                                </div>
+                            {% endif %}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <button id="submitBtn" type="submit" class="btn btn-primary">
+                {{ button_label|default('Save') }}
+            </button>
+<br>
+    <br>
+        <br>
+            <br>
+                <br>
+                    <br>
+                        <br>
+                            <br>
+            {{ form_end(form) }}
+
+            <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    var submitBtn = document.getElementById('submitBtn');
+                    
+                    submitBtn.addEventListener('click', function (event) {
+                        event.preventDefault();
+                        
+                        var title = document.querySelector('input[name="reclamation[title]"]').value;
+                        var description = document.querySelector('textarea[name="reclamation[description]"]').value;
+        
+                        var myHeaders = new Headers();
+                        myHeaders.append("apikey", "BvRBPgZPE12rd1Cm0GF9T3YbT9gHcRqW");
+        
+                        var requestOptions = {
+                            method: 'POST',  // Adjust the method as per your API documentation
+                            headers: myHeaders,
+                            redirect: 'follow',
+                            body: title + ' ' + description
+                        };
+        
+                        // Construct the API endpoint
+                        var apiUrl = 'https://api.apilayer.com/bad_words?censor_character=*';
+        
+                        fetch(apiUrl, requestOptions)
+                            .then(response => response.json())  // Assuming the response is in JSON format
+                            .then(result => {
+                                console.log(result);
+                                
+                                // Check if bad words are found
+                                if (result.bad_words_total > 0) {
+                                    // Replace bad words with *
+                                    result.bad_words_list.forEach(badWord => {
+                                        title = title.replace(new RegExp(badWord.word, 'gi'), '*'.repeat(badWord.word.length));
+                                        description = description.replace(new RegExp(badWord.word, 'gi'), '*'.repeat(badWord.word.length));
+                                    });
+        
+                                    // Update the form fields
+                                    document.querySelector('input[name="reclamation[title]"]').value = title;
+                                    document.querySelector('textarea[name="reclamation[description]"]').value = description;
+        
+                                    // Show an alert indicating bad words
+                                    alert('Bad words detected. Please remove them before submitting.');
+                                } else {
+                                    // No bad words, proceed with form submission
+                                    document.getElementById('reclamation_form').submit();
+                                }
+                            })
+                            .catch(error => alert('error', error));
+                    });
+                });
+            </script>
+        </div>
+    </div>
+{% endblock %}

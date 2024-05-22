@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New VehicleRequest{% endblock %}
+
+{% block body %}
+<div class="section-title">
+    <h2>Demander une assurance vehicule</h2>
+ </div>
+
+
+    {{ include('vehicle_request/_form.html.twig') }}
+
+{% endblock %}

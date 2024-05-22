@@ -1,0 +1,81 @@
+{% extends 'admin/dashboard.html.twig' %}
+
+{% block title %}Remorqueur index{% endblock %}
+
+{% block profile %}
+    <h1>Remorqueur index</h1>
+ <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <div class="col-md-12 mx-auto">
+        <div class="input-group">
+            <input class="form-control border-end-0 border rounded-pill" type="search" id="example-search-input">
+            <span class="input-group-append">
+                <button class="btn btn-outline-secondary border-bottom-0 border rounded-pill ms-n5" type="button" id="searchButton">
+                    Search
+                </button>
+            </span>
+        </div>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>FirstName</th>
+                <th>LastName</th>
+                <th>PhoneNumber</th>
+                <th>Lattitude</th>
+                <th>Longuitude</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody id="remorqueurTableBody">
+        {% for remorqueur in remorqueurs %}
+            <tr class="remorqueur-row">
+                <td>{{ remorqueur.id }}</td>
+                <td>{{ remorqueur.FirstName }}</td>
+                <td>{{ remorqueur.LastName }}</td>
+                <td>{{ remorqueur.PhoneNumber }}</td>
+                <td>{{ remorqueur.lattitude }}</td>
+                <td>{{ remorqueur.longuitude }}</td>
+                <td>
+                
+            <a href="{{ path('app_remorqueur_show', {'id': remorqueur.id}) }}" class="btn btn-success mt-3">Afficher</a>
+
+            <a href="{{ path('app_remorqueur_edit', {'id': remorqueur.id}) }}" class="btn btn-primary mt-3">Modifier</a>
+
+ 
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        <tr id="noRemorqueursRow" style="display: none;">
+                <td colspan="7" class="text-center">No Remorqueur found</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_remorqueur_new') }}" class="btn btn-warning mt-3">Create new</a>
+
+      <script>
+        $(document).ready(function () {
+            $('#searchButton').click(function () {
+                var searchQuery = $('#example-search-input').val().toLowerCase();
+                var noRemorqueursRow = $('#noRemorqueursRow');
+
+                // Loop through each remorqueur row and show/hide based on the search query
+                $('.remorqueur-row').each(function () {
+                    var remorqueurRowText = $(this).text().toLowerCase();
+
+                    // If the search query is found in the remorqueur row, show it; otherwise, hide it
+                    $(this).toggle(remorqueurRowText.includes(searchQuery));
+                });
+
+                // Show/hide the "No Remorqueurs Found" row based on search results
+                noRemorqueursRow.toggle($('.remorqueur-row:visible').length === 0);
+            });
+        });
+    </script>
+{% endblock %}

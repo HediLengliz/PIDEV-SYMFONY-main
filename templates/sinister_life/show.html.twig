@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Sinister Life{% endblock %}
+
+{% block body %}
+    <h1>Sinister Life</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ sinister_life.id }}</td>
+            </tr>
+            <tr>
+                <th>Date Sinister</th>
+                <td>{{ sinister_life.dateSinister ? sinister_life.dateSinister|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Location</th>
+                <td>{{ sinister_life.location }}</td>
+            </tr>
+            <tr>
+                <th>Amount Sinister</th>
+                <td>{{ sinister_life.amountSinister }}</td>
+            </tr>
+            <tr>
+                <th>Status Sinister</th>
+                <td>{{ sinister_life.statusSinister }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ sinister_life.description }}</td>
+            </tr>
+            <tr>
+                <th>Beneficiary Name</th>
+                <td>{{ sinister_life.beneficiaryName }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+
+    <div class="mt-4 d-flex justify-content-center">
+        <a href="{{ path('app_sinister_life_index') }}" class="btn btn-secondary me-2">Back to list</a>
+        <a href="{{ path('app_sinister_life_edit', {'id': sinister_life.id}) }}" class="btn btn-warning me-2">Edit</a>
+        {# Assuming the delete form is a simple form, adjust as needed #}
+        <form action="{{ path('app_sinister_life_delete', {'id': sinister_life.id}) }}" method="post" onsubmit="return confirm('Are you sure you want to delete this?');" class="d-inline">
+            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ sinister_life.id) }}">
+            <button type="submit" class="btn btn-danger">Delete</button>
+        </form>
+    </div>
+
+{% endblock %}

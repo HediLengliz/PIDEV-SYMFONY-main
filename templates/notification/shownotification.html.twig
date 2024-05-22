@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>Dashboard - NiceAdmin Bootstrap Template</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+    <link rel="stylesheet" href="{{ asset('bundles/mercuryseriesflashy/css/flashy.css') }}">
+    <link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700' rel='stylesheet'>
+<script src="{{ asset('bundles/mercuryseriesflashy/js/flashy.js') }}"></script>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <!-- Favicons -->
+    <link href="{{asset('backOffice/img/favicon.png')}}" rel="icon">
+    <link href="{{asset('backOffice/img/apple-touch-icon.png')}}" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+    <!-- backOffice/vendor CSS Files -->
+    <link href="{{asset('backOffice/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{asset('backOffice/vendor/bootstrap-icons/bootstrap-icons.css')}}" rel="stylesheet">
+    <link href="{{asset('backOffice/vendor/boxicons/css/boxicons.min.css')}}" rel="stylesheet">
+    <link href="{{asset('backOffice/vendor/quill/quill.snow.css')}}" rel="stylesheet">
+    <link href="{{asset('backOffice/vendor/quill/quill.bubble.css')}}" rel="stylesheet">
+    <link href="{{asset('backOffice/vendor/remixicon/remixicon.css')}}" rel="stylesheet">
+    <link href="{{asset('backOffice/vendor/simple-datatables/style.css')}}" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="{{asset('backOffice/css/style.css')}}" rel="stylesheet">
+
+    <!-- =======================================================
+    * Template Name: NiceAdmin
+    * Updated: Jan 29 2024 with Bootstrap v5.3.2
+    * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+    * Author: BootstrapMade.com
+    * License: https://bootstrapmade.com/license/
+    ======================================================== -->
+
+</head>
+
+<body>
+
+
+<!-- ======= Header ======= -->
+<header id="header" class="header fixed-top d-flex align-items-center">
+
+    <div class="d-flex align-items-center justify-content-between">
+        <a href="" class="logo d-flex align-items-center">
+            <backOffice/backOffice/img src="assets/backOffice/img/logo.png" alt="">
+            <span class="d-none d-lg-block">Protechtini</span>
+        </a>
+        <i class="bi bi-list toggle-sidebar-btn"></i>
+    </div><!-- End Logo -->
+
+    
+    <nav class="header-nav ms-auto">
+        <ul class="d-flex align-items-center">
+
+            <li class="nav-item d-block d-lg-none" >
+                <a class="nav-link nav-icon search-bar-toggle " href="#">
+                    <i class="bi bi-search"></i>
+                </a>
+            </li><!-- End Search Icon-->
+
+            <li class="nav-item dropdown">
+
+                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
+                    
+                 
+
+                    <li class="notification-item">
+                        <i class="bi bi-exclamation-circle text-warning"></i>
+                        <div>
+                            <h4>Lorem Ipsum</h4>
+                            <p>Quae dolorem earum veritatis oditseno</p>
+                            <p>30 min. ago</p>
+                        </div>
+                    </li>
+
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <li class="notification-item">
+                        <i class="bi bi-x-circle text-danger"></i>
+                        <div>
+                            <h4>Atque rerum nesciunt</h4>
+                            <p>Quae dolorem earum veritatis oditseno</p>
+                            <p>1 hr. ago</p>
+                        </div>
+                    </li>
+
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <li class="notification-item">
+                        <i class="bi bi-check-circle text-success"></i>
+                        <div>
+                            <h4>Sit rerum fuga</h4>
+                            <p>Quae dolorem earum veritatis oditseno</p>
+                            <p>2 hrs. ago</p>
+                        </div>
+                    </li>
+                {# <li class="dropdown"><a href="#"><span>Docteur-Client Relation</span> <i class="bi bi-chevron-down"></i></a>
+                    <ul>
+                    <li><a href="{{ path('app_prescription_new') }}" class="nav-link scrollto ">Declare MedicalSheet</a></li>
+                    <li><a href="{{ path('app_medical_sheet_new') }}" class="nav-link scrollto ">Declare Prescription </a></li>
+                    </ul>
+                  <li><a href="{{ path('app_reclamation_show') }}" class="nav-link scrollto ">Voir mes réclamations </a></li>
+                  <li><a href="{{ path('app_sinister_life_new') }}" class="nav-link scrollto ">Voir mes devis </a></li>
+                </ul>
+              </li> #}
+            
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <li class="notification-item">
+                        <i class="bi bi-info-circle text-primary"></i>
+                        <div>
+                            <h4>Dicta reprehenderit</h4>
+                            <p>Quae dolorem earum veritatis oditseno</p>
+                            <p>4 hrs. ago</p>
+                        </div>
+                    </li>
+
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li class="dropdown-footer">
+                        <a href="#">Show all notifications</a>
+                    </li>
+
+                </ul><!-- End Notification Dropdown Items -->
+
+            </li><!-- End Notification Nav -->
+
+            <li class="nav-item dropdown">
+
+            <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+                 <i class="bi bi-bell"></i></a>
+                <span id="notification-count" class="badge bg-primary badge-number">4</span>
+            </a><!-- End Notification Icon -->
+
+            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications" style="max-height: 300px; overflow-y: auto;">
+                <li class="dropdown-header">
+                    You have 4 new notifications
+                    <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
+                </li>
+                <li>
+                    <hr class="dropdown-divider">
+                </li>
+                       {% for notification in notifications %}
+                           <li class="notification-item">
+                               {% if notification.Titre == "Demande d'assurance habitat" %}
+<i class="bi bi-house text-warning"></i>
+
+                               {% else %}
+                                   {% if notification.Titre == "Demande d'assurance vehicule" %}
+<i class="bi bi-car-front-fill text-primary"></i>
+                                   {% else %}
+                                       {% if notification.Titre == "Demande d'assurance vie" %}
+<i class="bi bi-lungs-fill text-danger"></i>
+                                       {% endif %}
+                                   {% endif %}
+                               {% endif %}
+                               <div>
+                                   <h4>{{ notification.Titre }}</h4>
+                                   <p>{{ notification.Message }}</p>
+                                   <p>{{ notification.DateNotification }}</p>
+                               </div>
+                           </li>
+                       {% endfor %}
+
+
+
+
+
+
+
+
+                <li class="dropdown-footer">
+                    <a href="#">Show all notifications</a>
+                </li>
+
+            </ul><!-- End Notification Dropdown Items -->
+
+        </li><!-- End Notification Nav -->
+
+            <li class="nav-item dropdown pe-3">
+
+                <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+                    <backOffice/img src="assets/backOffice/img/profile-backOffice/img.jpg" alt="Profile" class="rounded-circle">
+                    {% if app.user %}
+                    {# Assuming that the user entity has 'getFirstName' and 'getLastName' methods #}
+                    {% set fullName = app.user.getFirstName() ~ ' ' ~ app.user.getLastName() %}
+                    <span class="d-none d-md-block dropdown-toggle ps-2">{{ fullName }}</span>
+                {% endif %}
+                
+                </a><!-- End Profile Iamge Icon -->
+
+                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+                    <li class="dropdown-header">
+                    {% if app.user %}
+                    {# Assuming that the user entity has 'getFirstName', 'getLastName', and 'getRoles' methods #}
+                    {% set fullName = app.user.getFirstName() ~ ' ' ~ app.user.getLastName() %}
+                    <h6>{{ fullName }}</h6>
+                    
+                    {# Check the user's role and display it accordingly #}
+                    {% set userRoles = app.user.getRoles() %}
+                    {% if 'ROLE_SUPER_ADMIN' in userRoles %}
+                        <span>Super Admin</span>
+                    {% elseif 'ROLE_ADMIN' in userRoles %}
+                        <span>Admin</span>
+                    {% elseif 'ROLE_SOUS_ADMIN' in userRoles %}
+                        <span>Sous Admin</span>
+                    {% elseif 'ROLE_EXPERT' in userRoles %}
+                        <span>Expert</span>
+                    {% elseif 'ROLE_PHARMACIST' in userRoles %}
+                        <span>Pharmacist</span>
+                    {% elseif 'ROLE_DOCTOR' in userRoles %}
+                        <span>Doctor</span>
+                    {% elseif 'ROLE_AGENT' in userRoles %}
+                        <span>Agent</span>
+                    {% else %}
+                        <span>User</span>
+                    {% endif %}
+                {% endif %}
+                
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <li>
+
+        <li class="nav-item" id="personalInfoNavItem">
+        {% if is_granted('ROLE_ADMIN') %}
+        <a class="dropdown-item d-flex align-items-center" href="{{ path('admin_profile') }}">
+            <i class="bi bi-grid"></i>
+            <span> My Profil</span>
+        </a>
+    {% else %}
+        <a class="dropdown-item d-flex align-items-center" href="{{ path('profile') }}">
+            <i class="bi bi-grid"></i>
+            <span>My profil</span>
+        </a>
+    {% endif %}
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li>
+                        <a class="dropdown-item d-flex align-items-center" href="{{ path('app_logout') }}">
+                            <i class="bi bi-box-arrow-right"></i>
+                            {% if app.user %}
+                            {# Other user information display code here #}
+                            
+                            
+                                <span>Sign Out</span>
+                            
+                        {% endif %}
+                        
+                        </a>
+                    </li>
+
+                </ul><!-- End Profile Dropdown Items -->
+            </li>
+           
+            
+            
+            <!-- End Profile Nav -->
+
+        </ul>
+    </nav><!-- End Icons Navigation -->
+
+</header><!-- End Header -->
+
+<!-- ======= Sidebar ======= -->
+<aside id="sidebar" class="sidebar">
+
+    <ul class="sidebar-nav" id="sidebar-nav">
+
+        <li class="nav-item" id="personalInfoNavItem">
+            {% if is_granted('ROLE_ADMIN') %}
+        <a class="nav-link" href="{{ path('admin_profile') }}">
+            <i class="bi bi-grid"></i>
+            <span>Profil</span>
+        </a>
+    {% else %}
+        <a class="nav-link" href="{{ path('profile') }}">
+            <i class="bi bi-grid"></i>
+            <span>Profil</span>
+        </a>
+    {% endif %}
+    
+        </li><!-- End Dashboard Nav -->
+        {% if is_granted('ROLE_ADMIN') %}
+        <li class="nav-item" id="adminNavItem">
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-journal-text"></i><span>Administration</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="forms-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="{{ path('app_user_index') }}">
+                        <i class="bi bi-circle"></i><span>Users</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ path('app_reclamation_index') }}">
+                        <i class="bi bi-circle"></i><span>Reclamations</span>
+                    </a>
+                </li>
+                <!-- Add more menu items as needed -->
+            </ul>
+        </li>
+    {% endif %}
+    <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="">
+                <i class="bi bi-layout-text-window-reverse"></i><span>rapports</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <li>
+                  <a href={{ path('app_rapport_index') }}>
+                <i class="bi bi-circle"></i><span>voir les rapports</span>
+            </a>
+            
+                </li>
+             
+            </ul>
+        </li><!-- End Tables Nav -->
+<li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#remorqueurs-nav" data-bs-toggle="collapse" href="">
+                <i class="bi bi-layout-text-window-reverse"></i><span>remorqueurs</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="remorqueurs-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <li>
+                  <a href={{ path('app_remorqueur_index') }}>
+                <i class="bi bi-circle"></i><span>voir les remorqueurs</span>
+            </a>
+            
+                </li>
+             
+            </ul>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#sinistre-nav" data-bs-toggle="collapse" href="">
+                <i class="bi bi-layout-text-window-reverse"></i><span>Sinistres</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="sinistre-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href={{ path('app_constat_index') }}>
+                <i class="bi bi-circle"></i><span>Sinistres vehicules</span>
+            </a>
+           
+                </li>
+
+                <li>
+                    <a href={{ path('app_sinister_life_dashboard') }}>
+                <i class="bi bi-circle"></i><span>Sinistres life</span>
+            </a>
+           
+                </li>
+
+
+                         <li>
+                       <a href={{ path('app_sinister_property_index') }}>
+                <i class="bi bi-circle"></i><span>Sinistres habitat</span>
+            </a>
+           
+                </li>
+             
+            </ul>
+        </li><!-- End Tables Nav -->
+        <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#question-nav" data-bs-toggle="collapse" href="">
+            <i class="bi bi-layout-text-window-reverse"></i><span>Questions</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="question-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+            <li>
+              <a href={{ path('app_question_index') }}>
+            <i class="bi bi-circle"></i><span>voir les questions</span>
+        </a>
+        
+            </li>
+         
+        </ul>
+    </li>
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#personal-nav" data-bs-toggle="collapse" href="">
+
+            <a class="nav-link collapsed" data-bs-target="#personal-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-layout-text-window-reverse"></i><span>Personal informations</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="personal-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="{{ path('app_reclamation_show') }}">
+                <i class="bi bi-circle"></i><span>Reclamations</span>
+            </a>
+            
+                </li>
+             
+            </ul>
+        </li>
+
+        <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#personal-nav" data-bs-toggle="collapse" href="">
+
+        <a class="nav-link collapsed" data-bs-target="#personal-nav" data-bs-toggle="collapse" href="#">
+            <i class="bi bi-layout-text-window-reverse"></i><span>Docteur-client relation</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="personal-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+            <li>
+                <a href="{{ path('app_prescription_new') }}">
+                <i class="bi bi-circle"></i><span>Declare medical sheets</span>
+        </a>
+        
+            </li>
+            <li>
+                <a href="{{ path('app_prescription_new') }}">
+                <i class="bi bi-circle"></i><span>Declare prescription</span>
+        </a>
+        
+            </li>
+
+            
+         
+        </ul>
+    </li>
+
+
+
+
+
+
+        <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
+            <i class="bi bi-menu-button-wide"></i><span>Contrats Assurance</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+            <li>
+                <a href="{{ path('app_contrat_vehicule_index') }}">
+                    <i class="bi bi-circle"></i><span>Contrats Assurance Vehicules</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('app_contrat_habitat_index') }}">
+                   <i class="bi bi-circle"></i><span>Contrats Assurance Habitats</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('app_contrat_vie_index') }}">
+                    <i class="bi bi-circle"></i><span>Contrats Assurance Maladies</span>
+                </a>
+            </li>
+
+        </ul>
+    </li><!-- End Components Nav -->
+
+
+
+
+    <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#demande-nav" data-bs-toggle="collapse" href="#">
+            <i class="bi bi-bar-chart"></i><span>Demandes Assurances</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="demande-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+           <li>
+
+                                           <a href="{{ path('app_contrat_vehicule_show_in_contrat') }}">
+                                           <i class="bi bi-circle"></i><span>Demandes Assurance Vehicules</span>
+                                       </a>
+                                   </li>
+                                   <li>
+                                           <a href="{{ path('app_contrat_habitat_show_in_contrat') }}">
+                                           <i class="bi bi-circle"></i><span>Demandes Assurance Habitats</span>
+                                       </a>
+                                   </li>
+
+                                   <li>
+                                           <a href="{{ path('app_contrat_vie_show_in_contrat') }}">
+                                           <i class="bi bi-circle"></i><span>Demandes Assurance Maladies</span>
+
+                                       </a>
+                                   </li>
+        </ul>
+    </li><!-- End Charts Nav -->
+
+    </ul>
+
+</aside><!-- End Sidebar-->
+
+<main id="main" class="main">
+
+    <div class="pagetitle">
+        {# <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li class="breadcrumb-item active">Dashboard</li>
+            </ol>
+        </nav> #}
+    </div><!-- End Page Title -->
+
+
+ {% block profile %}
+    
+    {% endblock %}
+</main><!-- End #main -->
+<!-- ======= Footer ======= -->
+
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+<!-- backOffice/vendor JS Files -->
+<script src="{{asset('backOffice/backOffice/vendor/apexcharts/apexcharts.min.js')}}"></script>
+<script src="{{asset('backOffice/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+<script src="{{asset('backOffice/vendor/chart.js/chart.umd.js')}}"></script>
+<script src="{{asset('backOffice/vendor/echarts/echarts.min.js')}}"></script>
+<script src="{{asset('backOffice/vendor/quill/quill.min.js')}}"></script>
+<script src="{{asset('backOffice/vendor/simple-datatables/simple-datatables.js')}}"></script>
+<script src="{{asset('backOffice/vendor/tinymce/tinymce.min.js')}}"></script>
+<script src="{{asset('backOffice/vendor/php-email-form/validate.js')}}"></script>
+
+<!-- Template Main JS File -->
+
+<script src="{{asset('backOffice/js/main.js')}}"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Get the current path or URL
+        var currentPath = window.location.pathname;
+
+        // Remove leading slash for comparison
+        currentPath = currentPath.replace(/^\//, '');
+
+        // Find the matching nav item and add the 'active' class
+        var navItems = document.querySelectorAll('#sidebar-nav li');
+        navItems.forEach(function (navItem) {
+            var navItemPath = navItem.querySelector('a').getAttribute('href').replace(/^\//, '');
+            if (currentPath === navItemPath) {
+                navItem.classList.add('active');
+
+            }
+        });
+
+        // Add event listener for links within the sidebar
+        var sidebarLinks = document.querySelectorAll('#sidebar-nav a');
+        sidebarLinks.forEach(function (link) {
+            link.addEventListener('click', function (event) {
+                event.preventDefault(); // Prevent the default behavior (page reload)
+
+                // Optionally, you can navigate to the link using JavaScript
+                var href = this.getAttribute('href');
+                if (href) {
+                    window.location.href = href;
+                }
+            });
+        });
+    });
+</script>
+
+
+<script src="{{asset('backOffice/js/main.js')}}"></script>
+{% block content %}
+    
+{% endblock %}
+</body>
+
+</html>

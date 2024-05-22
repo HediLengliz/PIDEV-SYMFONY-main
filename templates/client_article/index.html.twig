@@ -1,0 +1,192 @@
+{% extends 'basearticle.html.twig' %}
+
+{% block title %} {{ article.title }} {% endblock %}
+
+{% block article %}
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="utf-8">
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <title>ProTechTini</title>
+        <!-- Add your other meta tags, stylesheets, and scripts here -->
+        <script src="https://unpkg.com/commentbox.io/dist/commentBox.min.js"></script>
+    </head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        main {
+            margin: auto;
+            width: 100%; /* Adjust width as needed */
+            text-align: left;
+            padding: 20px;
+        }
+        .comment-box {
+            margin: auto;
+            text-align: center;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+        }
+        .comment-box textarea {
+            width: 80%;
+            height: 100px;
+            resize: none;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .stars {
+            display: inline-block;
+            font-size: 30px;
+            cursor: pointer;
+        }
+        .stars .star {
+            color: #ccc;
+        }
+        .stars .star.selected {
+            color: orange;
+        }
+        .stars .star:hover {
+            color: orange;
+        }
+        .btn {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: #02024d;
+            color: #fff;
+        }
+        #main {
+            margin-top: 200px; /* Adjust top margin for space under navigation */
+            .comment-buttons {
+                margin-top: 5px; /* Add some spacing between description and buttons */
+            }
+
+            .btn2 {
+                display: inline-block;
+                padding: 5px 10px;
+                border: none;
+                cursor: pointer;
+                text-decoration: none;
+                color: white;
+            }
+
+            .btn-edit {
+                background-color: blue;
+            }
+
+            .btn-delete {
+                background-color: red;
+            }
+
+            .btn:hover {
+                transform: translateY(-2px);
+                transition: transform 0.3s ease;
+            }
+
+            /* Style for delete button when hovered */
+            .btn-delete:hover {
+                background-color: darkred;
+            }
+        }
+    </style>
+    <body>
+    <!-- Your header and navigation code -->
+
+    <main id="main">
+        <!-- Your main content, possibly including the article -->
+                <h1>{{ article.title }}</h1>
+                <ul>
+                        <p>Publication Date: {{ article.datepub|date('F j, Y') }}</p>
+                        <p>Author: {{ article.authorname }}</p>                        {% if article.image %}
+                            <img src="{{ asset('uploads/images/' ~ article.image) }}" style="height: 500px;width: 500px;" class="bx-rectangle" alt="article Image">
+                        {% else %}
+                            <p>No image available</p>
+                        {% endif %}
+                        <p>Description: {{ article.description }}</p>
+
+
+                </ul>
+
+{#        <h2>Ajouter un commentaire</h2>#}
+{#        <div id="commentbox"></div>#}
+{#        <h2>Ajouter un commentaire</h2>#}
+{#        <div id="commentbox"></div> <!-- Add CommentBox.io element -->#}
+
+        <div id="comments-section">
+            <h2>Commentaires par : {{ article.authorname }}</h2>
+            <ul>
+                {% for comment in comments %}
+                    <li>
+                        <p>{{ comment.description }}</p>
+                        <p>Rate: {{ comment.rate }}</p>
+                        <div class="comment-buttons">
+                            <a href="{{ path('app_comment_edit', {id: comment.id}) }}" class="btn btn-edit">Edit</a>
+                            <a href="{{ path('app_comment_delete', {id: comment.id}) }}" class="btn btn-delete">Delete</a>
+                        {{ comment.id }}
+                        </div>
+                        <div class="reply-section">
+                            <h3>Reply</h3>
+                            <form action="{{ path('app_client_articlebyid',{id: article.id})}}" method="post">
+                                <textarea name="reply" placeholder="Your reply"></textarea>
+                                <input type="hidden" name="comment_id" value="{{ comment.id }}">
+                                <button type="submit" class="btn btn-reply">Reply</button>
+                            </form>
+                            {# Display replies for this comment #}
+                            <ul>
+                                {% for reply in comment.description %}
+                                    <li>{{comment.description }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <h2>Ajouter un commentaire</h2>
+        {{ form_start(form) }}
+        {{ form_row(form.description)}}
+        {{ form_row(form.rate)}}
+        <button href="{{ path('app_client_articlebyid', {'id': article.id}) }} type="submit" class="btn">Commenter</button>
+        {{ form_end(form) }}
+        <div id="comments-section">
+            <form action="{{ path('article.pdf', {'id': article.id}) }}" method="get" style="display: inline;">
+                <button type="submit" class="btn btn-primary" >Télecharger</button><i class="bx bxs-file-pdf"></i>
+            </form>
+            <h2>Commentaires par : {{ article.authorname }}</h2>
+            <ul>
+                {% for comment in comments %}
+                    <li>
+                        {{ comment.description }}
+                        <div class="comment-buttons">
+                            <a href="{{ path('app_comment_edit', {id: comment.id}) }}" class="btn btn-edit">Edit</a>
+                            <a href="{{ path('app_comment_delete', {id: comment.id}) }}" class="btn btn-delete">Delete</a>
+                            <form action="{{ path('article.pdf', {'id': article.id}) }}" method="get" style="display: inline;">
+                                <button type="submit" class="btn btn-primary">Télecharger</button><i class="bx bxs-file-pdf"></i>
+                            </form>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </main>
+    <script>
+        // Initialize CommentBox.io
+        commentBox('5700586838163456-proj'); // Replace 'your-commentbox-id' with your actual CommentBox.io ID
+    </script>
+    <!-- Your footer and other scripts -->
+    </body>
+    </html>
+
+{% endblock %}

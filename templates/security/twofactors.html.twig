@@ -1,0 +1,34 @@
+{# templates/two_factor_authentication/index.html.twig #}
+
+{% extends 'client/index2.html.twig' %}
+
+{% block title %}Two-Factor Authentication{% endblock %}
+
+{% block content %}
+    <div class="d-flex align-items-center justify-content-center" style="height: 70vh;">
+        <div class="col-md-6 text-center">
+            <h1>Two-Factor Authentication</h1>
+                {% for label, messages in app.flashes %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ label }} alert-dismissible" role="alert">
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        <div class="alert-message">
+                            {{ message|raw }}
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endfor %}
+            
+
+            <p>Enter the code sent to your email:</p>
+            <form method="post">
+                <label for="code">Code:</label>
+                <input type="text" id="code" name="code" required>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="..."></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="..."></script>
+{% endblock %}

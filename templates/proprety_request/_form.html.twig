@@ -1,0 +1,150 @@
+
+<body>
+<main>
+    <div class="container">
+        <div class="row justify-content-center align-items-center min-vh-100">
+            <div class="col-md-6">
+                <img src="{{asset('FrontOffice/img/habitat.png')}}" class="img-fluid animated" alt="">
+            </div>
+            <div class="col-md-6">
+        <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+            <div class="card mb-3">
+                <div class="card-body">
+                    {{ form_start(form, {'attr': {'class': 'row g-3 needs-validation', 'novalidate': 'novalidate', 'enctype': 'multipart/form-data'}}) }}
+                    {% if form_errors(form) %}
+                        <div class="alert alert-danger">
+                            <ul>
+                                {% for error in form_errors(form) %}
+                                    <li>{{ error.message }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
+                    <div class="col-12">
+                        <div class="step" id="step1">
+                            <div class="text-center mb-4">
+
+                            <h2>Informations de l'assuré</h2>
+                            </div>
+                            <div class="col-12">
+                                <label for="Date Demande" class="form-label">Date Demande</label>
+                                {{ form_widget(form.dateRequest, {'attr': {'class': 'form-control', 'id': 'dateRequest'}}) }}
+                            </div>
+                            <div class="col-12">
+                                <label for="typeInsurance" class="form-label">Type de l'assurance</label>
+                                {{ form_widget(form.typeInsurance, {'attr': {'class': 'form-control', 'id': 'typeInsurance'}}) }}
+                            </div>
+                            {# <div class="col-12">
+                                <label for="status" class="form-label">status</label>
+                                {{ form_widget(form.status, {'attr': {'class': 'form-control', 'id': 'status'}}) }}
+                            </div>
+                            <div class="col-12">
+                                <label for="requestUser" class="form-label">Client </label>
+                                {{ form_widget(form.requestUser, {'attr': {'class': 'form-control', 'id': 'requestUser'}}) }}
+                            </div> #}
+                            <button class="btn btn-primary w-100" type="button" onclick="nextStep('step1', 'step2')">
+                                Next <i class="bi bi-arrow-right-short"></i></button>
+                        </div>
+                    </div>
+
+                    <div class="step" id="step2" style="display: none;">
+                        <div class="col-12">
+                            <div class="text-center mb-4">
+
+                            <h2>Informations de l'habitat</h2>
+                            </div>
+                            <label for="Address" class="form-label">Adresse</label>
+                            {{ form_widget(form.Address, {'attr': {'class': 'form-control', 'id': 'Address'}}) }}
+                            {% if form_errors(form.Address) %}
+                                <div class="alert alert-danger">
+                                    {{ form_errors(form.Address) }}
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="col-12">
+                            <label for="PropertyForme" class="form-label">Type de l'habitat</label>
+                            {{ form_widget(form.PropertyForme, {'attr': {'class': 'form-control', 'id': 'PropertyForme'}}) }}
+                            {% if form_errors(form.PropertyForme) %}
+                                <div class="alert alert-danger">
+                                    {{ form_errors(form.PropertyForme) }}
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="col-12">
+                            <label for="NumberRooms" class="form-label">Nombre des pièces</label>
+                            {{ form_widget(form.NumberRooms, {'attr': {'class': 'form-control', 'id': 'NumberRooms'}}) }}
+                            {% if form_errors(form.NumberRooms) %}
+                                <div class="alert alert-danger">
+                                    {{ form_errors(form.NumberRooms) }}
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="col-12">
+                            <label for="Surface" class="form-label">Surface de l'habitat</label>
+                            {{ form_widget(form.Surface, {'attr': {'class': 'form-control','type': 'number', 'id': 'Surface'}}) }}
+                            {% if form_errors(form.Surface) %}
+                                <div class="alert alert-danger">
+                                    {{ form_errors(form.Surface) }}
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="col-12">
+                            <label for="PropertyValue" class="form-label">Valeur de l'habitat</label>
+                            {{ form_widget(form.PropertyValue, {'attr': {'class': 'form-control', 'id': 'PropertyValue'}}) }}
+                            {% if form_errors(form.PropertyValue) %}
+                                <div class="alert alert-danger">
+                                    {{ form_errors(form.PropertyValue) }}
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col">
+                                    <button class="btn btn-primary w-100" type="button" onclick="prevStep('step2', 'step1')"> <i class="bi bi-arrow-left-short"></i>
+                                        Previous</button>
+                                </div>
+                                <div class="col">
+                                    <button class="btn btn-primary w-100" onclick="submitForm()"> {{ button_label|default('Save') }} <i class="bi bi-check"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Add other fields related to vehicle A information here -->
+
+                    <div class="col-12">
+                        <a href="{{ path('app_proprety_request_index') }}" class="btn btn-primary w-100">Back to List</a>
+                    </div>
+
+                    {{ form_end(form) }}
+
+                </div>
+            </div>
+        </section>
+            </div>
+    </div>
+</main><!-- End #main -->
+</body>
+
+<script>
+    function showStep(stepId) {
+        // Hide all steps
+        document.getElementById('step1').style.display = 'none';
+        document.getElementById('step2').style.display = 'none';
+        // Show the specified step
+        document.getElementById(stepId).style.display = 'block';
+    }
+
+    function nextStep(currentStepId, nextStepId) {
+        // Add validation or logic here if needed before proceeding to the next step
+        showStep(nextStepId);
+    }
+
+    function prevStep(currentStepId) {
+        // Add validation or logic here if needed before going to the previous step
+        if (currentStepId === 'step2') {
+            showStep('step1');
+        }
+    }
+</script>

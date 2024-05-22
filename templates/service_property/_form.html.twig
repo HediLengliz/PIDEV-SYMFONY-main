@@ -1,0 +1,27 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block profile %}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-10 form-group">
+                        {{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
+                        {{ form_widget(form.name, {'attr': {'class': 'form-control', 'placeholder': 'name'}}) }}
+                            {{ form_errors(form.name) }}
+                        <br>
+                        {{ form_widget(form.price, {'attr': {'class': 'form-control', 'placeholder': 'price'}}) }}
+                        {{ form_errors(form.price) }}
+                    <br>
+                        <button class="btn btn-primary">{{ button_label|default('Save') }}</button>
+                    <a class="btn btn-secondary" href="{{ path('app_question_show',{'id': id}) }}">Back to List</a>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,106 @@
+<header id="header" class="fixed-top header-inner-pages">
+    
+<div class="container d-flex align-items-center justify-content-between">
+<h1 class="logo"  ><a href="{{ path('Home_Page') }}">Protechtini</a></h1>
+   
+<!-- Uncomment below if you prefer to use an image logo -->
+      <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+
+      <nav id="navbar" class="navbar" >
+        <ul>
+            {% if app.user %}
+          <li class="dropdown"><a href="#"><span>Demandes</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+            <li><a class="nav-link scrollto" href="{{ path('app_proprety_request_new') }}"> Demandes habitat</a></li>
+             <li><a class="nav-link scrollto" href="{{ path('app_vehicle_request_new') }}"> Demandes vehicule</a></li>
+             <li><a class="nav-link scrollto" href="{{ path('app_life_request_new') }}"> Demandes vie</a></li>
+
+            </ul>
+          </li>
+          
+            {% endif %}
+            
+            {% if app.user %}
+           
+          <li><a class="nav-link scrollto " href="{{ path('app_clienta') }}">Actualité</a></li>
+          <li ><a a class="nav-link scrollto " href={{ path('app_quote_new') }}><span> devis</span> </a>
+          <li ><a a class="nav-link scrollto " href={{ path('app_remorquage') }}><span>Remorquage</span> </a>
+          <li class="dropdown"><a href="#"><span>Profile</span> <i class="bi bi-chevron-down"></i></a>
+          <ul>
+            <li><a href="{{ path('profile') }}" class="nav-link scrollto ">Mon profile</a></li>
+            <li class="dropdown"><a href="#"><span>Mes sinistres</span> <i class="bi bi-chevron-down"></i></a>
+              <ul>
+              <li><a href="{{ path('app_vehic_show_paruser') }}" class="nav-link scrollto ">Sinistre Véhicules</a></li>
+              <li><a href="{{ path('app_prop_show_paruser') }}" class="nav-link scrollto ">Sinistres Habitat </a></li>
+              <li class="dropdown"><a href="{{ path('app_sinister_life_new') }}" class="nav-link scrollto "><span>Sinistres vie</span> <i class="bi bi-chevron-down"></i></a>
+             <ul
+              <li><a href="{{ path('app_sinister_life_new') }}" class="nav-link scrollto ">Mes Ordonnances </a></li>
+              <li><a href="{{ path('app_sinister_life_new') }}" class="nav-link scrollto ">Mes sinistres vie </a></li>
+              </ul>
+              </ul>
+            <li class="dropdown"><a href="#"><span>Mes demandes</span> <i class="bi bi-chevron-down"></i></a>
+              <ul>
+              <li><a href="{{ path('app_vehicle_request_show_paruser') }}" class="nav-link scrollto ">Demandes assurance véhicule</a></li>
+              <li><a href="{{ path('app_proprety_request_show_paruser') }}" class="nav-link scrollto ">Demandes assurance Habitat </a></li>
+              <li><a href="{{ path('app_life_request_show_paruser') }}" class="nav-link scrollto ">Demandes assurance vie </a></li>
+              </ul>
+            <li><a href="{{ path('app_reclamation_show') }}" class="nav-link scrollto ">Voir mes réclamations </a></li>
+            <li><a href="{{ path('app_user_quote_index') }}" class="nav-link scrollto ">Voir mes devis </a></li>
+          </ul>
+        </li>
+
+
+<li class="dropdown"><a href="#"><span>Sinistre</span> <i class="bi bi-chevron-down"></i></a>
+  <ul>
+    <li><a href="{{ path('app_constat_new') }}" class="nav-link scrollto ">déclarer un sinistre véhicule</a></li>
+    <li><a href="{{ path('app_sinister_property_new') }}" class="nav-link scrollto ">déclarer un sinistre habitat</a></li>
+    <li><a href="{{ path('app_sinister_life_new') }}" class="nav-link scrollto ">déclarer un sinistre vie </a></li>
+  </ul>
+</li>
+
+      
+      {% endif %}
+
+         
+            {% if app.user %}
+            {# User is logged in, show logout link #}
+
+
+
+          <li class="dropdown "><a href="#"><span>Docteur-Client Relation</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+            <li><a href="{{ path('app_medical_sheet_new') }}" class="nav-link scrollto ">Declare MedicalSheet</a></li>
+            <li><a href="{{ path('app_prescription_new') }}" class="nav-link scrollto ">Declare Prescription </a></li>
+            </ul> 
+        </ul>
+      </li>
+
+
+            <li><a class="getstarted scrollto" href="{{ path('app_logout') }}"><l>Logout</l></a></li>
+        {% else %}
+            {# User is not logged in, show login link #}
+            <li><a class="getstarted scrollto" href="{{ path('app_login') }}"><l>Log In</l></a></li>
+        {% endif %}
+        
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
+    </div>
+  </header>
+<body>
+<main id="main">
+
+  <!-- ======= Breadcrumbs ======= -->
+  <section class="breadcrumbs">
+
+  </section>
+
+
+
+</main>
+</body>
+
+
+
+  <!-- End Header -->

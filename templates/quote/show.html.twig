@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Quote{% endblock %}
+
+{% block body %}
+<div style="margin-top:100px">
+    <h1>Quote</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ quote.id }}</td>
+            </tr>
+            <tr>
+                <th>Type</th>
+                <td>{{ quote.type }}</td>
+            </tr>
+            <tr>
+                <th>Amount</th>
+                <td>{{ quote.amount }}</td>
+            </tr>
+            <tr>
+                <th>Services</th>
+                <td>
+                {% for service in  quote.services%}
+                {{ service }};
+                {% endfor %}
+                </td>
+
+               
+            </tr>
+        </tbody>
+    </table>
+
+    {# <a href="{{ path('app_user_quote_index',{}) }}">back to list</a> #}
+    <a class="btn btn-primary" href="{{path('app_quote_print',{'id': quote.id})}}">imprimer</a>
+    <a class="btn btn-primary" href="{{path('app_quote_mail',{'id': quote.id})}}">send via email</a>
+
+    {{ include('quote/_delete_form.html.twig') }}
+</div>
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste Des Sinistres Habitation{% endblock %}
+
+{% block body %}
+    <h1>Liste Des Sinistres Habitation</h1>
+    
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Date</th>
+                <th>Type_degat</th>
+                <th>Status</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="alert alert-{{ label }} alert-dismissible fade show" role="alert">
+                {{ message|raw }}
+                <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endfor %}
+    {% endfor %}
+            {% for sinister_property in sinister_properties %}
+                <tr>
+                    <td>{{ sinister_property.id }}</td>
+                    <td>{{ sinister_property.dateSinister ? sinister_property.dateSinister|date('Y-m-d') : '' }}</td>
+                    <td>{{ sinister_property.typeDegat }}</td>
+                    <td>{{ sinister_property.StatusSinister }}</td>
+                    <td>
+                        <a href="{{ path('app_sinister_property_show', {'id': sinister_property.id}) }}">show</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="5">no records found</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    
+{% endblock %}

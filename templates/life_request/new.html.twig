@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New LifeRequest{% endblock %}
+
+{% block body %}
+<div class="section-title">
+         <h2>Demander une assurance maladie</h2>
+      </div>
+    {{ include('life_request/_form.html.twig') }}
+
+    <a href="{{ path('app_life_request_index') }}">back to list</a>
+{% endblock %}

@@ -1,0 +1,107 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block title %}SinisterVehicle{% endblock %}
+
+{% block profile %}
+    <h1>SinisterVehicle</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ sinister.id }}</td>
+            </tr>
+            <tr>
+                <th>DateSinister</th>
+                <td>{{ sinister.dateSinister ? sinister.dateSinister|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Location</th>
+                <td>{{ sinister.location }}</td>
+            </tr>
+            <tr>
+                <th>ImageName</th>
+                <td>{{ sinister.imageName }}</td>
+            </tr>
+            <tr>
+                <th>Nom_Conducteur_A</th>
+                <td>{{ sinister.NomConducteurA }}</td>
+            </tr>
+            <tr>
+                <th>Nom_Conducteur_B</th>
+                <td>{{ sinister.NomConducteurB }}</td>
+            </tr>
+            <tr>
+                <th>Prenom_Conducteur_B</th>
+                <td>{{ sinister.PrenomConducteurB }}</td>
+            </tr>
+            <tr>
+                <th>Prenom_Conducteur_A</th>
+                <td>{{ sinister.PrenomConducteurA }}</td>
+            </tr>
+            <tr>
+                <th>Adresse_conducteurA</th>
+                <td>{{ sinister.AdresseConducteurA }}</td>
+            </tr>
+            <tr>
+                <th>Adresse_conducteurB</th>
+                <td>{{ sinister.AdresseConducteurB }}</td>
+            </tr>
+            <tr>
+                <th>Num_permisA</th>
+                <td>{{ sinister.numPermisA }}</td>
+            </tr>
+            <tr>
+                <th>Num_permisB</th>
+                <td>{{ sinister.numPermisB }}</td>
+            </tr>
+            <tr>
+                <th>Delivre_A</th>
+                <td>{{ sinister.delivreA ? sinister.delivreA|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Delivre_B</th>
+                <td>{{ sinister.delivreB ? sinister.delivreB|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Num_contratA</th>
+                <td>{{ sinister.numContratA }}</td>
+            </tr>
+            <tr>
+                <th>Num_contratB</th>
+                <td>{{ sinister.numContratB }}</td>
+            </tr>
+            <tr>
+                <th>Marque_VehiculeA</th>
+                <td>{{ sinister.MarqueVehiculeA }}</td>
+            </tr>
+            <tr>
+                <th>Marque_VehiculeB</th>
+                <td>{{ sinister.MarqueVehiculeB }}</td>
+            </tr>
+            <tr>
+                <th>ImmatriculationA</th>
+                <td>{{ sinister.ImmatriculationA }}</td>
+            </tr>
+            <tr>
+                <th>ImmatriculationB</th>
+                <td>{{ sinister.ImmatriculationB }}</td>
+            </tr>
+            <tr>
+                <th>BvehiculeAssurePar</th>
+                <td>{{ sinister.BvehiculeAssurePar }}</td>
+            </tr>
+            <tr>
+                <th>Agence</th>
+                <td>{{ sinister.agence }}</td>
+            </tr>
+             <tr>
+                <th>Status</th>
+                <td>{{ sinister.StatusSinister }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+
+ 
+{% endblock %}

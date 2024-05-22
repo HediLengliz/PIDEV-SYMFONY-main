@@ -1,0 +1,157 @@
+{% extends 'client/index.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block content %}
+
+<!-- Bootstrap JavaScript and Popper.js -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="..."></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="..."></script>
+
+    <div class="d-flex align-items-center justify-content-center" style="min-height: 100vh;">
+        <div class="col-md-6">
+            <h1 class="mb-4">Inscrire</h1>
+            {% for label, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="alert alert-{{ label }} alert-dismissible" role="alert">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    <div class="alert-message">
+                        {{ message|raw }}
+                    </div>
+                </div>
+            {% endfor %}
+        {% endfor %}
+        {{ form_start(registrationForm, {'attr': {'class': 'p-4 shadow rounded', 'id': 'registration-form', 'novalidate': 'novalidate'}}) }}
+
+            <div class="step" data-step="1">
+                <div class="mb-3">
+                    {{ form_widget(registrationForm.firstName, {'attr': {'class': 'form-control', 'placeholder': 'First Name'}}) }}
+                    {% if form_errors(registrationForm.firstName) %}
+                        <div class="text-danger error-message error-firstName">
+                    {{ registrationForm.firstName.vars.errors|first.message }}                        </div>
+                    {% endif %}
+                </div>
+                <div class="mb-3">
+                    {{ form_widget(registrationForm.lastName, {'attr': {'class': 'form-control', 'placeholder': 'Last Name'}}) }}
+                    {% if registrationForm.lastName.vars.errors|length > 0 %}
+                    <div class="text-danger error-message error-lastName">
+                        {{ registrationForm.lastName.vars.errors|first.message }}
+                    </div>
+                {% endif %} </div>
+                <div class="mb-3">
+                    {{ form_widget(registrationForm.address, {'attr': {'class': 'form-control', 'placeholder': 'Address'}}) }}
+                    {% if form_errors(registrationForm.address) %}
+                        <div class="text-danger error-message error-address">
+                            {{ form_errors(registrationForm.address) }}
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="mb-3">
+                    {{ form_widget(registrationForm.phoneNumber, {'attr': {'class': 'form-control', 'placeholder': 'Phone Number'}}) }}
+                    {% if form_errors(registrationForm.phoneNumber) %}
+                        <div class="text-danger error-message error-phoneNumber">
+                            {{ form_errors(registrationForm.phoneNumber) }}
+                        </div>
+                    {% endif %}
+                </div>
+                <br>
+                <button type="button" class="btn btn-primary next-step" data-step="2">
+                    Next <i class="bi bi-arrow-right"></i>
+                </button>
+            </div>
+
+            <div class="step" data-step="2" style="display: none;">
+                <div class="mb-3">
+                    {{ form_widget(registrationForm.cin, {'attr': {'class': 'form-control', 'placeholder': 'CIN'}}) }}
+                    {% if form_errors(registrationForm.cin) %}
+                        <div class="text-danger error-message error-cin">
+                            {{ form_errors(registrationForm.cin) }}
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="mb-3">
+                    {{ form_widget(registrationForm.email, {'attr': {'class': 'form-control', 'placeholder': 'Email'}}) }}
+                    {% if form_errors(registrationForm.email) %}
+                        <div class="text-danger error-message error-email">
+                            {{ form_errors(registrationForm.email) }}
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="mb-3">
+                    {{ form_widget(registrationForm.plainPassword, {
+                        'label': 'Password',
+                        'attr': {'class': 'form-control', 'autocomplete': 'new-password', 'placeholder': 'Password'}
+                    }) }}
+                    {% if form_errors(registrationForm.plainPassword) %}
+                        <div class="text-danger error-message error-plainPassword">
+                            {{ form_errors(registrationForm.plainPassword) }}
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="mb-3">
+                    {{ form_widget(registrationForm.captcha, {
+                        'label': 'Password',
+                        'attr': {'class': 'form-control', 'autocomplete': 'new-password', 'placeholder': 'Password'}
+                    }) }}
+                    {% if form_errors(registrationForm.captcha) %}
+                        <div class="text-danger error-message error-plainPassword">
+                            {{ form_errors(registrationForm.captcha) }}
+                        </div>
+                    {% endif %}
+                </div>
+                    <br>
+                <button type="button" class="btn btn-primary prev-step" data-step="1">
+                    <i class="bi bi-arrow-left"></i> Previous
+                </button>
+                <button type="submit" class="btn btn-primary ml-2">
+                    Register 
+                </button>
+            </div>
+
+            {{ form_end(registrationForm) }}
+        </div>
+    </div>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <script>
+        // Add event listeners for the "Next" and "Previous" buttons
+        document.querySelectorAll('.next-step').forEach(function(button) {
+            button.addEventListener('click', function() {
+                var currentStep = this.parentElement.getAttribute('data-step');
+                var nextStep = parseInt(currentStep) + 1;
+                document.querySelector('.step[data-step="' + currentStep + '"]').style.display = 'none';
+                document.querySelector('.step[data-step="' + nextStep + '"]').style.display = 'block';
+            });
+        });
+
+        document.querySelectorAll('.prev-step').forEach(function(button) {
+            button.addEventListener('click', function() {
+                var currentStep = this.parentElement.getAttribute('data-step');
+                var prevStep = parseInt(currentStep) - 1;
+                document.querySelector('.step[data-step="' + currentStep + '"]').style.display = 'none';
+                document.querySelector('.step[data-step="' + prevStep + '"]').style.display = 'block';
+            });
+        });
+        document.addEventListener('DOMContentLoaded', function () {
+            var inputFields = document.querySelectorAll('input, textarea, select');
+    
+            inputFields.forEach(function (input) {
+                input.addEventListener('input', function () {
+                    var fieldName = this.getAttribute('name');
+                    
+                    // Adjust the code to handle nested field names
+                    var nestedFieldNameMatch = fieldName.match(/\[([^\]]+)\]/);
+                    if (nestedFieldNameMatch) {
+                        fieldName = nestedFieldNameMatch[1];
+                    }
+    
+                    var errorElement = document.querySelector('.error-message.error-' + fieldName);
+                    
+                    if (errorElement) {
+                        errorElement.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+{% endblock %}

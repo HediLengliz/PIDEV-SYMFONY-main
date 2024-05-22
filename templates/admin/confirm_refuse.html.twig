@@ -1,0 +1,11 @@
+{% extends 'base2.html.twig' %}
+{% block body %}
+    <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 50vh;">
+        <h1>Are you sure you want to refuse this Sinister Life?</h1>
+        <form action="{{ path('app_sinister_life_refuse', {'id': sinister_life.id}) }}" method="post" class="my-2">
+            <input type="hidden" name="_token" value="{{ csrf_token('validate' ~ sinister_life.id) }}">
+            <button class="btn btn-danger" type="submit">Yes, refuse it</button>
+        </form>
+        <a href="{{ path('app_sinister_life_show_dashboard', {'id': sinister_life.id}) }}" class="btn btn-secondary">Cancel</a>
+    </div>
+{% endblock %}

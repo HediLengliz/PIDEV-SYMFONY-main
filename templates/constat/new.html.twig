@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New SinisterVehicle{% endblock %}
+
+{% block body %}
+    <h1 class="text-center">Déclarer votre sinistre véhicule</h1>
+
+    {{include('constat/_form.html.twig', {'button_label': 'Create', 'image_uri': vich_uploader_asset(sinister_vehicle, 'imageFile') }) }}
+
+{% endblock %}

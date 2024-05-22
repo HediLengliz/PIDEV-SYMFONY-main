@@ -1,0 +1,116 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block title %}Liste Des Sinistres Vehicules {% endblock %}
+
+{% block profile %}
+    <h1>Liste Des Sinistres Vehicules</h1>
+
+     <div>
+        <label for="orderByDate">Filtrer par Date:</label>
+        <select id="orderByDate">
+            <option value="all">Tous</option>
+            <option value="asc">Date croissante</option>
+            <option value="desc">Date décroissante</option>
+        </select>
+    </div>
+
+    <div>
+        <label for="filterByStatus">Filtrer par Status:</label>
+        <select id="filterByStatus">
+            <option value="">Tous</option>
+            <option value="en_cours">En Cours</option>
+            <option value="traité">Traité</option>
+        </select>
+    </div>
+
+    <table class="table" >
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>DateSinister</th>
+                <th>Location</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="sinisterTableBody">
+            {% for sinister_vehicle in sinister_vehicles %}
+                <tr>
+                    <td>{{ sinister_vehicle.id }}</td>
+                    <td>{{ sinister_vehicle.dateSinister ? sinister_vehicle.dateSinister|date('Y-m-d') : '' }}</td>
+                    <td>{{ sinister_vehicle.location }}</td>
+                    <td style="color: {% if sinister_vehicle.StatusSinister == 'traité' %}green{% elseif sinister_vehicle.StatusSinister == 'en_cours' %}orange{% endif %}">
+                        {{ sinister_vehicle.StatusSinister }}
+                    </td>
+                    <td>
+                         <a class="btn btn-success" href="{{ path('app_constat_showAdmin', {'id': sinister_vehicle.id}) }}">show</a>
+                        {% if sinister_vehicle.StatusSinister == 'en_cours' %}
+                            <a class="btn btn-warning" href="{{ path('app_rapport_new', {'id': sinister_vehicle.id}) }}">traiter</a>
+                        {% elseif sinister_vehicle.StatusSinister == 'traité' %}
+                          
+                        {% endif %}
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="5">no records found</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+<nav aria-label="Page navigation example">
+            <ul class="pagination " style="float: right;">
+                {{ knp_pagination_render(sinister_vehicles) }}
+            </ul>
+        </nav>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        // Function to filter sinisters by order and status
+        $("#orderByDate, #filterByStatus").on("change", function () {
+            var order = $("#orderByDate").val();
+            var selectedStatus = $("#filterByStatus").val();
+            filterSinisters(order, selectedStatus);
+        });
+
+        function filterSinisters(order, selectedStatus) {
+            // Show all rows initially
+            $("#sinisterTableBody tr").show();
+
+            // Filter rows based on selectedStatus
+            if (selectedStatus !== "") {
+                $("#sinisterTableBody tr").not(":contains('" + selectedStatus + "')").hide();
+            }
+
+            // Sort rows based on date if order is specified
+            if (order !== "all") {
+                var sortedRows = $("#sinisterTableBody tr:visible").toArray().sort(function (a, b) {
+                    var dateA = new Date($(a).find("td:eq(1)").text());
+                    var dateB = new Date($(b).find("td:eq(1)").text());
+
+                    return order === "asc" ? dateA - dateB : dateB - dateA;
+                });
+
+                // Update the table with sorted rows
+                $("#sinisterTableBody").empty().append(sortedRows);
+            }
+
+            // Color decisions
+            $("#sinisterTableBody tr").each(function () {
+                var rowStatus = $(this).find("td:eq(3)").text();
+                if (rowStatus === "traité") {
+                    $(this).find("td:eq(3)").css("color", "green");
+                } else if (rowStatus === "en_cours") {
+                    $(this).find("td:eq(3)").css("color", "orange");
+                }
+            });
+        }
+    });
+</script>
+
+
+
+
+
+{% endblock %}

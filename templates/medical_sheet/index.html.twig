@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}MedicalSheet index{% endblock %}
+
+{% block body %}
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">{{ message }}</div>
+    {% endfor %}
+
+    {% for message in app.flashes('warning') %}
+        <div class="alert alert-warning">{{ message }}</div>
+    {% endfor %}
+    <h1>MedicalSheet index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Medical Diagnosis</th>
+                <th>Treatment Plan</th>
+                <th>Medical Reports</th>
+                <th>Duration Of Incapacity</th>
+                <th>Procedure Performed</th>
+                <th>Sick Leave Duration</th>
+                <th>Hospitalization Period</th>
+                <th>Rehabilitation Period</th>
+                <th>Medical Information</th>
+                <th>Client Name</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for medical_sheet in medical_sheets %}
+            <tr>
+                <td>{{ medical_sheet.id }}</td>
+                <td>{{ medical_sheet.medicalDiagnosis }}</td>
+                <td>{{ medical_sheet.treatmentPlan }}</td>
+                <td>{{ medical_sheet.medicalReports }}</td>
+                <td>{{ medical_sheet.durationOfIncapacity }}</td>
+                <td>{{ medical_sheet.procedurePerformed }}</td>
+                <td>{{ medical_sheet.sickLeaveDuration }}</td>
+                <td>{{ medical_sheet.hospitalizationPeriod }}</td>
+                <td>{{ medical_sheet.rehabilitationPeriod }}</td>
+                <td>{{ medical_sheet.medicalInformation }}</td>
+                <td>{{ medical_sheet.userCIN }}</td>
+                <td>
+                    <a href="{{ path('app_medical_sheet_show', {'id': medical_sheet.id})  }}" class="btn btn-primary">show</a>
+
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="12">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="text-center mt-4">
+        <a href="{{ path('app_medical_sheet_new') }}" class="btn btn-success">Create new</a>
+    </div>
+
+{% endblock %}

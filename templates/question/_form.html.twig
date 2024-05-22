@@ -1,0 +1,33 @@
+{% extends 'admin/index.html.twig' %}
+{% block profile %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            {{ form_start(form,{'attr': {'novalidate': 'novalidate'}}) }}
+                {{ form_widget(form.question, {'attr': {'class': 'form-control', 'placeholder': 'question'}}) }}
+                {% if form_errors(form.question) %}
+                <div class="text-danger error-title">
+                    {{ form.title.vars.errors|first.message }}   
+                    </div>
+                {% endif %}
+                <br>
+                {{ form_widget(form.type, {'attr': {'class': 'form-control', 'placeholder': 'type'}}) }}
+                {% if form_errors(form.type) %}
+                <div class="text-danger error-title">
+                    {{ form.title.vars.errors|first.message }}   
+                    </div>
+                {% endif %}
+                <br>
+                {{ form_widget(form.priority, {'attr': {'class': 'form-control', 'placeholder': 'priority'}}) }}
+                {% if form_errors(form.priority) %}
+                <div class="text-danger error-title">
+                    {{ form.title.vars.errors|first.message }}   
+                    </div>
+                {% endif %}
+                <br>
+                <button class="btn btn-primary">{{ button_label|default('Save') }}</button>
+            {{ form_end(form) }}
+        </div>
+    </div>
+</div>
+{% endblock %}

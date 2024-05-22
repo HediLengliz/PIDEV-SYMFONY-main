@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Votre rapport de traitement du sinistre : </title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            margin: 0 auto;
+            display: block;
+            width: 600px;
+            background-color: #ffffff;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 15px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        p {
+            margin-bottom: 20px;
+        }
+
+        .quote {
+            margin-top: 30px;
+            font-style: italic;
+            text-align: center;
+            color: #555;
+        }
+
+        .insurance-name {
+            text-align: center;
+            color: #888;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 style="text-align: center;">Rapport de Traitement du Sinistre</h2>
+        
+        <p>Cher client,</p>
+
+        <p>
+            Suite à votre déclaration de sinistre, un expert a traité votre déclaration et voici le résultat du traitement.
+            Nous sommes heureux de vous présenter les détails de la décision prise concernant votre sinistre.
+        </p>
+
+        <table>
+            <tr>
+                <th>Date Sinister</th>
+                <td>{{ rapport.sinisterRapport.dateSinister|date('Y-m-d') }}</td>
+            </tr>
+            <tr>
+                <th>Location</th>
+                <td>{{ rapport.sinisterRapport.location }}</td>
+            </tr>
+            <tr>
+                <th>Décision :</th>
+                <td>{{rapport.decision}}</td>
+            </tr>
+            <tr>
+                <th>Justification :</th>
+                <td>{{rapport.Justification}}</td>
+            </tr>
+
+        </table>
+
+        <p class="quote">"Votre assurance, la promesse d'une épaule solide lorsque la vie devient imprévisible."</p>
+
+        <p class="insurance-name">Protechtini</p>
+
+        <p>Merci pour votre confiance.</p>
+    </div>
+</body>
+</html>

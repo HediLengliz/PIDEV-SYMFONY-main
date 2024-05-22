@@ -1,0 +1,55 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block title %}ContratVie{% endblock %}
+
+{% block profile %}
+   <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+
+     <div class="row justify-content-center">
+            <div class="col-md-12 offset-md-1">
+                <div class="card w-400 h-300">
+                    <div class="card-body">
+                        <h5 class="card-title"> Contrats vie {{ contrat_vie.id }}</h5>
+                        <table class="table table-striped">
+                            <thead>
+
+               <tr>
+                <th>Id</th>
+                <td>{{ contrat_vie.id }}</td>
+            </tr>
+            <tr>
+                <th>Date_debut</th>
+                <td>{{ contrat_vie.DateDebut ? contrat_vie.DateDebut|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Date_fin</th>
+                <td>{{ contrat_vie.DateFin ? contrat_vie.DateFin|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ contrat_vie.Description }}</td>
+            </tr>
+            <tr>
+            <th>Prix du contrat</th>
+            <td>{{ contrat_habitat.Prix }}</td>
+        </tr>
+            <tr>
+                <th>MatriculeAgent</th>
+                <td>{{ contrat_vie.MatriculeAgent }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_contrat_vie_index') }}">back to list</a>
+
+    <a href="{{ path('app_contrat_vie_edit', {'id': contrat_vie.id}) }}">edit</a>
+<form action="{{ path('contrat_vie.pdf', {'id': contrat_vie.id}) }}" method="get" style="display: inline;">
+        <button type="submit" class="btn btn-primary">Télecharger le contrat</button>
+    </form>
+    {{ include('contrat_vie/_delete_form.html.twig') }}
+   </div>
+       </div>
+       </div>
+       </div>
+       </section>
+{% endblock %}

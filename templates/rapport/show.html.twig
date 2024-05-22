@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Rapport{% endblock %}
+
+{% block body %}
+    <h1>Rapport</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ rapport.id }}</td>
+            </tr>
+            <tr>
+                <th>Decision</th>
+                <td>{{ rapport.decision }}</td>
+            </tr>
+              <tr>
+                <th>Date Sinister</th>
+                <td>{{ rapport.sinisterRapport.dateSinister|date('Y-m-d') }}</td>
+            </tr>
+            <tr>
+                <th>Location</th>
+                <td>{{ rapport.sinisterRapport.location }}</td>
+            </tr>
+            <tr>
+                      
+</tr>
+        </tbody>
+    </table>
+       <form action="{{ path('rapport.pdf', {'id': rapport.id}) }}" method="get" style="display: inline;">
+    <button type="submit" class="btn btn-primary">Télecharger le rapport</button>
+</form>
+
+
+{% endblock %}

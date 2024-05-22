@@ -1,0 +1,14 @@
+
+
+{% extends 'admin/index.html.twig' %}
+
+{% block title %}Sinister Details{% endblock %}
+
+{% block profile %}
+    <h1>Sinister Details</h1>
+
+    <p>Date: {{ sinister.dateSinister|date('Y-m-d') }}</p>
+    <p>Location: {{ sinister.location }}</p>
+
+    
+{% endblock %}

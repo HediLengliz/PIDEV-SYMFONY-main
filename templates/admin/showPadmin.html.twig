@@ -1,0 +1,52 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block title %}Prescription {% endblock %}
+
+{% block profile %}
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">{{ message }}</div>
+    {% endfor %}
+
+    {% for message in app.flashes('warning') %}
+        <div class="alert alert-warning">{{ message }}</div>
+    {% endfor %}
+    <h1>Prescriptions</h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+
+            <th>Date of Prescription</th>
+            <th>Medications</th>
+            <th>Status</th>
+            <th>Additional Notes</th>
+            <th>Validity Duration</th>
+            <th>Client Name</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for prescription in prescriptions %}
+            <tr>
+
+                <td>{{ prescription.datePrescription ? prescription.datePrescription|date('Y-m-d') : 'N/A' }}</td>
+                <td>{{ prescription.medications }}</td>
+                <td>{{ prescription.statusPrescription }}</td>
+                <td>{{ prescription.additionalNotes }}</td>
+                <td>{{ prescription.validityDuration }}</td>
+                <td>{{ prescription.userCIN }}</td>
+                <td>
+                    <a href="{{ path('app_prescription_show_dashboard', {'id': prescription.id}) }}">view</a>
+                    <a href="{{ path('app_prescription_edit_dashboard', {'id': prescription.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">No prescriptions found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_admin') }}">Retour au tableau de bord administrateur</a>
+{% endblock %}

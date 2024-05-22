@@ -1,0 +1,77 @@
+{% extends 'admin/index.html.twig' %}
+
+
+{% block profile %}
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    {% for message in app.flashes('error') %}
+        <div class="alert alert-danger">
+            {{ message }}
+        </div>
+    {% endfor %}
+    <h1>Sinister Life</h1>
+
+    <table class="table">
+        <tbody>
+        <tr>
+            <th>Id</th>
+            <td>{{ sinister_life.id }}</td>
+        </tr>
+        <tr>
+            <th>Date Sinister</th>
+            <td>{{ sinister_life.dateSinister ? sinister_life.dateSinister|date('Y-m-d') : '' }}</td>
+        </tr>
+        <tr>
+            <th>Location</th>
+            <td>{{ sinister_life.location }}</td>
+        </tr>
+        <tr>
+            <th>Amount Sinister</th>
+            <td>{{ sinister_life.amountSinister }}</td>
+        </tr>
+        <tr>
+            <th>Status Sinister</th>
+            <td>
+                {{ sinister_life.statusSinister }}
+
+                <script>console.log('Status Sinister:', '{{ sinister_life.statusSinister }}');</script>
+            </td>
+        </tr>
+        <tr>
+            <th>Description</th>
+            <td>{{ sinister_life.description }}</td>
+        </tr>
+        <tr>
+            <th>Beneficiary Name</th>
+            <td>{{ sinister_life.beneficiaryName }}</td>
+        </tr>
+        </tbody>
+    </table>
+
+
+    <div class="d-flex justify-content-center">
+        {% if sinister_life.statusSinister == 'ongoing' %}
+            <form action="{{ path('app_sinister_life_confirm_validate', {'id': sinister_life.id}) }}" method="post" class="m-2">
+                <input type="hidden" name="_token" value="{{ csrf_token('validate' ~ sinister_life.id) }}">
+                <button class="btn btn-success" type="submit">Validate</button>
+            </form>
+
+            <form action="{{ path('app_sinister_life_confirm_refuse', {'id': sinister_life.id}) }}" method="post" class="m-2">
+                <input type="hidden" name="_token" value="{{ csrf_token('validate' ~ sinister_life.id) }}">
+                <button class="btn btn-danger" type="submit">Refuse</button>
+            </form>
+        {% endif %}
+    </div>
+
+    <div class="d-flex justify-content-center mt-3">
+        {{ include('sinister_life/_delete_form.html.twig') }}
+    </div>
+
+    <div class="text-center mt-3">
+        <a href="{{ path('app_sinister_life_index') }}" class="btn btn-secondary">Back to list</a>
+    </div>
+{% endblock %}

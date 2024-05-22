@@ -1,0 +1,88 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block title %}Question{% endblock %}
+
+{% block profile %}
+    <h1>Question</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ question.id }}</td>
+            </tr>
+            <tr>
+                <th>Question</th>
+                <td>{{ question.question }}</td>
+            </tr>
+            <tr>
+                <th>Type</th>
+                <td>{{ question.type }}</td>
+            </tr>
+            <tr>
+                <th>Priority</th>
+                <td>{{ question.priority }}</td>
+            </tr>
+        </tbody>
+    </table>
+        <a class="btn btn-secondary" href="{{ path('app_question_edit', {'id': question.id}) }}">edit</a>
+    <br>
+    <br>
+        {{ include('question/_delete_form.html.twig') }}
+
+    <h1>Services</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for service in services %}
+            <tr>
+                <td>{{ service.id }}</td>
+                <td>{{ service.name }}</td>
+                <td>{{ service.price }}</td>
+                {% if question.type == 'property' %}
+                <td>
+                    <a class="btn btn-info" href="{{ path('app_service_property_show', {'id': service.id}) }}">show</a>
+                    <a class="btn btn-success" href="{{ path('app_service_property_edit', {'id': service.id}) }}">edit</a>
+                </td>
+                {% endif %}
+                {% if question.type == 'life' %}
+                <td>
+                    <a class="btn btn-info" href="{{ path('app_service_life_show', {'id': service.id}) }}">show</a>
+                    <a class="btn btn-success" href="{{ path('app_service_life_edit', {'id': service.id}) }}">edit</a>
+                </td>
+                {% endif %}
+                {% if question.type == 'auto' %}
+                <td>
+                    <a class="btn btn-info" href="{{ path('app_service_auto_show', {'id': service.id}) }}">show</a>
+                    <a class="btn btn-success" href="{{ path('app_service_auto_edit', {'id': service.id}) }}">edit</a>
+                </td>
+                {% endif %}
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div style="display: inline-block;">
+    {% if question.type == 'life' %}
+    <a class="btn btn-success" href="{{ path('app_service_life_new', {'id': question.id}) }}"><i class="bi bi-plus">Service</i></a>
+    {% endif %}
+    {% if question.type == 'property' %}
+    <a class="btn btn-success" href="{{ path('app_service_property_new', {'id': question.id}) }}"><i class="bi bi-plus">Service</i></a>
+    {% endif %}
+    {% if question.type == 'auto' %}
+    <a class="btn btn-success" href="{{ path('app_service_auto_new', {'id': question.id}) }}"><i class="bi bi-plus">Service</i></a>
+    {% endif %}
+    <a class ="btn btn-warning "href="{{ path('app_question_index') }}">back to list</a>
+    </div>
+
+{% endblock %}

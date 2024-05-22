@@ -1,0 +1,15 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block title %}Edit Rapport{% endblock %}
+
+{% block profile %}
+    <h1>Edit Rapport</h1>
+
+{{ include('rapport/_form.html.twig', {'class': 'btn btn-warning', 'button_label': 'Update'}) }}
+
+<a href="{{ path('app_rapport_index') }} class="btn btn-secondary">Back to list</a>
+
+             
+
+   
+{% endblock %}

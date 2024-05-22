@@ -1,0 +1,11 @@
+{# {% extends 'base.html.twig' %} #}
+
+{# {% block title %}New User{% endblock %} #}
+
+{# {% block body %} #}
+    
+
+    {{ include('user/_form.html.twig',{'action':'add'}) }}
+
+    <a href="{{ path('app_user_index') }}">back to list</a>
+{# {% endblock %} #}

@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Demande vehicule {{ vehicle_request.id }}{% endblock %}
+
+{% block body %}
+ <div class="section-title">
+
+    <h2>Demande vehicule {{ vehicle_request.id }}</h2>
+</div>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ vehicle_request.id }}</td>
+            </tr>
+            <tr>
+                <th>DateRequest</th>
+                <td>{{ vehicle_request.dateRequest ? vehicle_request.dateRequest|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>TypeInsurance</th>
+                <td>{{ vehicle_request.typeInsurance }}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{{ vehicle_request.status }}</td>
+            </tr>
+            <tr>
+                <th>Marque</th>
+                <td>{{ vehicle_request.Marque }}</td>
+            </tr>
+            <tr>
+                <th>Modele</th>
+                <td>{{ vehicle_request.Modele }}</td>
+            </tr>
+            <tr>
+                <th>Fab_year</th>
+                <td>{{ vehicle_request.FabYear ? vehicle_request.FabYear|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Serial_number</th>
+                <td>{{ vehicle_request.serialNumber }}</td>
+            </tr>
+            <tr>
+                <th>Matricul_number</th>
+                <td>{{ vehicle_request.matriculNumber }}</td>
+            </tr>
+            <tr>
+                <th>Vehicle_price</th>
+                <td>{{ vehicle_request.vehiclePrice }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_vehicle_request_index') }}">back to list</a>
+
+    <a href="{{ path('app_vehicle_request_edit', {'id': vehicle_request.id}) }}">edit</a>
+
+    {{ include('vehicle_request/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block title %}New ServiceProperty{% endblock %}
+
+{% block profile %}
+<h1 class="text-center">Déclarer votre sinistre habitation</h1>
+
+    {{ include('service_property/_form.html.twig') }}
+
+    <a href="{{ path('app_service_property_index') }}">back to list</a>
+{% endblock %}

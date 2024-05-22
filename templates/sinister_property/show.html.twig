@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}SinisterProperty{% endblock %}
+
+{% block body %}
+    <h1>SinisterProperty</h1>
+
+        <table class="table table-bordered table-hover" >
+        <tbody>
+          
+            <tr>
+                <th>Type_degat</th>
+                <td>{{ sinister_property.typeDegat }}</td>
+            </tr>
+            <tr>
+                <th>Description_degat</th>
+                <td>{{ sinister_property.descriptionDegat }}</td>
+            </tr>
+             <tr>
+                <th>Status</th>
+                <td>{{ sinister_property.StatusSinister }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+{% if sinister_property.StatusSinister == 'traité' %}
+        <a href="{{ path('app_rapport_showhh', {'id': sinister_property.id}) }}" class="btn btn-primary">Voir Rapport</a>
+    {% endif %}
+
+    {% if sinister_property.StatusSinister == 'en_cours' %}
+<a class="btn btn-primary mt3" href="{{ path('app_sinister_property_edit', {'id': sinister_property.id}) }}">edit</a>
+{{ include('sinister_property/_delete_form.html.twig') }}
+{% endif %}
+    
+
+    
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Prescription index{% endblock %}
+
+{% block body %}
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">{{ message }}</div>
+    {% endfor %}
+
+    {% for message in app.flashes('warning') %}
+        <div class="alert alert-warning">{{ message }}</div>
+    {% endfor %}
+    <h1>Prescription index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Date Prescription</th>
+                <th>Medications</th>
+                <th>Status Prescription</th>
+                <th>Additional Notes</th>
+                <th>Validity Duration</th>
+                <th>Client Name</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for prescription in prescriptions %}
+            <tr>
+                <td>{{ prescription.id }}</td>
+                <td>{{ prescription.datePrescription ? prescription.datePrescription|date('Y-m-d') : '' }}</td>
+                <td>{{ prescription.medications }}</td>
+                <td>{{ prescription.statusPrescription }}</td>
+                <td>{{ prescription.additionalNotes }}</td>
+                <td>{{ prescription.validityDuration }}</td>
+                <td>{{ prescription.userCIN }}</td>
+                <td>
+                    <a href="{{ path('app_prescription_show', {'id': prescription.id}) }}" class="btn btn-primary">show</a>
+
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="text-center mt-4">
+        <a href="{{ path('app_prescription_new') }}" class="btn btn-success">Create new</a>
+    </div>
+{% endblock %}

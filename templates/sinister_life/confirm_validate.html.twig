@@ -1,0 +1,11 @@
+{# templates/sinister_life/confirm_validate.html.twig #}
+{% extends 'base2.html.twig' %}
+
+{% block body %}
+    <h1>Are you sure you want to validate this Sinister Life?</h1>
+    <form action="{{ path('app_sinister_life_validate', {'id': sinister_life.id}) }}" method="post">
+        <input type="hidden" name="_token" value="{{ csrf_token('validate' ~ sinister_life.id) }}">
+        <button class="btn btn-danger" type="submit">Yes, Validate it</button>
+    </form>
+    <a href="{{ path('app_sinister_life_show_dashboard', {'id': sinister_life.id}) }}">Cancel</a>
+{% endblock %}

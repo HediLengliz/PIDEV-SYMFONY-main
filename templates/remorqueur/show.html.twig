@@ -1,0 +1,44 @@
+{% extends 'admin/dashboard.html.twig' %}
+
+{% block title %}Remorqueur{% endblock %}
+
+{% block profile %}
+    <h1>Remorqueur</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ remorqueur.id }}</td>
+            </tr>
+            <tr>
+                <th>FirstName</th>
+                <td>{{ remorqueur.FirstName }}</td>
+            </tr>
+            <tr>
+                <th>LastName</th>
+                <td>{{ remorqueur.LastName }}</td>
+            </tr>
+            <tr>
+                <th>PhoneNumber</th>
+                <td>{{ remorqueur.PhoneNumber }}</td>
+            </tr>
+            <tr>
+                <th>Lattitude</th>
+                <td>{{ remorqueur.lattitude }}</td>
+            </tr>
+            <tr>
+                <th>Longuitude</th>
+                <td>{{ remorqueur.longuitude }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+ <a href="{{ path('app_remorqueur_index') }}" class="btn btn-secondary mt-3">Back to List</a>
+
+            <!-- Edit button -->
+            <a href="{{ path('app_remorqueur_edit', {'id': remorqueur.id}) }}" class="btn btn-warning mt-3">Edit</a>
+
+
+    {{ include('remorqueur/_delete_form.html.twig') }}
+{% endblock %}

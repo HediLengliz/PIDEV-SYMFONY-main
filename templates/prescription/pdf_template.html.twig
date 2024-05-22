@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Prescription PDF</title>
+    <style>
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: #444;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 32px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        strong {
+            font-weight: 700;
+        }
+
+        .footer {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 14px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Prescription</h1>
+    <p><strong>Date:</strong> {{ prescription.datePrescription|date('Y-m-d') }}</p>
+    <p><strong>Medications:</strong> {{ prescription.medications }}</p>
+    <p><strong>Status:</strong> {{ prescription.statusPrescription }}</p>
+    <p><strong>Additional Notes:</strong> {{ prescription.additionalNotes }}</p>
+    <p><strong>Validity Duration:</strong> {{ prescription.validityDuration }}</p>
+    <p><strong>User:</strong> {{ prescription.userCIN.firstName }}</p>
+</div>
+<div class="col-lg-3 col-md-6 footer-contact">
+    <h3>Protechtini</h3>
+    <p>
+        18, rue de l'Usine <br>
+        ZI Aéroport Charguia <br>
+        II 2035 Ariana<br><br>
+        <strong>Phone:</strong> (+216) 58 26 64 36 <br>
+        <strong>Email:</strong> protechtini.synthcode@esprit.tn<br>
+    </p>
+</div>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Devis Assurance</title>
+    <style>
+        .header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .title {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .details {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <div class="header">
+            <div class="assurance-name">
+                Assurance Protechtini
+            </div>
+            <div class="date">
+                Date: {{date}}
+            </div>
+        </div>
+        <div class="title">
+            <h1>Devis Numéro: 123456</h1>
+        </div>
+        <p><strong>Client :  {{firstName}} {{lastName}}</strong></p>
+
+        <h2>Assurance Type : {{quote.type}}</h2>
+        <br>
+        <br>
+        <div class="details">
+            <h2>Détails du devis :</h2>
+            {% for index,service in quote.services %}
+            <h4>{{questions[index].question}}</h4>
+            <p>{{service}}</p>
+            {% endfor %}
+
+        </div>
+    </div>
+
+    
+            <h3>Total: {{ quote.amount }}</h3>
+    </div>
+</body>
+</html>

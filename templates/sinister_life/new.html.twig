@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Sinister Life{% endblock %}
+
+{% block body %}
+    <h1>Create a new Sinister Life</h1>
+
+    {{ include('sinister_life/_form.html.twig') }}
+
+    <a href="{{ path('app_sinister_life_index') }}">Back to list</a>
+{% endblock %}

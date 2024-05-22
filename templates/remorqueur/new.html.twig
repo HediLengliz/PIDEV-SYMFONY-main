@@ -1,0 +1,11 @@
+{% extends 'admin/dashboard.html.twig' %}
+
+{% block title %}New Remorqueur{% endblock %}
+
+{% block profile %}
+    <h1>Create new Remorqueur</h1>
+
+    {{ include('remorqueur/_form.html.twig') }}
+
+    <a href="{{ path('app_remorqueur_index') }}">back to list</a>
+{% endblock %}

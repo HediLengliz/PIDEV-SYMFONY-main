@@ -1,0 +1,31 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block title %}ServiceAuto{% endblock %}
+
+{% block profile %}
+    <h1>ServiceAuto</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ service_auto.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ service_auto.name }}</td>
+            </tr>
+            <tr>
+                <th>Price</th>
+                <td>{{ service_auto.price }}</td>
+            </tr>
+
+        </tbody>
+    </table>
+
+<a class="btn btn-secondary" href="{{ path('app_question_show',{'id': id}) }}">Back to List</a>
+
+    <a class="btn btn-info" href="{{ path('app_service_auto_edit', {'id': service_auto.id}) }}">edit</a>
+
+    {{ include('service_auto/_delete_form.html.twig') }}
+{% endblock %}

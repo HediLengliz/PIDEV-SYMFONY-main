@@ -1,0 +1,100 @@
+security:
+    enable_authenticator_manager: true
+    # https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords
+    password_hashers:
+        Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
+    # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
+    providers:
+        # used to reload user from session & other features (e.g. switch_user)
+        app_user_provider:
+            entity:
+                class: App\Entity\User
+                property: email
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        main:
+            lazy: true
+            provider: app_user_provider
+            custom_authenticator: App\Security\AppCustomAuthenticator
+            access_denied_handler: App\Security\AccessDeniedHandler
+
+            logout:
+                path: app_logout
+                # where to redirect after logout
+                target: app_login
+
+            remember_me:
+                secret: '%kernel.secret%'
+                lifetime: 604800
+                path: /
+                always_remember_me: true
+
+            # activate different ways to authenticate
+            # https://symfony.com/doc/current/security.html#the-firewall
+
+            # https://symfony.com/doc/current/security/impersonating_user.html
+            # switch_user: true
+
+    # Easy way to control access for large sections of your site
+    # Note: Only the *first* access control that matches will be used
+    access_control:
+        # - { path: ^/admin/utilisateurs, roles: ROLE_ADMIN }
+        # - { path: ^/admin, roles: ROLE_PRODUCT_ADMIN }
+        - { path: ^/adminprofile, roles: ROLE_ADMIN}
+        - { path: ^/rapport/pdf/\d+, roles: ROLE_USER }
+        - { path: ^/rapport/showrapporthh/\d+, roles: ROLE_USER }
+        - { path: ^/rapport, roles: ROLE_ADMIN }
+        - { path: ^/question, roles: ROLE_ADMIN}
+        - { path: ^/quote, roles: ROLE_USER}
+        - { path: ^/remorquage, roles: ROLE_USER}
+        - { path: ^/remorqueur, roles: ROLE_ADMIN}
+        - { path: ^/profile, roles: ROLE_USER}
+        - { path: ^/admin, roles: ROLE_ADMIN}
+        - { path: ^/client, roles: ROLE_ADMIN}
+        - { path: ^/user, roles: ROLE_ADMIN}
+        - { path: ^/reclamation/userReclamation, roles: ROLE_USER}
+        - { path: ^/reclamation/clientreclamation, roles: ROLE_USER}
+        - { path: ^/reclamation/new, roles: ROLE_USER}
+        - { path: '^/reclamation/\d+', roles: ROLE_USER }
+        - { path: ^/medical/sheet/new, roles: ROLE_DOCTOR }
+        - { path: ^/medical/sheet_doctor/, roles: ROLE_DOCTOR }
+        - { path: ^/medical/sheet/edit, roles: ROLE_DOCTOR }
+        - { path: ^/medical/sheet/delete/, roles: ROLE_DOCTOR }
+        - { path: ^/medical/sheet/, roles: ROLE_DOCTOR }
+        - { path: ^/prescription/, roles: ROLE_ADMIN}
+        - { path: ^/adminprofile/, roles: ROLE_ADMIN}
+        - { path: ^/contrat/habitat/, roles: ROLE_ADMIN}
+        - { path: ^/contrat/vehicule/, roles: ROLE_ADMIN}
+        - { path: ^/contrat/vie/, roles: ROLE_ADMIN}
+        - { path: ^/life/request/, roles: ROLE_USER}
+        - { path: ^/vehicle/request/, roles: ROLE_USER}
+        - { path: ^/proprety/request/, roles: ROLE_USER}
+
+        
+      
+
+        - { path: ^/reclamation, roles: ROLE_ADMIN }
+
+    # access_denied_handler:
+    #     handler_id: App\Security\AccessDeniedHandler
+    role_hierarchy:
+        ROLE_CIENT: ROLE_USER
+        # ROLE_SOUS_ADMIN: ROLE_CLIENT
+        ROLE_ADMIN: ROLE_CLIENT
+        ROLE_SUPER_ADMIN: ROLE_ADMIN
+
+when@test:
+    security:
+        password_hashers:
+            # By default, password hashers are resource intensive and take time. This is
+            # important to generate secure password hashes. In tests however, secure hashes
+            # are not important, waste resources and increase test times. The following
+            # reduces the work factor to the lowest possible values.
+            Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface:
+                algorithm: auto
+                cost: 4 # Lowest possible value for bcrypt
+                time_cost: 3 # Lowest possible value for argon
+                memory_cost: 10 # Lowest possible value for argon
+    

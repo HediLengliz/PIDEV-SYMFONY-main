@@ -1,0 +1,86 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}PropretyRequest index{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <div class="section-title text-center">
+        <h2>Liste des assurances habitats</h2>
+    </div>
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <div class="input-group" style="width: 60%;">
+            <input class="form-control border-end-0 border rounded-pill" type="search" id="example-search-input">
+            <span class="input-group-append">
+                <button class="btn btn-outline-secondary border-bottom-0 border rounded-pill" type="button" id="searchButton">Search</button>
+            </span>
+        </div>
+        <a href="{{ path('app_proprety_request_new') }}" class="btn btn-primary">Create new</a>
+    </div>
+
+    <div class="mx-auto" style="max-width: 800px;">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Date Request</th>
+                    <th>Type Insurance</th>
+                    <th>Status</th>
+                    <th>Property Form</th>
+                    <th>Number of Rooms</th>
+                    <th>Address</th>
+                    <th>Property Value</th>
+                    <th>Surface</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for proprety_request in proprety_requests %}
+                    <tr class="proprety-row">
+                        <td>{{ proprety_request.id }}</td>
+                        <td>{{ proprety_request.dateRequest ? proprety_request.dateRequest|date('Y-m-d') : '' }}</td>
+                        <td>{{ proprety_request.typeInsurance }}</td>
+                        <td class="{% if proprety_request.status == 'Accepter' %}text-success{% elseif proprety_request.status == 'Refusée' %}text-danger{% endif %}">{{ proprety_request.status }}</td>
+                        <td>{{ proprety_request.PropertyForme }}</td>
+                        <td>{{ proprety_request.NumberRooms }}</td>
+                        <td>{{ proprety_request.Address }}</td>
+                        <td>{{ proprety_request.PropertyValue }}</td>
+                        <td>{{ proprety_request.Surface }}</td>
+                        <td>
+                            <a href="{{ path('app_proprety_request_show', {'id': proprety_request.id}) }}" class="btn btn-primary"><i class="bi bi-list-check"></i></a>
+                            <a href="{{ path('app_proprety_request_edit', {'id': proprety_request.id}) }}" class="btn btn-warning"><i class="bi bi-pencil-square"></i></a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="10">No records found</td>
+                    </tr>
+                {% endfor %}
+                <tr id="noPropretyRequestsRow" style="display: none;">
+                    <td colspan="7" class="text-center">Aucune demande trouvée</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+   
+
+    <script>
+        $(document).ready(function () {
+            $('#searchButton').click(function () {
+                var searchQuery = $('#example-search-input').val().toLowerCase();
+                var noPropretyRow = $('#noPropretyRequestsRow');
+
+                // Loop through each user row and show/hide based on the search query
+                $('.proprety-row').each(function () {
+                    var userRowText = $(this).text().toLowerCase();
+
+                    // If the search query is found in the user row, show it; otherwise, hide it
+                    $(this).toggle(userRowText.includes(searchQuery));
+                });
+
+                noPropretyRow.toggle($('.proprety-row:visible').length === 0);
+            });
+        });
+    </script>
+</div>
+{% endblock %}

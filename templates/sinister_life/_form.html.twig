@@ -1,0 +1,99 @@
+<body>
+<main>
+    <div class="container">
+
+        <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+            <div class="card mb-3">
+
+                <div class="card-body">
+
+
+                    {{ form_start(form, {'attr': {'class': 'row g-3 needs-validation', 'novalidate': 'novalidate'}}) }}
+                    {% if form_errors(form) %}
+
+                        <div class="alert alert-danger">
+                            <ul>
+                                {% for error in form_errors(form) %}
+                                    <li>{{ error.message }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
+                    <div class="col-12">
+                        <label for="dateSinister" class="form-label">Date Sinister</label>
+                        {{ form_widget(form.dateSinister, {'attr': {'class': 'form-control', 'id': 'dateSinister'}}) }}
+                        {% if form_errors(form.dateSinister) %}
+                            <div class="alert alert-danger">
+                                {{ form_errors(form.dateSinister) }}
+                            </div>
+                        {% endif %}
+                    </div>
+
+
+                    <div class="col-12">
+                        <label for="location" class="form-label">Location</label>
+                        {{ form_widget(form.location, {'attr': {'class': 'form-control', 'id': 'location'}}) }}
+                        {% if form_errors(form.location) %}
+                            <div class="alert alert-danger">
+                                {{ form_errors(form.location) }}
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="col-12">
+                        <label for="amountSinister" class="form-label">Amount Sinister</label>
+                        {{ form_widget(form.amountSinister, {'attr': {'class': 'form-control', 'id': 'amountSinister'}}) }}
+                        {% if form_errors(form.amountSinister) %}
+                            <div class="alert alert-danger">
+                                {{ form_errors(form.amountSinister) }}
+                            </div>
+                        {% endif %}
+                    </div>
+
+
+
+                    <div class="col-12">
+                        <label for="description" class="form-label">Description</label>
+                        {{ form_widget(form.description, {'attr': {'class': 'form-control', 'id': 'description'}}) }}
+                        {% if form_errors(form.description) %}
+                            <div class="alert alert-danger">
+                                {{ form_errors(form.description) }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="col-12">
+                        <label for="beneficiaryName" class="form-label">Beneficiary Name</label>
+                        {{ form_widget(form.beneficiaryName, {'attr': {'class': 'form-control', 'id': 'beneficiaryName'}}) }}
+                        {% if form_errors(form.beneficiaryName) %}
+                            <div class="alert alert-danger">
+                                {{ form_errors(form.beneficiaryName) }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="col-12">
+                        <label for="sinisterUser" class="form-label">Sinister User</label>
+                        {{ form_widget(form.sinisterUser, {'attr': {'class': 'form-control', 'id': 'sinisterUser'}}) }}
+                    </div>
+
+
+                    <div class="col-12">
+
+                        <button class="btn btn-primary w-100">{{ button_label|default('Save') }}</button>
+                    </div>
+                    <div class="col-12">
+                        <a href="{{ path('app_sinister_life_index') }}" class="btn btn-primary w-100">back to list</a>
+
+                    </div>
+
+
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </section>
+
+    </div>
+</main><!-- End #main -->
+
+
+
+</body>

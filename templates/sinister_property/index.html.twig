@@ -1,0 +1,124 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block title %}Liste Des Sinistres Habitation{% endblock %}
+
+{% block profile %}
+  <h1>Liste Des Sinistres Habitation</h1>
+
+    <div>
+        <label for="orderByDate">Filtrer par Date:</label>
+        <select id="orderByDate">
+            <option value="all">Tous</option>
+            <option value="asc">Date croissante</option>
+            <option value="desc">Date décroissante</option>
+        </select>
+    </div>
+
+    <div>
+        <label for="filterByStatus">Filtrer par Status:</label>
+        <select id="filterByStatus">
+            <option value="">Tous</option>
+            <option value="en_cours">En Cours</option>
+            <option value="traité">Traité</option>
+        </select>
+    </div>
+
+    <div>
+        <label for="filterByDamageType">Filtrer par Type de Dégât:</label>
+        <select id="filterByDamageType">
+            <option value="all">Tous</option>
+            <option value="volé">volé</option>
+            <option value="incendié">incendié</option>
+            <option value="inondé">inondé</option>
+        </select>
+  </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Date</th>
+                <th>Type_degat</th>
+                <th>Status</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody id="sinisterTableBody">
+            {% for sinister_property in sinister_properties %}
+                  <tr>
+                    <td>{{ sinister_property.id }}</td>
+                    <td>{{ sinister_property.dateSinister ? sinister_property.dateSinister|date('Y-m-d') : '' }}</td>
+                    <td>{{ sinister_property.typeDegat }}</td>
+                    <td style="color: {% if sinister_property.StatusSinister == 'traité' %}green{% elseif sinister_property.StatusSinister == 'en_cours' %}orange{% endif %}">
+                        {{ sinister_property.StatusSinister }}
+                    </td>
+                    <td>
+                        <a class="btn btn-success" href="{{ path('app_sinister_property_show_admin', {'id': sinister_property.id}) }}">show</a>
+                        {% if sinister_property.StatusSinister == 'en_cours' %}
+                            <a class="btn btn-warning" href="{{ path('app_rapport_new', {'id': sinister_property.id })}}">traiter</a>
+                        {% elseif sinister_property.StatusSinister == 'traité' %}
+                      
+
+                        {% endif %}
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="5">no records found</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination " style="float: right;">
+            {{ knp_pagination_render(sinister_properties) }}
+        </ul>
+    </nav>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            // Function to filter sinisters by order, status, and damage type
+            $("#orderByDate, #filterByStatus, #filterByDamageType").on("change", function() {
+                var order = $("#orderByDate").val();
+                var selectedStatus = $("#filterByStatus").val();
+                var selectedDamageType = $("#filterByDamageType").val();
+                filterSinisters(order, selectedStatus, selectedDamageType);
+            });
+
+            function filterSinisters(order, selectedStatus, selectedDamageType) {
+                $("#sinisterTableBody tr").sort(function(a, b) {
+                    var dateA = new Date($(a).find("td:eq(1)").text()); 
+                    var dateB = new Date($(b).find("td:eq(1)").text());
+
+                    if (order === "all") {
+                        return 0; // Don't change order
+                    }
+
+                    return order === "asc" ? dateA - dateB : dateB - dateA;
+                }).each(function() {
+                    var rowStatus = $(this).find("td:eq(3)").text(); 
+                    var rowDamageType = $(this).find("td:eq(2)").text(); 
+                    if (
+                        (selectedStatus === "" || rowStatus === selectedStatus) &&
+                        (selectedDamageType === "all" || rowDamageType === selectedDamageType)
+                    ) {
+                        $(this).show();
+                    } else {
+                        $(this).hide();
+                    }
+                }).appendTo("#sinisterTableBody");
+            }
+
+            // Function to color decisions
+            $("#sinisterTableBody tr").each(function() {
+                var rowStatus = $(this).find("td:eq(3)").text(); 
+                if (rowStatus === "traité") {
+                    $(this).find("td:eq(3)").css("color", "green");
+                } else if (rowStatus === "en_cours") {
+                    $(this).find("td:eq(3)").css("color", "orange");
+                }
+            });
+        });
+    </script>
+{% endblock %}

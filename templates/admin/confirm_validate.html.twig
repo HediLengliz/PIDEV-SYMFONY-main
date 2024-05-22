@@ -1,0 +1,16 @@
+{% extends 'base2.html.twig' %}
+
+{% block body %}
+    <div class="d-flex justify-content-center align-items-center" style="height: 100vh;">
+        <div>
+            <h1 class="text-center">Are you sure you want to validate this Sinister Life?</h1>
+            <div class="text-center mt-4"> <!-- Added margin-top for spacing -->
+                <form action="{{ path('app_sinister_life_validate', {'id': sinister_life.id}) }}" method="post" class="d-inline-block">
+                    <input type="hidden" name="_token" value="{{ csrf_token('validate' ~ sinister_life.id) }}">
+                    <button class="btn btn-success" type="submit">Yes, Validate it</button>
+                </form>
+                <a href="{{ path('app_sinister_life_show_dashboard', {'id': sinister_life.id}) }}" class="btn btn-secondary ml-2">Cancel</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

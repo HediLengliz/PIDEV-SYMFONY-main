@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Sinister Life {% endblock %}
+
+{% block body %}
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">{{ message }}</div>
+    {% endfor %}
+
+    {% for message in app.flashes('warning') %}
+        <div class="alert alert-warning">{{ message }}</div>
+    {% endfor %}
+
+    <h1>Sinister Lives</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Date Sinister</th>
+                <th>Location</th>
+                <th>Amount Sinister</th>
+                <th>Status Sinister</th>
+                <th>Description</th>
+                <th>Beneficiary Name</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for sinister_life in sinister_lives %}
+            <tr>
+                <td>{{ sinister_life.id }}</td>
+                <td>{{ sinister_life.dateSinister ? sinister_life.dateSinister|date('Y-m-d') : '' }}</td>
+                <td>{{ sinister_life.location }}</td>
+                <td>{{ sinister_life.amountSinister }}</td>
+                <td>{{ sinister_life.statusSinister }}</td>
+                <td>{{ sinister_life.description }}</td>
+                <td>{{ sinister_life.beneficiaryName }}</td>
+                <td>
+                    <a href="{{ path('app_sinister_life_show', {'id': sinister_life.id}) }}" class="btn btn-primary">Show</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            {{ knp_pagination_render(sinister_lives) }}
+        </ul>
+    </nav>
+    <div class="text-center mt-4">
+        <a href="{{ path('app_sinister_life_new') }}" class="btn btn-success">Create new</a>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,63 @@
+{% extends 'client/index.html.twig' %}
+
+{% block title %}ContratHabitat index{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="section-title">
+        <h2>Liste des assurances habitat</h2>
+    </div>                 <table class="table table-striped">
+                          <thead>
+              <tr>
+                <th>Id</th>
+                <th>Date_debut</th>
+                <th>Date_fin</th>
+                <th>Description</th>
+                <th>Prix</th>
+                <th>MatriculeAgent</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {# {% for contrat_habitat in contrat_habitats %} #}
+                    <tr class="requestVehicule-row">
+                <td>{{ contrat_habitat.id }}</td>
+                <td>{{ contrat_habitat.DateDebut ? contrat_habitat.DateDebut|date('Y-m-d') : '' }}</td>
+                <td>{{ contrat_habitat.DateFin ? contrat_habitat.DateFin|date('Y-m-d') : '' }}</td>
+                <td>{{ contrat_habitat.Description }}</td>
+                <td>{{ contrat_habitat.Prix }}</td>
+
+                <td>{{ contrat_habitat.MatriculeAgent }}</td>
+                    <td>
+                    <a href="{{ path('app_stripe')}}" class="btn btn-primary">Payer</a>
+                    </a>
+                </td>
+                
+            </tr>
+       
+                                  
+                                   {# {% endfor %} #}
+                               </tbody>
+                           </table>
+
+                        </div>
+                    </div>
+        <script>
+        $(document).ready(function () {
+                    $('#searchButton').click(function () {
+                        var searchQuery = $('#example-search-input').val().toLowerCase();
+                        var noRequestVehiculeRow = $('#noUserRequestVehiculeRow');
+
+                        // Loop through each user row and show/hide based on the search query
+                        $('.requestVehicule-row').each(function () {
+                            var userRowText = $(this).text().toLowerCase();
+
+                            // If the search query is found in the user row, show it; otherwise, hide it
+                            $(this).toggle(userRowText.includes(searchQuery));
+                        });
+
+                        noRequestVehiculeRow.toggle($('.requestVehicule-row:visible').length === 0);
+                    });
+                });
+        </script>
+{% endblock %}

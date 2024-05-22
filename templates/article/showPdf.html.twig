@@ -1,0 +1,76 @@
+
+{% block body %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contrat Vie</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        .section {
+            margin-bottom: 30px;
+        }
+        .section-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .section-content {
+            margin-left: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>{{article.title}}</h1>
+
+        <div class="section">
+            <div class="section-title">Informations générales :</div>
+            <div class="section-content">
+                <p><strong>Numéro de article :</strong> {{ article.id }}</p>
+                <p><strong>Date de publication :</strong> {{ article.datepub  | date('Y-m-d')}}</p>
+
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">Description :</div>
+            <div class="section-content">
+                <p>{{ article.description }}</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">Nom D'auteur :</div>
+            <div class="section-content">
+                <p>{{ article.authorname }}</p>
+            </div>
+        </div>
+         <div class="section">
+                    <div class="section-title">categorie</div>
+                    <div class="section-content">
+                        <p>{{ article.categorie }}</p>
+                    </div>
+                </div>
+
+    </div>
+</body>
+</html>
+{% endblock %}

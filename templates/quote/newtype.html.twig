@@ -1,0 +1,194 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Quiz{% endblock %}
+
+{% block body %}
+    <style>
+        .question-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 150px; /* Add margin to move it up */
+        }
+
+        .question-div {
+            width: 50%;
+            margin: 0 auto;
+            text-align: center;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .active {
+            display: block;
+        }
+
+        .service-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .service-div {
+            width: calc(25% - 20px); /* 25% minus margin */
+            margin: 10px;
+            padding: 10px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: transform 0.3s ease-in-out;
+            text-align: center;
+        }
+
+        .service-div:hover {
+            transform: scale(1.05);
+        }
+
+
+
+        .service-div label {
+            cursor: pointer;
+        }
+
+        .buttons-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .buttons-container button {
+            margin: 0 10px;
+        }
+    </style>
+
+    <div class="question-container">
+        {% set currentQuestionIndex = 0 %}
+        {% for index, question in questions %}
+            <div class="question-div {% if index == currentQuestionIndex %}active{% endif %}" id="question-{{ index }}" style="display: {% if index == currentQuestionIndex %}block{% else %}none{% endif %};">
+                {{ question.question }}
+                <div class="service-container">
+                    {% for service in question.services %}
+                        <div class="service-div" onclick="selectService({{ index }}, {{ loop.index0 }})">
+                            <input type="radio" id="service-{{ index }}-{{ loop.index0 }}" name="service" value="{{ loop.index0 }}">
+                            <label for="service-{{ index }}-{{ loop.index0 }}" data-value={{ service.id }} id="label-{{ index }}-{{ loop.index0 }}">{{ service.name }}</label>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="buttons-container">
+        <button class="btn btn-info" id="prev-question" onclick="showPrevious()">Previous</button>
+        <button class="btn btn-secondary" id="next-question" onclick="showNext()">Next</button>
+        {{ form_start(form,{'attr': {'id': 'myForm'}}) }}
+        <input type="hidden" id="test" name="selectedServices">
+        <br>
+        <button type="button" class="btn btn-success" id="submit-quote" onclick="submitForm()">Submit</button>
+        {{ form_end(form) }}
+
+    </div>
+
+    <script>
+        let currentQuestionIndex = 0;
+        let selectedServices = {};
+        let selectedServiceIndexPerQuestion = {};
+
+        disableNextButton();
+        function showQuestion(index) {
+            const questionDivs = document.querySelectorAll('.question-div');
+            questionDivs.forEach(function(div, i) {
+                if (i === index) {
+                    div.style.display = 'block';
+                } else {
+                    div.style.display = 'none';
+                }
+            });
+        }
+
+        function selectService(questionIndex, serviceIndex) {
+            const radioButton = document.getElementById(`service-${questionIndex}-${serviceIndex}`);
+            radioButton.checked = true; // Check the corresponding radio button
+            const labelElement = document.getElementById(`label-${questionIndex}-${serviceIndex}`);
+            selectedServices[questionIndex] = labelElement.dataset.value;
+            selectedServiceIndexPerQuestion[questionIndex]= serviceIndex;
+            console.log(selectedServices);
+            enableNextButton(); // Enable the next button when a radio button is selected
+        }
+
+        function showPrevious() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                showQuestion(currentQuestionIndex);
+                enableNextButton()
+                const serviceIndex = selectedServiceIndexPerQuestion[currentQuestionIndex];
+                const radioButton = document.getElementById(`service-${currentQuestionIndex}-${serviceIndex}`);
+                radioButton.checked = true;
+ 
+            }
+            if (currentQuestionIndex < {{ questions|length-1 }}) {
+
+            const nextButton = document.getElementById('next-question');
+            nextButton.hidden = false;
+
+            }
+        }
+
+        function showNext() {
+            if (currentQuestionIndex < {{ questions|length - 1 }}) {
+                currentQuestionIndex++;
+                showQuestion(currentQuestionIndex);
+                disableNextButton(); // Always disable next button after moving to the next question
+
+
+            }
+
+            
+            if (currentQuestionIndex == {{ questions|length-1 }}) {
+                console.log("aaaaaa");
+
+            const nextButton = document.getElementById('next-question');
+            nextButton.hidden = true;
+
+            }
+
+        }
+
+        function enableNextButton() {
+            const nextButton = document.getElementById('next-question');
+            nextButton.disabled = false;
+        }
+
+        function disableNextButton() {
+            const nextButton = document.getElementById('next-question');
+            nextButton.disabled = true;
+        }
+        function submitForm() {
+            // Check if all questions have been answered
+            const totalQuestions = {{ questions|length }};
+            const answeredQuestions = Object.keys(selectedServices).length;
+            
+            if (answeredQuestions === totalQuestions) {
+                // All questions have been answered, proceed with submission
+                document.getElementById('test').value = JSON.stringify(selectedServices);
+                submit();
+            } else {
+                // Not all questions have been answered, show alert
+                alert("Please answer all questions before submitting.");
+            }
+        }
+        
+        function submit() {
+            console.log("Submitting...");
+            document.getElementById('myForm').submit(); // Submit the form
+        }
+
+        // Show the initial question
+        showQuestion(currentQuestionIndex);
+    </script>
+{% endblock %}

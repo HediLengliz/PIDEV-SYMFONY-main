@@ -1,0 +1,36 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block title %}ServiceProperty index{% endblock %}
+
+{% block profile %}
+    <h1>ServiceProperty index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for service_property in service_properties %}
+            <tr>
+                <td>{{ service_property.id }}</td>
+                <td>{{ service_property.name }}</td>
+                <td>{{ service_property.price }}</td>
+                <td>
+                    <a class="btn btn-info" href="{{ path('app_service_property_show', {'id': service_property.id}) }}">show</a>
+                    <a class="btn btn-success" href="{{ path('app_service_property_edit', {'id': service_property.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

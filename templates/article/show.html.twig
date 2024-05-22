@@ -1,0 +1,57 @@
+{% extends 'baseback.html.twig' %}
+
+{% block title %}{{ article.title }}{% endblock %}
+
+{% block content1 %}
+    <h1>{{ article.title }}</h1>
+<center>
+    <div>
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ article.id }}</td>
+
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ article.title }}</td>
+
+
+
+            </tr>
+            <tr>
+                <th>Image</th>
+                <td>  <img src="{{ asset('uploads/images/' ~ article.image)}} " style="height: 150px;width: 150px;" class="rounded-circle" alt="article Image">
+
+            </tr>
+            <tr>
+                <th>Author_name</th>
+                <td>{{ article.authorname }}</td>
+
+            </tr>
+            <tr>
+                <th>Date pub</th>
+                <td>{{ article.datepub ? article.datePub|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ article.description |raw }}</td>
+
+            </tr>
+            <tr>
+                <th>Categorie</th>
+                <td>{{ article.categorie }}</td>
+        </tbody>
+    </table>
+    </div>
+
+
+    <a href="{{ path('app_article_index') }}">Retour</a>
+
+    <a href="{{ path('app_article_edit', {'id': article.id}) }}">Modifier</a>
+
+    {{ include('article/_delete_form.html.twig') }}
+    </center>
+{% endblock %}
+

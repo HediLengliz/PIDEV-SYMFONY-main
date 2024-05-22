@@ -1,0 +1,81 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block title %}Liste des rapports{% endblock %}
+
+{% block profile %}
+    <h1>Liste des rapports</h1>
+
+    <div>
+        <label for="filterByDecision">Filtrer par Decision:</label>
+        <select id="filterByDecision">
+            <option value="all">Tous</option>
+            <option value="accépté par la garantie">Accepté par la garantie</option>
+            <option value="non accépté par la garantie">Non Accepté</option>
+        </select>
+    </div>
+
+    <table class="table" id="rapportTable">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Decision</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for rapport in rapports %}
+            <tr data-decision="{{ rapport.decision }}">
+                <td>{{ rapport.id }}</td>
+                <td>{{ rapport.decision }}</td>
+                <td>
+                    <a class="btn btn-success" href="{{ path('app_rapport_show_admin', {'id': rapport.id}) }}">show rapport</a>
+                    <a class="btn btn-warning" href="{{ path('app_rapport_edit', {'id': rapport.id}) }}">update</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    
+<nav aria-label="Page navigation example">
+            <ul class="pagination " style="float: right;">
+                {{ knp_pagination_render(rapports) }}
+            </ul>
+        </nav>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            // Function to filter reports by decision
+            $("#filterByDecision").on("change", function() {
+                var selectedDecision = $("#filterByDecision").val();
+                filterReports(selectedDecision);
+            });
+
+            function filterReports(selectedDecision) {
+                $("#rapportTable tbody tr").each(function() {
+                    var rowDecision = $(this).data("decision");
+                    if (selectedDecision === "all" || rowDecision === selectedDecision) {
+                        $(this).show();
+                    } else {
+                        $(this).hide();
+                    }
+                });
+            }
+
+            // Function to color decisions
+            $("#rapportTable tbody tr").each(function() {
+                var rowDecision = $(this).data("decision");
+                if (rowDecision === "accépté par la garantie") {
+                    $(this).find("td:eq(1)").css("color", "green");
+                } else if (rowDecision === "non accépté par la garantie") {
+                    $(this).find("td:eq(1)").css("color", "red");
+                }
+            });
+        });
+    </script>
+
+{% endblock %}

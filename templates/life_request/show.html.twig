@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}LifeRequest{% endblock %}
+
+{% block body %}
+<div class="section-title">
+         <h2>Assurance maladie</h2>
+      </div>
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ life_request.id }}</td>
+            </tr>
+            <tr>
+                <th>DateRequest</th>
+                <td>{{ life_request.dateRequest ? life_request.dateRequest|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>TypeInsurance</th>
+                <td>{{ life_request.typeInsurance }}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{{ life_request.status }}</td>
+            </tr>
+            <tr>
+                <th>Age</th>
+                <td>{{ life_request.Age }}</td>
+            </tr>
+            <tr>
+                <th>Chron_disease</th>
+                <td>{{ life_request.chronDisease }}</td>
+            </tr>
+            <tr>
+                <th>Surgery</th>
+                <td>{{ life_request.surgery }}</td>
+            </tr>
+            <tr>
+                <th>Civil_status</th>
+                <td>{{ life_request.civilStatus }}</td>
+            </tr>
+            <tr>
+                <th>Occupation</th>
+                <td>{{ life_request.occupation }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+
+    <a href="{{ path('app_life_request_edit', {'id': life_request.id}) }}">edit</a>
+
+    {{ include('life_request/_delete_form.html.twig') }}
+{% endblock %}

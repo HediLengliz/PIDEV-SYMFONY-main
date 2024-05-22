@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit PropretyRequest{% endblock %}
+
+{% block body %}
+<div class="section-title">
+         <h2>Modifier une demande d'une assurance habitat</h2>
+      </div>
+    {{ include('proprety_request/_form.html.twig', {'button_label': 'Update'}) }}
+
+
+    <div class="col-12">
+        <a href="{{ path('app_proprety_request_index') }}" class="btn btn-primary w-100">Back to List</a>
+    </div>
+
+    {{ include('proprety_request/_delete_form.html.twig') }}
+{% endblock %}

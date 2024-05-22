@@ -1,0 +1,61 @@
+<body>
+    <main>
+        <div class="container">
+
+            <!-- Add this script tag to include jQuery -->
+            <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+            <section class="section register min-vh-100 d-flex flex-column  ">
+                <div class="card mb-3">
+                
+                    <div class="card-body">
+
+                        {{ form_start(form, {'attr': {'class': 'row g-3 needs-validation', 'novalidate': 'novalidate', 'enctype': 'multipart/form-data'}}) }}
+                        {% if form_errors(form) %}
+                            <div class="alert alert-danger">
+                                <ul>
+                                    {% for error in form_errors(form) %}
+                                        <li>{{ error.message }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        {% endif %}
+
+                        <div class="col-6">
+                            
+
+                            <div class="col-12">
+                                <label for="decision" class="form-label">Décision</label>
+                                {{ form_widget(form.decision, {'attr': {'class': 'form-control', 'id': 'decision'}}) }}
+                                {% if form_errors(form.decision) %}
+                                    <div class="alert alert-danger">
+                                        {{ form_errors(form.decision) }}
+                                    </div>
+                                {% endif %}
+                            </div>
+
+                               <div class="col-12">
+                                <label for="justification" class="form-label">justification</label>
+                                {{ form_widget(form.justification, {'attr': {'class': 'form-control', 'id': 'justification'}}) }}
+                                {% if form_errors(form.justification) %}
+                                    <div class="alert alert-danger">
+                                        {{ form_errors(form.justification) }}
+                                    </div>
+                                {% endif %}
+                            </div>
+
+                            <div class="col-5">
+                                <button class="btn btn-primary w-100">{{ button_label|default('Save') }}</button>
+                            </div>
+
+                        </div>
+
+                        {{ form_end(form) }}
+
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main><!-- End #main -->
+</body>

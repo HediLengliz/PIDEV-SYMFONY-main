@@ -1,0 +1,13 @@
+{% extends 'admin/dashboard.html.twig' %}
+
+{% block title %}Edit Remorqueur{% endblock %}
+
+{% block profile %}
+    <h1>Edit Remorqueur</h1>
+
+    {{ include('remorqueur/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_remorqueur_index') }}" class="btn btn-secondary">Back to List</a>
+
+    {{ include('remorqueur/_delete_form.html.twig') }}
+{% endblock %}

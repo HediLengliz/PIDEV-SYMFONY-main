@@ -1,0 +1,13 @@
+{% extends 'base2.html.twig' %}
+
+{% block title %}Edit SinisterLife{% endblock %}
+
+{% block body %}
+    <h1>Edit SinisterLife</h1>
+
+    {{ include('sinister_life/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_sinister_life_dashboard') }}">back to list</a>
+
+    {{ include('sinister_life/_delete_form.html.twig') }}
+{% endblock %}

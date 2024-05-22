@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <style>
+        .insurance-option {
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .insurance-option:hover {
+            transform: scale(1.1);
+        }
+    </style>
+
+<div style="margin-top:100px">
+    <h1>Create new Quote</h1>
+    <h1 style="text-align: center;">Select your type of insurance</h1>
+    <div id="insurance-options" style="display: flex; justify-content: center; margin-top: 100px; text-align: center;">
+        <div class="insurance-option" style="width: 200px; height: 200px;" data-insurance="auto">
+            <img src="{{ asset('FrontOffice/img/car.svg') }}" class="img-fluid" alt="">
+            <h3 style="margin-bottom: 0px;">car</h3>
+        </div>
+        <div class="insurance-option" style="width: 200px; height: 200px; margin: 20px;" data-insurance="life">
+            <img src="{{ asset('FrontOffice/img/life.svg') }}" class="img-fluid" alt="">
+            <h3 style="margin-bottom: 0px;">life</h3>
+        </div>
+        <div class="insurance-option" style="width: 200px; height: 200px;" data-insurance="property">
+            <img src="{{ asset('FrontOffice/img/house.svg') }}" class="img-fluid" alt="">
+            <h3 style="margin-bottom: 0px;">property</h3>
+        </div>
+    </div>
+</div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const insuranceOptions = document.querySelectorAll('.insurance-option');
+            insuranceOptions.forEach(function(option) {
+                option.addEventListener('click', function() {
+                    const selectedInsurance = option.getAttribute('data-insurance');
+                    window.location.href = "/quote/new/" + selectedInsurance;
+                });
+            });
+        });
+    </script>
+{% endblock %}
+
+

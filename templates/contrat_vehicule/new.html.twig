@@ -1,0 +1,11 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block title %}New ContratVehicule{% endblock %}
+
+{% block profile %}
+
+
+    {{ include('contrat_vehicule/_form.html.twig') }}
+
+    <a href="{{ path('app_contrat_vehicule_index') }}">back to list</a>
+{% endblock %}

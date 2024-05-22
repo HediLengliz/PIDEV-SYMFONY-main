@@ -1,0 +1,113 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}SinisterVehicle{% endblock %}
+
+{% block body %}
+    <h1>SinisterVehicle</h1>
+
+        <table class="table table-bordered table-hover" >
+        <tbody>
+            
+            <tr>
+                <th>DateSinister</th>
+                <td>{{ sinister_vehicle.dateSinister ? sinister_vehicle.dateSinister|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Location</th>
+                <td>{{ sinister_vehicle.location }}</td>
+            </tr>
+            <tr>
+                <th>ImageName</th>
+                <td> <img src="{{ asset('images/sinister_vehicles/' ~ sinister_vehicle.imageName ) }}" style="height: 150px;width: 150px;" class="rounded-circle" alt="User Image"></td>
+            </tr>
+            <tr>
+                <th>Nom_Conducteur_A</th>
+                <td>{{ sinister_vehicle.NomConducteurA }}</td>
+            </tr>
+            <tr>
+                <th>Nom_Conducteur_B</th>
+                <td>{{ sinister_vehicle.NomConducteurB }}</td>
+            </tr>
+            <tr>
+                <th>Prenom_Conducteur_B</th>
+                <td>{{ sinister_vehicle.PrenomConducteurB }}</td>
+            </tr>
+            <tr>
+                <th>Prenom_Conducteur_A</th>
+                <td>{{ sinister_vehicle.PrenomConducteurA }}</td>
+            </tr>
+            <tr>
+                <th>Adresse_conducteurA</th>
+                <td>{{ sinister_vehicle.AdresseConducteurA }}</td>
+            </tr>
+            <tr>
+                <th>Adresse_conducteurB</th>
+                <td>{{ sinister_vehicle.AdresseConducteurB }}</td>
+            </tr>
+            <tr>
+                <th>Num_permisA</th>
+                <td>{{ sinister_vehicle.numPermisA }}</td>
+            </tr>
+            <tr>
+                <th>Num_permisB</th>
+                <td>{{ sinister_vehicle.numPermisB }}</td>
+            </tr>
+            <tr>
+                <th>Delivre_A</th>
+                <td>{{ sinister_vehicle.delivreA ? sinister_vehicle.delivreA|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Delivre_B</th>
+                <td>{{ sinister_vehicle.delivreB ? sinister_vehicle.delivreB|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Num_contratA</th>
+                <td>{{ sinister_vehicle.numContratA }}</td>
+            </tr>
+            <tr>
+                <th>Num_contratB</th>
+                <td>{{ sinister_vehicle.numContratB }}</td>
+            </tr>
+            <tr>
+                <th>Marque_VehiculeA</th>
+                <td>{{ sinister_vehicle.MarqueVehiculeA }}</td>
+            </tr>
+            <tr>
+                <th>Marque_VehiculeB</th>
+                <td>{{ sinister_vehicle.MarqueVehiculeB }}</td>
+            </tr>
+            <tr>
+                <th>ImmatriculationA</th>
+                <td>{{ sinister_vehicle.ImmatriculationA }}</td>
+            </tr>
+            <tr>
+                <th>ImmatriculationB</th>
+                <td>{{ sinister_vehicle.ImmatriculationB }}</td>
+            </tr>
+            <tr>
+                <th>BvehiculeAssurePar</th>
+                <td>{{ sinister_vehicle.BvehiculeAssurePar }}</td>
+            </tr>
+            <tr>
+                <th>Agence</th>
+                <td>{{ sinister_vehicle.agence }}</td>
+            </tr>
+             <tr>
+                <th>Status</th>
+                <td>{{ sinister_vehicle.StatusSinister }}</td>
+            </tr>
+        </tbody>
+    </table>
+    {% if sinister_vehicle.StatusSinister == 'traité' %}
+<a href="{{ path('app_rapport_showhh', {'id': sinister_vehicle.id}) }}" class="btn btn-primary">Voir Rapport</a>
+{% endif %}
+
+{% if sinister_vehicle.StatusSinister == 'en_cours' %}
+<a class="btn btn-primary mt3" href="{{ path('app_constat_edit', {'id': sinister_vehicle.id}) }}">edit</a>
+{{ include('constat/_delete_form.html.twig') }}
+{% endif %}
+
+    
+
+    
+{% endblock %}

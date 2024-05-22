@@ -1,0 +1,163 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block title %}User index{% endblock %}
+
+{% block profile %}
+        <div class="col-md-12">
+        {{ include('@MercurySeriesFlashy/flashy.html.twig') }}
+
+        {# {% for label, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="alert alert-{{ label }} alert-dismissible" role="alert">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    <div class="alert-message">
+                        {{ message|raw }}
+                    </div>
+                </div>
+            {% endfor %}
+        {% endfor %} #}
+            <h1 >Liste des utilisateurs</h1>
+            <div class="d-flex"  >
+            <div class="col-md-12 mx-auto">
+        {# <div class="small fw-light">search input with icon</div> #}
+        <div class="input-group">
+        <input class="form-control border-end-0 border rounded-pill" type="search"  id="example-search-input">
+        <span class="input-group-append">
+            <button class="btn btn-outline-secondary border-bottom-0 border rounded-pill ms-n5" type="button" id="searchButton">
+                Search
+            </button>
+        </span>
+        </div>
+    </div>
+</div>
+<br>
+            <table class="table table-bordered table-hover">
+                <thead class="table-secondary">
+                    <tr>
+                        
+                        <th>CIN</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email</th>
+                        <th>Address</th>
+                        <th>Phone Number</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody  id="userTableBody">
+                    {% for user in users %}
+                    {% if app.user and app.user.id != user.id %}
+                    <tr class="user-row">
+                       
+                        <td>{{ user.cin }}</td>
+                        <td>{{ user.firstName }}</td>
+                        <td>{{ user.lastName }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.address }}</td>
+                        <td>{{ user.phoneNumber }}</td>
+                        <td class="ml-2">
+                            <div class="d-flex">
+                            {% if permissions.canUpdate %}
+                            <a href="{{ path('app_user_edit', {'id': user.id}) }}" class="btn btn-primary btn-sm mr-4" style="margin-right: 4%;">
+                                <i class="bi bi-pencil"></i>
+                            </a>
+                        
+                        {% endif %}
+                        {% if permissions.canDelete %}
+                        {{ include('user/_delete_form.html.twig') }}
+                   
+                    {% endif %}
+                    {% if not permissions.canDelete and not permissions.canUpdate %}
+                <p class="text-danger">No action authorized</p>
+            {% endif %}
+            
+
+                            </div>
+                        </td>
+                    </tr>
+                {% endif %}
+                      {% else %}
+                        <tr>
+                            <td colspan="9" class="text-center">No Users found</td>
+                        </tr>
+                    {% endfor %}
+                    <tr id="noUsersRow" style="display: none;">
+                <td colspan="7" class="text-center">No Users found</td>
+            </tr>
+                </tbody>
+            </table>
+            <nav aria-label="Page navigation example">
+            <ul class="pagination " style="float: right;">
+                {{ knp_pagination_render(users) }}
+            </ul>
+        </nav>
+        
+            {% if permissions.canCreate %}
+        <a href="{{ path('app_user_new') }}" class="btn btn-primary">Create New</a>
+        
+    {% endif %}        </div>
+    </div>
+    
+    <script>
+
+
+
+        $(document).ready(function () {
+            $('#searchButton').click(function () {
+                var searchQuery = $('#example-search-input').val().toLowerCase();
+                var noUsersRow = $('#noUsersRow');
+    
+                // Loop through each user row and show/hide based on the search query
+                $('.user-row').each(function () {
+                    var userRowText = $(this).text().toLowerCase();
+    
+                    // If the search query is found in the user row, show it; otherwise, hide it
+                    $(this).toggle(userRowText.includes(searchQuery));
+                });
+    
+                // Show/hide the "No Users Found" row based on search results
+                noUsersRow.toggle($('.user-row:visible').length === 0);
+            });
+        });
+        
+
+        // Your delete function remains unchanged
+        function deleteUser(userId, csrfToken) {
+            // ...
+        }
+    
+            document.addEventListener('DOMContentLoaded', function () {
+                // Get the current path or URL
+                var currentPath = window.location.pathname;
+        
+                // Remove leading slash for comparison
+                currentPath = currentPath.replace(/^\//, '');
+        
+                // Find the matching nav item and add the 'active' class
+                var navItems = document.querySelectorAll('#sidebar-nav li');
+                navItems.forEach(function (navItem) {
+                    var navItemPath = navItem.querySelector('a').getAttribute('href').replace(/^\//, '');
+        
+                    if (currentPath === navItemPath) {
+                        navItem.classList.add('active');
+                    }
+                });
+        
+                // Add event listener for links within the sidebar
+                var sidebarLinks = document.querySelectorAll('#sidebar-nav a');
+                sidebarLinks.forEach(function (link) {
+                    link.addEventListener('click', function (event) {
+                        event.preventDefault(); // Prevent the default behavior (page reload)
+        
+                        // Optionally, you can navigate to the link using JavaScript
+                        var href = this.getAttribute('href');
+                        if (href) {
+                            window.location.href = href;
+                        }
+                    });
+                });
+            });
+        
+        
+    </script>
+{% endblock %}

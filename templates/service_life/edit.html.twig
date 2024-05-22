@@ -1,0 +1,13 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block title %}Edit ServiceLife{% endblock %}
+
+{% block profile %}
+    <h1>Edit ServiceLife</h1>
+
+    {{ include('service_life/_form.html.twig', {'button_label': 'Update'}) }}
+
+    
+
+    {{ include('service_life/_delete_form.html.twig') }}
+{% endblock %}

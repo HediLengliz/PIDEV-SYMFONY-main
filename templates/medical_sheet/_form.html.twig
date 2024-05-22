@@ -1,0 +1,146 @@
+<body>
+<main>
+    <div class="container">
+
+        <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+            <div class="card mb-3">
+
+                <div class="card-body">
+
+
+                    {{ form_start(form, {'attr': {'class': 'row g-3 needs-validation', 'novalidate': 'novalidate'}}) }}
+                    {% if form_errors(form) %}
+
+                        <div class="alert alert-danger">
+                            <ul>
+                                {% for error in form_errors(form) %}
+                                    <li>{{ error.message }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
+                    <div class="col-12">
+                        <label for="medicalDiagnosis" class="form-label">Medical Diagnosis</label>
+                        {{ form_widget(form.medicalDiagnosis, {'attr': {'class': 'form-control', 'id': 'medicaldiagnosis'}}) }}
+                        {% if form_errors(form.medicalDiagnosis) %}
+                            <div class="alert alert-danger">
+                                {{ form_errors(form.medicalDiagnosis) }}
+                            </div>
+                        {% endif %}
+                    </div>
+
+
+                    <div class="col-12">
+                        <label for="treatmentPlan" class="form-label">Treatment Plan</label>
+                        {{ form_widget(form.treatmentPlan, {'attr': {'class': 'form-control', 'id': 'treatmentPlan'}}) }}
+                        {% if form_errors(form.treatmentPlan) %}
+                            <div class="alert alert-danger">
+                                {{ form_errors(form.treatmentPlan) }}
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="col-12">
+                        <label for="medicalReports" class="form-label">Medical Reports</label>
+                        {{ form_widget(form.medicalReports, {'attr': {'class': 'form-control', 'id': 'medicalReports'}}) }}
+                        {% if form_errors(form.medicalReports) %}
+                            <div class="alert alert-danger">
+                                {{ form_errors(form.medicalReports) }}
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="col-12">
+                        <label for="durationOfIncapacity" class="form-label">Duration Of Incapacity</label>
+                        {{ form_widget(form.durationOfIncapacity, {'attr': {'class': 'form-control', 'id': 'durationOfIncapacity'}}) }}
+                        {% if form_errors(form.durationOfIncapacity) %}
+                            <div class="alert alert-danger">
+                                {{ form_errors(form.durationOfIncapacity) }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="col-12">
+                        <label for="procedurePerformed" class="form-label">Procedure Performed</label>
+                        {{ form_widget(form.procedurePerformed, {'attr': {'class': 'form-control', 'id': 'procedurePerformed'}}) }}
+                        {% if form_errors(form.procedurePerformed) %}
+                            <div class="alert alert-danger">
+                                {{ form_errors(form.procedurePerformed) }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="col-12">
+                        <label for="sickLeaveDuration" class="form-label">sick Leave Duration </label>
+                        {{ form_widget(form.sickLeaveDuration, {'attr': {'class': 'form-control', 'id': 'sickLeaveDuration'}}) }}
+                        {% if form_errors(form.sickLeaveDuration) %}
+                            <div class="alert alert-danger">
+                                {{ form_errors(form.sickLeaveDuration) }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="col-12">
+                        <label for="hospitalizationPeriod" class="form-label">Hospitalization Period </label>
+                        {{ form_widget(form.hospitalizationPeriod, {'attr': {'class': 'form-control', 'id': 'hospitalizationPeriod'}}) }}
+                        {% if form_errors(form.hospitalizationPeriod) %}
+                            <div class="alert alert-danger">
+                                {{ form_errors(form.hospitalizationPeriod) }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="col-12">
+                        <label for="rehabilitationPeriod" class="form-label">Rehabilitation Period </label>
+                        {{ form_widget(form.rehabilitationPeriod, {'attr': {'class': 'form-control', 'id': 'rehabilitationPeriod'}}) }}
+                        {% if form_errors(form.rehabilitationPeriod) %}
+                            <div class="alert alert-danger">
+                                {{ form_errors(form.rehabilitationPeriod) }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="col-12">
+                        <label for="medicalInformation" class="form-label">Medical Information </label>
+                        {{ form_widget(form.medicalInformation, {'attr': {'class': 'form-control', 'id': 'medicalInformation'}}) }}
+                        {% if form_errors(form.medicalInformation) %}
+                            <div class="alert alert-danger">
+                                {{ form_errors(form.medicalInformation) }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="col-12">
+                        <label for="userCIN" class="form-label">Client CIN</label>
+                        {{ form_widget(form.userCIN, {'attr': {'class': 'form-control', 'id': 'userCIN'}}) }}
+                        {% if form_errors(form.userCIN) %}
+                            <div class="alert alert-danger">
+                                {{ form_errors(form.userCIN) }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="col-12">
+                        <label for="sinisterLife" class="form-label">sinister Life </label>
+                        {{ form_widget(form.sinisterLife, {'attr': {'class': 'form-control', 'id': 'sinisterLife'}}) }}
+                        {% if form_errors(form.sinisterLife) %}
+                            <div class="alert alert-danger">
+                                {{ form_errors(form.sinisterLife) }}
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="col-12">
+
+                        <button class="btn btn-primary w-100">{{ button_label|default('Save') }}</button>
+                    </div>
+                    <div class="col-12">
+                        <a href="{{ path('app_sinister_life_index') }}" class="btn btn-primary w-100">back to list</a>
+
+                    </div>
+
+
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </section>
+
+    </div>
+</main><!-- End #main -->
+
+
+
+</body>

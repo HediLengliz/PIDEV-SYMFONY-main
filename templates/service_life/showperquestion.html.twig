@@ -1,0 +1,35 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block title %}ServiceLife index{% endblock %}
+
+{% block profile %}
+    <h1>ServiceLife index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for service_life in service_lives %}
+            <tr>
+                <td>{{ service_life.id }}</td>
+                <td>{{ service_life.name }}</td>
+                <td>{{ service_life.price }}</td>
+                <td>
+                    <a class="btn btn-info" href="{{ path('app_service_life_show', {'id': service_life.id}) }}">show</a>
+                    <a class="btn btn-success" href="{{ path('app_service_life_edit', {'id': service_life.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

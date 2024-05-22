@@ -1,0 +1,13 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block title %}Edit ServiceAuto{% endblock %}
+
+{% block profile %}
+    <h1>Edit ServiceAuto</h1>
+
+    {{ include('service_auto/_form.html.twig', {'button_label': 'Update'}) }}
+
+    
+
+    {{ include('service_auto/_delete_form.html.twig') }}
+{% endblock %}

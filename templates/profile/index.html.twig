@@ -1,0 +1,294 @@
+{% extends 'client/index.html.twig' %}
+
+{% block content %}
+
+{{ include('@MercurySeriesFlashy/flashy2.html.twig') }}
+<div  style="margin-top: 5%;margin-bottom: 18%;">
+{% for label, messages in app.flashes %}
+    {% for message in messages %}
+        <div class="alert alert-{{ label }} alert-dismissible" role="alert">
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            <div class="alert-message">
+                {{ message|raw }}
+            </div>
+        </div>
+    {% endfor %}
+{% endfor %}
+
+<div class="row">
+  <div class="col-xl-3 text-center">
+
+    <div class="card">
+      <div class=" profile-card pt-4 d-flex flex-column align-items-center">
+
+
+      {% if app.user and app.user.imageFileName is null %}
+      <img src="{{ asset('frontOffice/img/user.png') }}" style="height: 60%; width: 50%;" alt="Your Image">
+  {% elseif app.user %}
+  <img src="{{ asset('usersImages/' ~ app.user.imageFileName) }}" style="height: 150px;width: 150px;" class="rounded-circle" alt="User Image">
+{% endif %}
+<form action="{{ path('change_profile_picture') }}" method="post" enctype="multipart/form-data">
+{{ form_start(editPictureform) }}
+{{ form_errors(editPictureform.imageFileName) }}
+
+{{ form_widget(editPictureform.imageFileName, {'attr': {'id': 'profile_picture', 'style': 'display:none;'}}) }}
+
+
+<!-- Edit icon -->
+<div id="edit_icon" style="cursor: pointer;margin-left: 150px; margin-bottom: 10px;">
+    <i class="bi bi-pen"></i>
+</div>
+
+<button type="submit" id="submit_button" style="display: none;">Upload</button>
+{{ form_end(editPictureform) }}
+
+<!-- JavaScript to trigger click event on the file input when the edit icon is clicked -->
+
+</form>
+
+
+      {% if app.user %}
+     
+        <h5>{{user.firstName}} {{user.lastName}}</h5>
+          {% endif %}
+
+          {% set userRoles = app.user.getRoles() %}
+          {% if 'ROLE_SUPER_ADMIN' in userRoles %}
+        <h5>Super Admin</h5>
+          {% elseif 'ROLE_ADMIN' in userRoles %}
+              <h5>Admin</h5>
+          {% elseif 'ROLE_SOUS_ADMIN' in userRoles %}
+              <h5>Sous Admin</h5>
+          {% elseif 'ROLE_EXPERT' in userRoles %}
+              <h5>Expert</h5>
+          {% elseif 'ROLE_PHARMACIST' in userRoles %}
+              <h5>Pharmacist</h5>
+          {% elseif 'ROLE_DOCTOR' in userRoles %}
+              <h5>Doctor</h5>
+          {% elseif 'ROLE_AGENT' in userRoles %}
+              <h5>Agent</h5>
+          {% else %}
+              <h3>User</h3>
+          {% endif %}
+      
+      
+      
+      </div>
+    </div>
+  </div>
+
+  <div class="col-xl-9">
+
+    <div class="card">
+      <div class="card-body pt-3">
+        <!-- Bordered Tabs -->
+        <ul class="nav nav-tabs nav-tabs-bordered">
+
+          <li class="nav-item">
+            <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">Overview</button>
+          </li>
+
+          <li class="nav-item">
+            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Edit Profile</button>
+          </li>
+
+          <li class="nav-item">
+            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password">Change Password</button>
+          </li>
+
+        </ul>
+        <div class="tab-content pt-2">
+
+          <div class="tab-pane fade show active profile-overview" id="profile-overview">
+            <h5 class="card-title">Profile Details</h5>
+            <div class="row">
+              <div class="col-lg-3 col-md-4 label">CIN</div>
+              <div class="col-lg-9 col-md-8">{{user.cin}}</div>
+            </div>
+            <div class="row">
+              <div class="col-lg-3 col-md-4 label">First Name</div>
+              <div class="col-lg-9 col-md-8">{{user.firstName}}</div>
+            </div>
+            <div class="row">
+              <div class="col-lg-3 col-md-4 label">Last Name</div>
+              <div class="col-lg-9 col-md-8">{{user.lastName}}</div>
+            </div>
+            <div class="row">
+              <div class="col-lg-3 col-md-4 label">Address</div>
+              <div class="col-lg-9 col-md-8">{{user.address}}</div>
+            </div>
+            <div class="row">
+              <div class="col-lg-3 col-md-4 label">Role</div>
+              <div class="col-lg-9 col-md-8">
+    {% for role in user.roles %}
+        {{ role }}
+        {% if not loop.last %}, {% endif %}
+    {% endfor %}
+</div>
+
+            </div>
+            <div class="row">
+              <div class="col-lg-3 col-md-4 label">Phone Number</div>
+              <div class="col-lg-9 col-md-8">{{user.phoneNumber}}</div>
+            </div>
+            <div class="row">
+              <div class="col-lg-3 col-md-4 label">Email</div>
+              <div class="col-lg-9 col-md-8">{{user.email}}</div>
+            </div>
+          </div>
+
+          <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
+           <!-- Profile Edit Form -->
+<!-- Profile Edit Form -->
+<form method="post" action="{{ path('editprofile') }}">
+    {{ form_start(form) }}
+
+    <div class="row mb-3">
+        <label for="{{ form.cin.vars.id }}" class="col-md-4 col-lg-3 col-form-label">CIN</label>
+        <div class="col-md-8 col-lg-9">
+            {{ form_widget(form.cin, { 'attr': {'class': 'form-control'} }) }}
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <label for="{{ form.firstName.vars.id }}" class="col-md-4 col-lg-3 col-form-label">First Name</label>
+        <div class="col-md-8 col-lg-9">
+            {{ form_widget(form.firstName, { 'attr': {'class': 'form-control'} }) }}
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <label for="{{ form.lastName.vars.id }}" class="col-md-4 col-lg-3 col-form-label">Last Name</label>
+        <div class="col-md-8 col-lg-9">
+            {{ form_widget(form.lastName, { 'attr': {'class': 'form-control'} }) }}
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <label for="{{ form.email.vars.id }}" class="col-md-4 col-lg-3 col-form-label">Email</label>
+        <div class="col-md-8 col-lg-9">
+        {{ form_widget(form.email, {'attr': {'class': 'form-control', 'readonly': true}}) }}
+    </div>
+    </div>
+
+    <div class="row mb-3">
+        <label for="{{ form.address.vars.id }}" class="col-md-4 col-lg-3 col-form-label">Address</label>
+        <div class="col-md-8 col-lg-9">
+            {{ form_widget(form.address, { 'attr': {'class': 'form-control'} }) }}
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <label for="{{ form.phoneNumber.vars.id }}" class="col-md-4 col-lg-3 col-form-label">Phone Number</label>
+        <div class="col-md-8 col-lg-9">
+            {{ form_widget(form.phoneNumber, { 'attr': {'class': 'form-control'} }) }}
+        </div>
+    </div>
+    <div class="text-center">
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+    </div>
+
+    {{ form_end(form) }}
+</form>
+          </div>
+<!-- End Profile Edit Form -->
+
+<!-- End Profile Edit Form -->
+
+<div class="tab-pane fade pt-3" id="profile-change-password">
+<form method="post" action="{{ path('changePassword') }}">
+    {{ form_start(changePwdForm) }}
+    
+    <div class="row mb-3">
+        <label for="{{ changePwdForm.currentPassword.vars.id }}" class="col-md-4 col-lg-3 col-form-label">Current Password</label>
+        <div class="col-md-8 col-lg-9">
+            {{ form_widget(changePwdForm.currentPassword, { 'attr': {'class': 'form-control'} }) }}
+        </div>
+    </div>
+    
+    <div class="row mb-3">
+        <label for="{{ changePwdForm.newPassword.vars.id }}" class="col-md-4 col-lg-3 col-form-label">New Password</label>
+        <div class="col-md-8 col-lg-9">
+            {{ form_widget(changePwdForm.newPassword, { 'attr': {'class': 'form-control'} }) }}
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <label for="{{ changePwdForm.renewPassword.vars.id }}" class="col-md-4 col-lg-3 col-form-label">Re-enter New Password</label>
+        <div class="col-md-8 col-lg-9">
+            {{ form_widget(changePwdForm.renewPassword, { 'attr': {'class': 'form-control'} }) }}
+        </div>
+    </div>
+    
+    <div class="row mb-3">
+        <div class="col-md-8 offset-md-4 col-lg-9 offset-lg-3 text-center">
+            <button type="submit" class="btn btn-primary">Change Password</button>
+        </div>
+    </div>
+    
+    {{ form_end(changePwdForm) }}
+</form>
+</div>
+
+        </div><!-- End Bordered Tabs -->
+
+      </div>
+    </div>
+
+  </div>
+</div>
+</section>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    console.log('Document is ready');
+
+    document.getElementById('edit_icon').addEventListener('click', function () {
+        var fileInput = document.querySelector('input[type="file"]');
+        console.log('File input element:', fileInput);
+
+        if (fileInput) {
+            fileInput.click(); // Simulate a click on the file input
+            fileInput.addEventListener('change', function () {
+            // Simulate a click on the form submit button (assuming it has an ID 'submit_button')
+            var submitButton = document.getElementById('submit_button');
+            
+            if (submitButton) {
+                submitButton.click();
+            } else {
+                console.error('Submit button not found');
+            }
+        });
+        } else {
+            console.error('File input not found');
+        }
+    });
+});
+
+  $(document).ready(function () {
+      $('#change-password-form').submit(function (event) {
+          event.preventDefault();
+
+          $.ajax({
+              type: 'POST',
+              url: '{{ path('changePassword') }}',
+              data: $(this).serialize(),
+              success: function (response) {
+                  if (response.success) {
+                      alert(response.message); // You can replace this with your custom popup logic
+                      // Additional logic for successful password change
+                  } else {
+                      alert(response.message); // You can replace this with your custom popup logic
+                      // Additional logic for unsuccessful password change
+                  }
+              },
+              error: function () {
+                  alert('An error occurred'); // You can replace this with your custom error handling
+              }
+          });
+      });
+  });
+
+</script>
+<script src="//code.jquery.com/jquery.js"></script>
+</div>
+{% endblock %}

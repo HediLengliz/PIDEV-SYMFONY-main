@@ -1,0 +1,165 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block title %}SinisterVehicle{% endblock %}
+
+{% block profile %}
+    <h1>SinisterVehicle</h1>
+
+    <form>
+        <div class="form-group row">
+            <label for="id" class="col-sm-2 col-form-label">Id</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="id" value="{{ sinister_vehicle.id }}" readonly>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="dateSinister" class="col-sm-2 col-form-label">DateSinister</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="dateSinister" value="{{ sinister_vehicle.dateSinister ? sinister_vehicle.dateSinister|date('Y-m-d') : '' }}" readonly>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="location" class="col-sm-2 col-form-label">Location</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="location" value="{{ sinister_vehicle.location }}" readonly>
+            </div>
+        </div>
+       
+        <div class="form-group row">
+            <label for="imageName" class="col-sm-2 col-form-label">ImageName</label>
+            <div class="col-sm-10">
+            <img src="{{ asset('images/sinister_vehicles/' ~ sinister_vehicle.imageName ) }}" style="height: 150px;width: 150px;" class="rounded-circle" alt="User Image">
+               
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="NomConducteurA" class="col-sm-2 col-form-label">Nom_Conducteur_A</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="NomConducteurA" value="{{ sinister_vehicle.NomConducteurA }}" readonly>
+            </div>
+        </div>
+        <!-- Add more fields as needed -->
+
+        <div class="form-group row">
+            <label for="status" class="col-sm-2 col-form-label">Status</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="status" value="{{ sinister_vehicle.StatusSinister }}" readonly>
+            </div>
+        </div>
+   
+        <div class="form-group row">
+            <label for="Nom_Conducteur_B" class="col-sm-2 col-form-label">Nom_Conducteur_B</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="Nom_Conducteur_B" value="{{ sinister_vehicle.NomConducteurB }}" readonly>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="Prenom_Conducteur_A" class="col-sm-2 col-form-label">Prenom_Conducteur_A</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="Prenom_Conducteur_A" value="{{ sinister_vehicle.PrenomConducteurA }}" readonly>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="Prenom_Conducteur_B" class="col-sm-2 col-form-label">Prenom_Conducteur_B</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="Prenom_Conducteur_B" value="{{ sinister_vehicle.PrenomConducteurB }}" readonly>
+            </div>
+        </div>
+
+           <div class="form-group row">
+            <label for="AdresseConducteurA " class="col-sm-2 col-form-label">AdresseConducteurA </label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="AdresseConducteurA " value="{{ sinister_vehicle.AdresseConducteurA  }}" readonly>
+            </div>
+        </div>
+        
+           <div class="form-group row">
+            <label for="AdresseConducteurB" class="col-sm-2 col-form-label">AdresseConducteurB </label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="AdresseConducteurB " value="{{ sinister_vehicle.AdresseConducteurB  }}" readonly>
+            </div>
+        </div>
+
+      <div class="form-group row">
+            <label for="numPermisA " class="col-sm-2 col-form-label">numPermisA </label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="numPermisA " value="{{ sinister_vehicle.numPermisA  }}" readonly>
+            </div>
+        </div>
+         <div class="form-group row">
+            <label for="numPermisB" class="col-sm-2 col-form-label">numPermisB </label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="numPermisB " value="{{ sinister_vehicle.numPermisB  }}" readonly>
+            </div>
+        </div>
+         
+        <div class="form-group row">
+            <label for="delivreA" class="col-sm-2 col-form-label">Delivre_A</label>
+            <div class="col-sm-10">
+                <input type="date" class="form-control" id="delivreA" value="{{ sinister_vehicle.delivreA ? sinister_vehicle.delivreA|date('Y-m-d') : '' }}" readonly>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="delivreB" class="col-sm-2 col-form-label">Delivre_B</label>
+            <div class="col-sm-10">
+                <input type="date" class="form-control" id="delivreB" value="{{ sinister_vehicle.delivreB ? sinister_vehicle.delivreB|date('Y-m-d') : '' }}" readonly>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="numContratA" class="col-sm-2 col-form-label">Num_contratA</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="numContratA" value="{{ sinister_vehicle.numContratA }}" readonly>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="numContratB" class="col-sm-2 col-form-label">Num_contratB</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="numContratB" value="{{ sinister_vehicle.numContratB }}" readonly>
+            </div>
+        </div>
+        <div class="form-group row">
+    <label for="MarqueVehiculeA" class="col-sm-2 col-form-label">Marque_VehiculeA</label>
+    <div class="col-sm-10">
+        <input type="text" class="form-control" id="MarqueVehiculeA" value="{{ sinister_vehicle.MarqueVehiculeA }}" readonly>
+    </div>
+</div>
+
+<div class="form-group row">
+    <label for="MarqueVehiculeB" class="col-sm-2 col-form-label">Marque_VehiculeB</label>
+    <div class="col-sm-10">
+        <input type="text" class="form-control" id="MarqueVehiculeB" value="{{ sinister_vehicle.MarqueVehiculeB }}" readonly>
+    </div>
+</div>
+
+<div class="form-group row">
+    <label for="ImmatriculationA" class="col-sm-2 col-form-label">ImmatriculationA</label>
+    <div class="col-sm-10">
+        <input type="text" class="form-control" id="ImmatriculationA" value="{{ sinister_vehicle.ImmatriculationA }}" readonly>
+    </div>
+</div>
+
+<div class="form-group row">
+    <label for="ImmatriculationB" class="col-sm-2 col-form-label">ImmatriculationB</label>
+    <div class="col-sm-10">
+        <input type="text" class="form-control" id="ImmatriculationB" value="{{ sinister_vehicle.ImmatriculationB }}" readonly>
+    </div>
+</div>
+
+<div class="form-group row">
+    <label for="BvehiculeAssurePar" class="col-sm-2 col-form-label">BvehiculeAssurePar</label>
+    <div class="col-sm-10">
+        <input type="text" class="form-control" id="BvehiculeAssurePar" value="{{ sinister_vehicle.BvehiculeAssurePar }}" readonly>
+    </div>
+</div>
+
+<div class="form-group row">
+    <label for="agence" class="col-sm-2 col-form-label">Agence</label>
+    <div class="col-sm-10">
+        <input type="text" class="form-control" id="agence" value="{{ sinister_vehicle.agence }}" readonly>
+    </div>
+</div>
+    </form>
+{% endblock %}

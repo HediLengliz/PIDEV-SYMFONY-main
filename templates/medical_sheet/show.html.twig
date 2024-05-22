@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}MedicalSheet{% endblock %}
+
+{% block body %}
+    <h1>MedicalSheet</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ medical_sheet.id }}</td>
+            </tr>
+            <tr>
+                <th>Medical Diagnosis</th>
+                <td>{{ medical_sheet.medicalDiagnosis }}</td>
+            </tr>
+            <tr>
+                <th>Treatment Plan</th>
+                <td>{{ medical_sheet.treatmentPlan }}</td>
+            </tr>
+            <tr>
+                <th>Medical Reports</th>
+                <td>{{ medical_sheet.medicalReports }}</td>
+            </tr>
+            <tr>
+                <th>Duration Of Incapacity</th>
+                <td>{{ medical_sheet.durationOfIncapacity }}</td>
+            </tr>
+            <tr>
+                <th>Procedure Performed</th>
+                <td>{{ medical_sheet.procedurePerformed }}</td>
+            </tr>
+            <tr>
+                <th>Sick Leave Duration</th>
+                <td>{{ medical_sheet.sickLeaveDuration }}</td>
+            </tr>
+            <tr>
+                <th>Hospitalization Period</th>
+                <td>{{ medical_sheet.hospitalizationPeriod }}</td>
+            </tr>
+            <tr>
+                <th>Rehabilitation Period</th>
+                <td>{{ medical_sheet.rehabilitationPeriod }}</td>
+            </tr>
+            <tr>
+                <th>Medical Information</th>
+                <td>{{ medical_sheet.medicalInformation }}</td>
+            </tr>
+            <tr>
+                <th>Client Name</th>
+                <td>{{ medical_sheet.userCIN }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="mt-4 d-flex justify-content-center">
+        <a href="{{ path('app_medical_sheet_index') }}" class="btn btn-secondary me-2">Back to list</a>
+        <a href="{{ path('app_medical_sheet_edit', {'id': medical_sheet.id}) }}" class="btn btn-warning me-2">Edit</a>
+        <form action="{{ path('app_medical_sheet_delete', {'id': medical_sheet.id}) }}" method="post" onsubmit="return confirm('Are you sure you want to delete this?');" class="d-inline">
+            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ medical_sheet.id) }}">
+            <button type="submit" class="btn btn-danger">Delete</button>
+        </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,67 @@
+{% extends 'baseback.html.twig' %}
+{% block title %}Cree un article{% endblock %}
+{% block stylesheets %}
+    <style>
+        /* Add your custom styles here */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        form {
+            margin-top: 20px;
+        }
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            background-color: #02024d;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #02024d;
+        }
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #02024d;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+{% endblock %}
+{% block content1 %}
+    <center>
+     <div class="container">
+    <h1>Cree Un Article</h1>
+
+     {{ include('article/_form.html.twig') }}
+
+
+    <a  class="btn btn-primary" href="{{ path('app_article_index') }}">Retour</a>
+
+        </center>
+{% endblock %}

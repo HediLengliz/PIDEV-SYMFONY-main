@@ -1,0 +1,78 @@
+{% extends 'client/index.html.twig' %}
+
+{% block title %}ContratVehicule index{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+<section>
+    <div class="container mt-4">
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title mb-4">Contrats Vehicule</h5>
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <div class="input-group" style="width: 40%;">
+                                <input class="form-control border-end-0 border rounded-pill py-2" type="search" id="example-search-input" style="font-size: 0.875rem;" placeholder="Search...">
+                                <span class="input-group-append">
+                                    <button class="btn btn-outline-secondary border-bottom-0 border rounded-pill py-2" type="button" id="searchButton" style="font-size: 0.875rem;">Search</button>
+                                </span>
+                            </div>
+                        </div>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Date_debut</th>
+                                    <th>Date_fin</th>
+                                    <th>Description</th>
+                                    <th>Prix</th>
+                                    <th>MatriculeAgent</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="requestVehicule-row">
+                                    <td>{{ contrat_vehicule.id }}</td>
+                                    <td>{{ contrat_vehicule.DateDebut ? contrat_vehicule.DateDebut|date('Y-m-d') : '' }}</td>
+                                    <td>{{ contrat_vehicule.DateFin ? contrat_vehicule.DateFin|date('Y-m-d') : '' }}</td>
+                                    <td>{{ contrat_vehicule.Description }}</td>
+                                    <td>{{ contrat_vehicule.Prix }}</td>
+                                    <td>{{ contrat_vehicule.MatriculeAgent }}</td>
+                                    <td>
+                                        <a href="{{ path('app_stripe') }}" class="btn btn-warning">
+                                            <i class="bi bi-pencil-square"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="7">No records found</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#searchButton').click(function () {
+            var searchQuery = $('#example-search-input').val().toLowerCase();
+            var noRequestVehiculeRow = $('#noUserRequestVehiculeRow');
+
+            // Loop through each user row and show/hide based on the search query
+            $('.requestVehicule-row').each(function () {
+                var userRowText = $(this).text().toLowerCase();
+
+                // If the search query is found in the user row, show it; otherwise, hide it
+                $(this).toggle(userRowText.includes(searchQuery));
+            });
+
+            noRequestVehiculeRow.toggle($('.requestVehicule-row:visible').length === 0);
+        });
+    });
+</script>
+{% endblock %}

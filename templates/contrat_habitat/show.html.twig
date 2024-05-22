@@ -1,0 +1,67 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block title %}ContratHabitat{% endblock %}
+
+{% block profile %}
+<section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+
+  <div class="row justify-content-center">
+         <div class="col-md-12 offset-md-1">
+
+             <div class="card w-400 h-300">
+                 <div class="card-body">
+                     <h5 class="card-title"> Contrats vehicule {{ contrat_habitat.id }}</h5>
+                     <table class="table table-striped">
+                         <thead>
+
+            <tr>
+                <th>Id</th>
+                <td>{{ contrat_habitat.id }}</td>
+            </tr>
+            <tr>
+                <th>Date_debut</th>
+                <td>{{ contrat_habitat.DateDebut ? contrat_habitat.DateDebut|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Date_fin</th>
+                <td>{{ contrat_habitat.DateFin ? contrat_habitat.DateFin|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ contrat_habitat.Description }}</td>
+            </tr>
+            <tr>
+            <th>Prix du contrat</th>
+            <td>{{ contrat_habitat.Prix }}</td>
+        </tr>
+            <tr>
+                <th>MatriculeAgent</th>
+                <td>{{ contrat_habitat.MatriculeAgent }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+<form action="{{ path('app_contrat_habitat_index') }}" method="get" style="display: inline;">
+    <button type="submit" class="btn btn-primary">back to list</button>
+</form>
+<form action="{{ path('app_contrat_habitat_edit', {'id': contrat_habitat.id}) }}" method="get" style="display: inline;">
+    <button type="submit" class="btn btn-primary">Edit</button>
+</form>
+<form action="{{ path('contrat_habitat.pdf', {'id': contrat_habitat.id}) }}" method="get" style="display: inline;">
+    <button type="submit" class="btn btn-primary">Télecharger le contrat</button>
+</form>
+{% if not is_granted('ROLE_ADMIN') %}
+    {# Admin-specific content or form #}
+    <form action="{{ path('app_stripe') }}" method="get" style="display: inline;">
+        <button type="submit" class="btn btn-primary">Payer</button>
+    </form>
+{% endif %}
+
+
+    {{ include('contrat_habitat/_delete_form.html.twig') }}
+      </div>
+        </div>
+        </div>
+        </div>
+        </section>
+{% endblock %}

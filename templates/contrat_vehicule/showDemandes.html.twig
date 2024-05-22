@@ -1,0 +1,136 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block title %}VehicleRequest index{% endblock %}
+
+{% block profile %}
+<section >
+
+<div class="container mt-4">
+<div class="row justify-content-center">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title mb-4">Demandes Vehicule</h5>
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div class="input-group" style="width: 40%;">
+                        <input class="form-control border-end-0 border rounded-pill py-2" type="search" id="example-search-input" style="font-size: 0.875rem;" placeholder="Search...">
+                        <span class="input-group-append">
+                            <button class="btn btn-outline-secondary border-bottom-0 border rounded-pill py-2" type="button" id="searchButton" style="font-size: 0.875rem;">Search</button>
+                        </span>
+                    </div>
+                </div> 
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Date</th>
+                                <th>Type assurance</th>
+                                <th>Status</th>
+                                <th>Marque</th>
+                                <th>Modele</th>
+                                <th>Date fabrication</th>
+                                <th>Num Serie</th>
+                                <th>Matricule</th>
+                                <th>Prix</th>
+                                <th>actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for vehicle_request in vehicle_requests %}
+                    <tr class="requestVehicule-row">
+                                <td>{{ vehicle_request.id }}</td>
+                                <td>{{ vehicle_request.dateRequest ? vehicle_request.dateRequest|date('Y-m-d') : '' }}</td>
+                                <td>{{ vehicle_request.typeInsurance }}</td>
+                                <td>{{ vehicle_request.status }}</td>
+                                <td>{{ vehicle_request.Marque }}</td>
+                                <td>{{ vehicle_request.Modele }}</td>
+                                <td>{{ vehicle_request.FabYear ? vehicle_request.FabYear|date('Y-m-d') : '' }}</td>
+                                <td>{{ vehicle_request.serialNumber }}</td>
+                                <td>{{ vehicle_request.matriculNumber }}</td>
+                                <td>{{ vehicle_request.vehiclePrice }}</td>
+                               <td>
+                                   {% if vehicle_request.status == 'Validée' %}
+                                       <button type="button" class="btn btn-success rounded-pill" disabled>Valider</button>
+                                   {% elseif vehicle_request.status == 'Refusée' %}
+                                       <button type="button" class="btn btn-danger refuseButton" disabled>Refuser</button>
+                                   {% else %}
+                                       <button type="button" onclick="window.location='{{ path('app_contrat_vehicule_newId', {'id': vehicle_request.id}) }}'" class="btn btn-success rounded-pill">Valider</button>
+                                       <form class="refuse-demande-form" action="{{ path('refuser_demande', {'id': vehicle_request.id}) }}" method="post">
+                                           <input type="hidden" name="_method" value="POST">
+                                           <button type="submit" class="btn btn-danger refuseButton">Refuser</button>
+                                       </form>
+                                   {% endif %}
+                               </td>
+                            </tr>
+                            {% else %}
+                            <tr>
+                                <td colspan="10">no records found</td>
+                            </tr>
+                            {% endfor %}
+                            <tr id="noUserRequestVehiculeRow" style="display: none;">
+                                        <td colspan="7" class="text-center">Aucune demande trouvée</td>
+                                      </tr>
+                        </tbody>
+                    </table>
+                       <nav aria-label="Page navigation example">
+                            <ul class="pagination justify-content-center">
+                                {{ knp_pagination_render(vehicle_requests) }}
+                            </ul>
+                        </nav>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+<script>
+    // Sélectionnez tous les boutons "Refuser" par leur classe
+    var refuseButtons = document.querySelectorAll('.refuseButton');
+
+    // Ajoutez un écouteur d'événements à chaque bouton "Refuser"
+    refuseButtons.forEach(function(button) {
+        button.addEventListener('click', function(event) {
+            event.preventDefault();
+
+            Swal.fire({
+                title: 'Êtes-vous sûr?',
+                text: "Vous ne pourrez pas revenir en arrière!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Oui, refuser!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Trouvez le formulaire parent et soumettez-le
+                    var form = button.closest('.refuse-demande-form');
+                    form.submit();
+                }
+            });
+        });
+    });
+</script>
+<script>
+$(document).ready(function () {
+            $('#searchButton').click(function () {
+                var searchQuery = $('#example-search-input').val().toLowerCase();
+                var noRequestVehiculeRow = $('#noUserRequestVehiculeRow');
+
+                // Loop through each user row and show/hide based on the search query
+                $('.requestVehicule-row').each(function () {
+                    var userRowText = $(this).text().toLowerCase();
+
+                    // If the search query is found in the user row, show it; otherwise, hide it
+                    $(this).toggle(userRowText.includes(searchQuery));
+                });
+
+                noRequestVehiculeRow.toggle($('.requestVehicule-row:visible').length === 0);
+            });
+        });
+</script>
+{% endblock %}

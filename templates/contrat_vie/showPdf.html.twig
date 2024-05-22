@@ -1,0 +1,85 @@
+{% block title %}ContratVie{% endblock %}
+
+{% block body %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contrat Vie</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffffff; /* Couleur de fond blanc */
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #ffffff; /* Couleur de fond blanc */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        h1 {
+            color: #333333; /* Couleur de titre */
+            text-align: center;
+        }
+        .section {
+            margin-bottom: 30px;
+        }
+        .section-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #007bff; /* Couleur de titre de section */
+        }
+        .section-content {
+            margin-left: 20px;
+            color: #666666; /* Couleur de contenu de section */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+
+        <h1>Contrat d'Assurance Vie</h1>
+
+        <div class="section">
+            <div class="section-title">Informations générales :</div>
+            <div class="section-content">
+                <p><strong>Numéro de contrat :</strong> {{ contrat_vie.id }}</p>
+                <p><strong>Date de début :</strong> {{ contrat_vie.DateDebut ? contrat_vie.DateDebut|date('Y-m-d') : '' }}</p>
+                <p><strong>Date de fin :</strong> {{ contrat_vie.DateFin ? contrat_vie.DateFin|date('Y-m-d') : '' }}</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">Description :</div>
+            <div class="section-content">
+                <p>{{ contrat_vie.Description }}</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">Matricule Agent :</div>
+            <div class="section-content">
+                <p>{{ contrat_vie.MatriculeAgent }}</p>
+            </div>
+        </div>
+         <div class="section">
+                    <div class="section-title">Prix :</div>
+                    <div class="section-content">
+                        <p>{{ contrat_vie.Prix }}</p>
+                    </div>
+                </div>
+
+    </div>
+</body>
+</html>
+{% endblock %}

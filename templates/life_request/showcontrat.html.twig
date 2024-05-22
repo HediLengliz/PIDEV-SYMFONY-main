@@ -1,0 +1,58 @@
+{% extends 'client/index.html.twig' %}
+
+{% block title %}Contrat Maladie{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="section-title">
+        <h2>Liste des assurances maladies</h2>
+    </div>                   <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Date_debut</th>
+                                    <th>Date_fin</th>
+                                    <th>Description</th>
+                                    <th>Prix</th>
+                                    <th>MatriculeAgent</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                             
+                                <tr class="requestVehicule-row">
+                                    <td>{{ contrat_vie.id }}</td>
+                                    <td>{{ contrat_vie.DateDebut ? contrat_vie.DateDebut|date('Y-m-d') : '' }}</td>
+                                    <td>{{ contrat_vie.DateFin ? contrat_vie.DateFin|date('Y-m-d') : '' }}</td>
+                                    <td>{{ contrat_vie.Description }}</td>
+                                    <td>{{ contrat_vie.Prix }}</td>
+                                    <td>{{ contrat_vie.MatriculeAgent }}</td>
+                                    <td>
+                                        <a href="{{ path('app_stripe') }}" class="btn btn-warning">
+                                    <i class="bi bi-pencil-square"></i>
+
+                                    </td>
+                                </tr>
+                               
+                            </tbody>
+                        </table>
+                    </div>
+<script>
+    $(document).ready(function () {
+        $('#searchButton').click(function () {
+            var searchQuery = $('#example-search-input').val().toLowerCase();
+            var noRequestVehiculeRow = $('#noUserRequestVehiculeRow');
+
+            // Loop through each user row and show/hide based on the search query
+            $('.requestVehicule-row').each(function () {
+                var userRowText = $(this).text().toLowerCase();
+
+                // If the search query is found in the user row, show it; otherwise, hide it
+                $(this).toggle(userRowText.includes(searchQuery));
+            });
+
+            noRequestVehiculeRow.toggle($('.requestVehicule-row:visible').length === 0);
+        });
+    });
+</script>
+{% endblock %}

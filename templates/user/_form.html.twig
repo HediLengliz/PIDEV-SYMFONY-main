@@ -1,0 +1,172 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block profile %}
+    <div class="d-flex align-items-center justify-content-center">
+        <div class="col-md-8">
+            <div class="h1 mb-4">
+                {% if action == 'update' %}
+                    Mettre à jour l'utilisateur
+                {% else %}
+                   Créer un utilisateur
+                {% endif %}
+            </div>
+
+            {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+
+            <table class="table">
+            
+            <tbody>
+                <tr>
+                    <th class="align-middle">{{ form_label(form.cin) }}</th>
+                    <td>
+                        {{ form_widget(form.cin, {'attr': {'class': 'form-control','readonly': action == 'update'}}) }}
+                        {% if form_errors(form.cin) %}
+                            <div class="text-danger error-cin" style="list-style: none;">
+                                {{ form_errors(form.cin) }}
+                            </div>
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <th class="align-middle">{{ form_label(form.email) }}</th>
+                    <td>
+                        {{ form_widget(form.email, {'attr': {'class': 'form-control','readonly': action == 'update'}}) }}
+                        {% if form_errors(form.email) %}
+                            <div class="text-danger error-email">
+                                {{ form_errors(form.email) }}
+                            </div>
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <th class="align-middle">{{ form_label(form.firstName) }}</th>
+                    <td>
+                        {{ form_widget(form.firstName, {'attr': {'class': 'form-control','readonly': action == 'update'}}) }}
+                        {% if form_errors(form.firstName) %}
+                            <div class="text-danger error-firstName">
+                                {{ form_errors(form.firstName) }}
+                            </div>
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <th class="align-middle">{{ form_label(form.lastName) }}</th>
+                    <td>
+                        {{ form_widget(form.lastName, {'attr': {'class': 'form-control','readonly': action == 'update'}}) }}
+                        {% if form_errors(form.lastName) %}
+                            <div class="text-danger error-lastName">
+                                {{ form_errors(form.lastName) }}
+                            </div>
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <th class="align-middle">{{ form_label(form.phoneNumber) }}</th>
+                    <td>
+                        {{ form_widget(form.phoneNumber, {'attr': {'class': 'form-control','readonly': action == 'update'}}) }}
+                        {% if form_errors(form.phoneNumber) %}
+                            <div class="text-danger error-phoneNumber">
+                                {{ form_errors(form.phoneNumber) }}
+                            </div>
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <th class="align-middle">{{ form_label(form.address) }}</th>
+                    <td>
+                        {{ form_widget(form.address, {'attr': {'class': 'form-control','readonly': action == 'update'}}) }}
+                        {% if form_errors(form.address) %}
+                            <div class="text-danger error-address">
+                                {{ form_errors(form.address) }}
+                            </div>
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <th class="align-middle">{{ form_label(form.roles) }}</th>
+                    <td colspan="2">
+                        <div class="form-group">
+                        {{ form_widget(form.roles, {'attr': {'class': 'form-control js-example-basic-multiple', 'style': 'width: 100%;'}}) }}
+                         
+                            {% if form_errors(form.roles) %}
+                                <div class="text-danger error-roles">
+                                    {{ form_errors(form.roles) }}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                <th class="align-middle">{{ form_label(form.claims) }}</th>
+                <td colspan="2">
+                    <div class="form-group">
+                    {{ form_widget(form.claims, {'attr': {'class': 'form-control js-example-basic-multiple', 'style': 'width: 100%;'}}) }}
+                     
+                        {% if form_errors(form.claims) %}
+                            <div class="text-danger error-roles">
+                                {{ form_errors(form.claims) }}
+                            </div>
+                        {% endif %}
+                    </div>
+                </td>
+            </tr>
+
+
+
+
+
+
+
+                {# {% if action == 'add' %}
+                    <tr>
+                        <th class="align-middle">{{ form_label(form.password) }}</th>
+                        <td>
+                            {{ form_widget(form.password, {'attr': {'class': 'form-control'}}) }}
+                            {% if form_errors(form.password) %}
+                                <div class="text-danger error-password">
+                                    {{ form_errors(form.password) }}
+                                </div>
+                            {% endif %}
+                            <!-- Include password requirements here if needed -->
+                        </td>
+                    </tr>
+                {% endif %} #}
+            </tbody>
+        </table>
+
+        <button class="btn btn-primary">{{ button_label|default('Save') }}</button>
+
+        {{ form_end(form) }}
+        <script>
+           
+                $(document).ready(function() {
+                    $('.js-example-basic-multiple').select2();
+                });
+            
+            // Plain JavaScript code to hide error messages when typing starts
+            document.addEventListener('DOMContentLoaded', function () {
+                var inputFields = document.querySelectorAll('input, textarea, select');
+        
+                inputFields.forEach(function (input) {
+                    input.addEventListener('input', function () {
+                        var fieldName = this.getAttribute('name');
+                        
+                        // Adjust the code to handle nested field names
+                        var nestedFieldNameMatch = fieldName.match(/\[([^\]]+)\]/);
+                        if (nestedFieldNameMatch) {
+                            fieldName = nestedFieldNameMatch[1];
+                        }
+        
+                        var errorElement = document.querySelector('.error-' + fieldName);
+                        
+                        if (errorElement) {
+                            errorElement.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        </script>
+        
+    </div>
+</div>
+{% endblock %}

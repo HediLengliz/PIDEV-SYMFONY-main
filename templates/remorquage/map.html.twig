@@ -1,0 +1,120 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}SinisterVehicle index{% endblock %}
+
+{% block body %}
+    <div id="map" style="height: 400px;"></div>
+    <button id="locateAndShow">Voir les remorqueurs disponibles</button>
+
+    <!-- Flash Bag Container -->
+    <div id="flash-bag"></div>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCgClXCMDHYkdbbt_7lWCLNVYKhivPdCiM&libraries=places&callback=initMap" async defer></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        function initMap() {
+            console.log('Initiating the map');
+
+            window.map = new google.maps.Map(document.getElementById('map'), {
+                center: { lat: 33.8869, lng: 9.5375 }, 
+                zoom: 6,
+            });
+
+            const locateAndShowButton = document.getElementById('locateAndShow');
+
+            if (locateAndShowButton) {
+                locateAndShowButton.addEventListener('click', () => {
+                    locateUser();
+                });
+            }
+        }
+
+        function locateUser() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        const userLocation = {
+                            lat: position.coords.latitude,
+                            lng: position.coords.longitude,
+                        };
+
+                        const marker = new google.maps.Marker({
+                            position: userLocation,
+                            map: window.map,
+                            title: 'Your Location',
+                        });
+
+                        window.map.setCenter(userLocation);
+
+                        
+                        showRemorqueurs(userLocation);
+                    },
+                    (error) => {
+                        console.error('Error getting user location:', error.message);
+                    }
+                );
+            } else {
+                console.error('Geolocation is not supported by this browser.');
+            }
+        }
+
+        function showRemorqueurs() {
+            const remorqueurs = {{ remorqueurs|raw }};
+            console.log(remorqueurs);
+
+            remorqueurs.forEach(remorqueur => {
+                const marker = new google.maps.Marker({
+                    position: { lat: parseFloat(remorqueur.lattitude), lng: parseFloat(remorqueur.longuitude) },
+                    map: window.map,
+                    title: remorqueur.FirstName + ' ' + remorqueur.LastName,
+                    icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png',
+                });
+
+                const infoWindowContent = `<p>Name: ${remorqueur.FirstName} ${remorqueur.LastName}<br>
+                                Distance: ${calculateDistance(remorqueur.lattitude, remorqueur.longuitude)} km</p>
+                                <button class="obtenirButton" data-remorqueur-id="${remorqueur.id}">Obtenir ce remorquage</button>`;
+
+                const infoWindow = new google.maps.InfoWindow({
+                    content: infoWindowContent,
+                });
+
+                marker.addListener('click', () => {
+                    infoWindow.open(window.map, marker);
+
+                    
+                    
+                    infoWindow.addListener('domready', () => {
+                        const obtenirButton = document.querySelector('.obtenirButton[data-remorqueur-id="' + remorqueur.id + '"]');
+                        if (obtenirButton) {
+                            obtenirButton.addEventListener('click', () => {
+                                displayPhoneNumber(remorqueur.PhoneNumber);
+                            });
+                        }
+                    });
+                });
+            });
+        }
+
+        function calculateDistance(lat, lng) {
+            // Haversine formula for distance calculation
+            const userLat = window.map.center.lat();
+            const userLng = window.map.center.lng();
+            const R = 6371; // Radius of the Earth in km
+            const dLat = (lat - userLat) * (Math.PI / 180);
+            const dLng = (lng - userLng) * (Math.PI / 180);
+            const a =
+                Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                Math.cos(userLat * (Math.PI / 180)) * Math.cos(lat * (Math.PI / 180)) *
+                Math.sin(dLng / 2) * Math.sin(dLng / 2);
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+            const distance = R * c;
+
+            return distance.toFixed(2);
+        }
+
+        function displayPhoneNumber(phoneNumber) {
+            alert('Remorqueur Phone Number: ' + phoneNumber);
+        }
+    </script>
+{% endblock %}

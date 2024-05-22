@@ -1,0 +1,49 @@
+{% extends 'admin/index.html.twig' %}
+
+
+{% block profile %}
+    <h1>Prescription</h1>
+
+    <table class="table">
+        <tbody>
+        <tr>
+            <th>Id</th>
+            <td>{{ prescription.id }}</td>
+        </tr>
+        <tr>
+            <th>Date Prescription</th>
+            <td>{{ prescription.datePrescription ? prescription.datePrescription|date('Y-m-d') : '' }}</td>
+        </tr>
+        <tr>
+            <th>Medications</th>
+            <td>{{ prescription.medications }}</td>
+        </tr>
+        <tr>
+            <th>Status Prescription</th>
+            <td>{{ prescription.statusPrescription }}</td>
+        </tr>
+        <tr>
+            <th>Additional Notes</th>
+            <td>{{ prescription.additionalNotes }}</td>
+        </tr>
+        <tr>
+            <th>Validity Duration</th>
+            <td>{{ prescription.validityDuration }}</td>
+        </tr>
+        <tr>
+            <th>Client Name</th>
+            <td>{{prescription.userCIN }}</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_prescription_index') }}">back to list</a>
+
+    <a href="{{ path('app_prescription_edit_dashboard', {'id': prescription.id}) }}">edit</a>
+
+    <a href="{{ path('prescription_export_pdf', {'id': prescription.id}) }}" class="btn btn-primary">Exporter en PDF</a>
+
+
+
+    {{ include('prescription/_delete_form.html.twig') }}
+{% endblock %}

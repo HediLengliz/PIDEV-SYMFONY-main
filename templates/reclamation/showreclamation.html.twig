@@ -1,0 +1,49 @@
+{% extends 'client/index.html.twig' %}
+
+
+{% block title %}Show Reclamation{% endblock %}
+
+{% block content %}
+    <h1>Show Reclamation</h1>
+
+    <form>
+        <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" class="form-control" id="title" value="{{ reclamation.title }}" readonly>
+        </div>
+        <div class="mb-3">
+    <label for="title" class="form-label">Date</label>
+    <input type="text" class="form-control" id="title" value="{{ reclamation.dateReclamation|date('Y-m-d H:i:s') }}" readonly>
+</div>
+
+        <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea class="form-control" id="description" rows="9" readonly>{{ reclamation.description }}</textarea>
+        </div>
+
+       
+        {# <div class="mb-3">
+            <label for="user" class="form-label">User</label>
+            <input type="text" class="form-control" id="user" value="{{ reclamation.user.username }}" readonly>
+        </div> #}
+       
+    
+
+        <!-- Add more fields as needed -->
+
+        <a href="javascript:history.back()" class="btn btn-primary">Back to list</a>
+        <br>
+            <br> <br>
+                <br>
+                    <br> <br>
+                        <br>
+                            <br> <br>
+        {# {% if is_granted('ROLE_ADMIN') %}
+       
+        {{ include('reclamation/_delete_form.html.twig') }}
+    {% endif %} #}
+        {# <a href="{{ path('app_reclamation_edit', {'id': reclamation.id}) }}" class="btn btn-warning">Edit</a> #}
+
+        {# {{ include('reclamation/_delete_form.html.twig') }} #}
+    </form>
+{% endblock %}

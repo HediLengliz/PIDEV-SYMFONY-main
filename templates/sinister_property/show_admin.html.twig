@@ -1,0 +1,31 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block title %}SinisterProperty{% endblock %}
+
+{% block profile %}
+    <h1>SinisterProperty</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ sinister_property.id }}</td>
+            </tr>
+            <tr>
+                <th>Type_degat</th>
+                <td>{{ sinister_property.typeDegat }}</td>
+            </tr>
+            <tr>
+                <th>Description_degat</th>
+                <td>{{ sinister_property.descriptionDegat }}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td style="color: {% if sinister_property.StatusSinister == 'traité' %}green{% elseif sinister_property.StatusSinister == 'en_cours' %}orange{% endif %}">
+                    {{ sinister_property.StatusSinister }}
+                </td>
+            </tr>
+            
+        </tbody>
+    </table>
+{% endblock %}

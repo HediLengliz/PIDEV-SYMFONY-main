@@ -1,0 +1,87 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block title %}Questions{% endblock %}
+{% block profile %}
+{{ include('@MercurySeriesFlashy/flashy.html.twig') }}
+
+<h1>Question index</h1>
+<div class="d-flex"  >
+    <div class="col-md-3 offset-md-9">
+{# <div class="small fw-light">search input with icon</div> #}
+<div class="input-group">
+<input class="form-control border-end-0 border rounded-pill" type="search" value="search" id="example-search-input">
+<span class="input-group-append">
+</span>
+</div>
+</div>
+</div>
+    <div class="row">
+        <div class="col-sm-12">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Question</th>
+                        <th>Type</th>
+                        <th>actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for question in questions %}
+                    <tr class="question-row">
+                        <td>{{ question.question }}</td>
+                        <td>{{ question.type }}</td>
+                        <td>
+                            <a class="btn btn-info" href="{{ path('app_question_show', {'id': question.id}) }}">show</a>
+                            <a class="btn btn-secondary" href="{{ path('app_question_edit', {'id': question.id}) }}">edit</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="4">no records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+                <tr id="noQuestionRow" style="display: none;"                >
+                    <td colspan="3" class="text-center">No question found</td>
+                </tr>
+                
+            </table>
+            <nav aria-label="Page navigation example">
+                <ul class="pagination" style="float: right;">
+                    {{ knp_pagination_render(questions) }}
+                </ul>
+            </nav>
+        </div>
+</div>
+
+    <a class="btn btn-success" href="{{ path('app_question_new') }}">Create new</a>
+    <script>
+        $(document).ready(function () {
+            $('#example-search-input').click(function () {
+                $(this).val(''); // Clear the value of the input field
+            });
+        }); 
+        $(document).ready(function () {
+            $('#example-search-input').on('input', function () {
+                var searchQuery = $(this).val().toLowerCase();
+                var noUsersRow = $('#noQuestionRow');
+    
+                // Loop through each user row and show/hide based on the search query
+                $('.question-row').each(function () {
+                    var userRowText = $(this).text().toLowerCase();
+    
+                    // If the search query is found in the user row, show it; otherwise, hide it
+                    $(this).toggle(userRowText.includes(searchQuery));
+                });
+    
+                // Show/hide the "No Users Found" row based on search results
+                noUsersRow.toggle($('.question-row:visible').length === 0);
+            });
+        });
+    </script>
+{% block script %}
+<script src="{{asset('js/filters.js')}}"> </script>
+
+{% endblock script %}
+
+{% endblock %}

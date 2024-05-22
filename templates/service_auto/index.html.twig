@@ -1,0 +1,43 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block title %}ServiceAuto index{% endblock %}
+
+{% block profile %}
+    <h1>ServiceAuto index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Marque</th>
+                <th>Modele</th>
+                <th>Year</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for service_auto in service_autos %}
+            <tr>
+                <td>{{ service_auto.id }}</td>
+                <td>{{ service_auto.name }}</td>
+                <td>{{ service_auto.price }}</td>
+                <td>{{ service_auto.marque }}</td>
+                <td>{{ service_auto.modele }}</td>
+                <td>{{ service_auto.year }}</td>
+                <td>
+                    <a class="btn btn-info" href="{{ path('app_service_auto_show', {'id': service_auto.id}) }}">show</a>
+                    <a class="btn btn-success" href="{{ path('app_service_auto_edit', {'id': service_auto.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_service_auto_new') }}">Create new</a>
+{% endblock %}

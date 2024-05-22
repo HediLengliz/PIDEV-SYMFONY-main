@@ -1,0 +1,56 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block title %}ContratVehicule{% endblock %}
+
+{% block profile %}
+ <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+
+  <div class="row justify-content-center">
+         <div class="col-md-12 offset-md-1">
+             <div class="card w-400 h-300">
+                 <div class="card-body">
+                     <h5 class="card-title"> Contrats vehicule {{ contrat_vehicule.id }}</h5>
+                     <table class="table table-striped">
+                         <thead>
+
+            <tr>
+                <th>Id</th>
+                <td>{{ contrat_vehicule.id }}</td>
+            </tr>
+            <tr>
+                <th>Date_debut</th>
+                <td>{{ contrat_vehicule.DateDebut ? contrat_vehicule.DateDebut|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Date_fin</th>
+                <td>{{ contrat_vehicule.DateFin ? contrat_vehicule.DateFin|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ contrat_vehicule.Description }}</td>
+            </tr>
+            <tr>
+            <th>Prix du contrat</th>
+            <td>{{ contrat_vehicule.Prix }}</td>
+        </tr>
+            <tr>
+                <th>MatriculeAgent</th>
+                <td>{{ contrat_vehicule.MatriculeAgent }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_contrat_vehicule_index') }}">back to list</a>
+
+    <a href="{{ path('app_contrat_vehicule_edit', {'id': contrat_vehicule.id}) }}">edit</a>
+    <form action="{{ path('contrat_vehicule.pdf', {'id': contrat_vehicule.id}) }}" method="get" style="display: inline;">
+        <button type="submit" class="btn btn-primary">Télecharger le contrat</button>
+    </form>
+
+    {{ include('contrat_vehicule/_delete_form.html.twig') }}
+    </div>
+    </div>
+    </div>
+    </div>
+    </section>
+{% endblock %}

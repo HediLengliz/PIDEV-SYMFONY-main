@@ -1,0 +1,11 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block title %}New ContratHabitat{% endblock %}
+
+{% block profile %}
+<div class="section-title">
+        {# <h2>Ajouter un nouveau contrat d'assurance habitat</h2> #}
+     </div>
+    {{ include('contrat_habitat/_form.html.twig') }}
+
+{% endblock %}
